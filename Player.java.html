@@ -1,0 +1,420 @@
+<html>
+<head>
+<title>Player.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+.s3 { color: #629755; font-style: italic;}
+.s4 { color: #6897bb;}
+.s5 { color: #808080;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Player.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">sample</span><span class="s0">;</span>
+
+
+
+<span class="s0">import </span><span class="s1">java.io.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.ArrayList</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.concurrent.ExecutorService</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.concurrent.Executors</span><span class="s0">;</span>
+
+<span class="s0">public abstract class </span><span class="s1">Player </span><span class="s0">extends </span><span class="s1">Game </span><span class="s0">implements </span><span class="s1">Runnable {</span>
+    <span class="s0">static </span><span class="s1">ArrayList&lt;Attacker.ATank&gt; s1 = </span><span class="s0">new </span><span class="s1">ArrayList&lt;Attacker.ATank&gt;()</span><span class="s0">;</span>
+    <span class="s0">static </span><span class="s1">ArrayList&lt;Defender.Canon&gt; s4 = </span><span class="s0">new </span><span class="s1">ArrayList&lt;Defender.Canon&gt;()</span><span class="s0">;</span>
+    <span class="s0">static </span><span class="s1">ArrayList&lt;Defender.Tower&gt; s5 = </span><span class="s0">new </span><span class="s1">ArrayList&lt;Defender.Tower&gt;()</span><span class="s0">;</span>
+    <span class="s0">static </span><span class="s1">ArrayList&lt;Defender.air_Defence&gt; s6 = </span><span class="s0">new </span><span class="s1">ArrayList&lt;Defender.air_Defence&gt;()</span><span class="s0">;</span>
+    <span class="s0">static </span><span class="s1">ArrayList&lt;Attacker.air_Plane&gt; s7 = </span><span class="s0">new </span><span class="s1">ArrayList&lt;Attacker.air_Plane&gt;()</span><span class="s0">;</span>
+    <span class="s0">static </span><span class="s1">ArrayList&lt;Attacker.Ssolider&gt; s2 = </span><span class="s0">new </span><span class="s1">ArrayList&lt;Attacker.Ssolider&gt;()</span><span class="s0">;</span>
+    <span class="s0">static </span><span class="s1">ArrayList&lt;Attacker.Rsolider&gt; s3 = </span><span class="s0">new </span><span class="s1">ArrayList&lt;Attacker.Rsolider&gt;()</span><span class="s0">;</span>
+    <span class="s0">static </span><span class="s1">ArrayList&lt;Attacker.Bomb&gt; s8 = </span><span class="s0">new </span><span class="s1">ArrayList&lt;Attacker.Bomb&gt;()</span><span class="s0">;</span>
+    <span class="s0">static </span><span class="s1">ArrayList&lt;Defender.Support_Rsolider&gt; Support_item = </span><span class="s0">new </span><span class="s1">ArrayList&lt;Defender.Support_Rsolider&gt;()</span><span class="s0">;</span>
+    <span class="s0">static </span><span class="s1">ArrayList&lt;Base&gt; base = </span><span class="s0">new </span><span class="s1">ArrayList&lt;Base&gt;()</span><span class="s0">;</span>
+
+
+     <span class="s0">public synchronized  void </span><span class="s1">Write_log_file(String file_name</span><span class="s0">, </span><span class="s1">String str) {</span>
+
+        <span class="s0">try </span><span class="s1">{</span>
+
+            <span class="s1">File file = </span><span class="s0">new </span><span class="s1">File(file_name)</span><span class="s0">;</span>
+            <span class="s1">FileWriter fw = </span><span class="s0">new </span><span class="s1">FileWriter(file</span><span class="s0">, true</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">BufferedWriter out = </span><span class="s0">new </span><span class="s1">BufferedWriter(fw)</span><span class="s0">;</span>
+
+
+            <span class="s1">out.write(str + </span><span class="s2">&quot;</span><span class="s0">\n</span><span class="s2">&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">out.close()</span><span class="s0">;</span>
+
+
+        <span class="s1">} </span><span class="s0">catch </span><span class="s1">(Exception e) {</span>
+            <span class="s1">e.printStackTrace()</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public synchronized  void </span><span class="s1">Read_log_file(String file_name) {</span>
+        <span class="s0">try </span><span class="s1">{</span>
+
+            <span class="s1">String jj</span><span class="s0">;</span>
+            <span class="s1">BufferedReader file = </span><span class="s0">new </span><span class="s1">BufferedReader(</span><span class="s0">new </span><span class="s1">FileReader(file_name))</span><span class="s0">;</span>
+            <span class="s0">while </span><span class="s1">((jj = file.readLine()) != </span><span class="s0">null</span><span class="s1">) {</span>
+                <span class="s1">System.out.println(jj)</span><span class="s0">;</span>
+            <span class="s1">}</span>
+
+
+            <span class="s1">file.close()</span><span class="s0">;</span>
+        <span class="s1">} </span><span class="s0">catch </span><span class="s1">(Exception e) {</span>
+            <span class="s1">e.printStackTrace()</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">static  synchronized  boolean </span><span class="s1">check_not_Attacker(</span><span class="s0">int </span><span class="s1">i</span><span class="s0">, int </span><span class="s1">j) {</span>
+        <span class="s0">return </span><span class="s1">!(Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s2">&quot; &quot;</span><span class="s1">)) &amp;&amp; !(Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s2">&quot;X&quot;</span><span class="s1">)) &amp;&amp; !(Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s2">&quot;T&quot;</span><span class="s1">)) &amp;&amp; !(Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s2">&quot;R&quot;</span><span class="s1">)) &amp;&amp; !(Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s2">&quot;S&quot;</span><span class="s1">)) &amp;&amp; !(Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s2">&quot;B&quot;</span><span class="s1">)) &amp;&amp; !(Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s2">&quot;@&quot;</span><span class="s1">)) &amp;&amp; !(Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s2">&quot;1&quot;</span><span class="s1">)) &amp;&amp; !(Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s2">&quot;2&quot;</span><span class="s1">)) &amp;&amp; !(Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s2">&quot;3&quot;</span><span class="s1">)) &amp;&amp; !(Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s2">&quot;4&quot;</span><span class="s1">)) &amp;&amp; !(Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s2">&quot;*&quot;</span><span class="s1">)) &amp;&amp; !(Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s2">&quot;/&quot;</span><span class="s1">)) &amp;&amp; !(Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s2">&quot;+&quot;</span><span class="s1">)) &amp;&amp; !(Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s2">&quot;8&quot;</span><span class="s1">)) &amp;&amp; !(Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s2">&quot;9&quot;</span><span class="s1">)) &amp;&amp; !(Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s2">&quot;10&quot;</span><span class="s1">)) &amp;&amp; !(Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s2">&quot;H&quot;</span><span class="s1">))</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">synchronized  boolean </span><span class="s1">check_Next_Move(</span><span class="s0">int </span><span class="s1">i</span><span class="s0">, int </span><span class="s1">j) {</span>
+        <span class="s0">return </span><span class="s1">((Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s2">&quot;T&quot;</span><span class="s1">)) || (Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s2">&quot;R&quot;</span><span class="s1">)) || (Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s2">&quot;S&quot;</span><span class="s1">)) || (Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s2">&quot;B&quot;</span><span class="s1">)) || (Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s2">&quot;A&quot;</span><span class="s1">)) &amp;&amp; (Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s2">&quot;1&quot;</span><span class="s1">)) || (Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s2">&quot;2&quot;</span><span class="s1">)) || (Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s2">&quot;3&quot;</span><span class="s1">)) || (Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s2">&quot;4&quot;</span><span class="s1">)) || (Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s2">&quot;8&quot;</span><span class="s1">)) || (Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s2">&quot;D&quot;</span><span class="s1">)) || (Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s2">&quot;&amp;&quot;</span><span class="s1">)) || (Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s2">&quot;$&quot;</span><span class="s1">)) || (Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s2">&quot;#&quot;</span><span class="s1">)) || (Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s2">&quot;@&quot;</span><span class="s1">)))</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static </span><span class="s1">Range_List Range(</span><span class="s0">int </span><span class="s1">x</span><span class="s0">, int </span><span class="s1">y</span><span class="s0">, int </span><span class="s1">Limt) {</span>
+        <span class="s1">ArrayList&lt;String&gt; animes = </span><span class="s0">new </span><span class="s1">ArrayList&lt;String&gt;()</span><span class="s0">;</span>
+        <span class="s1">ArrayList&lt;String&gt; position = </span><span class="s0">new </span><span class="s1">ArrayList&lt;String&gt;()</span><span class="s0">;</span>
+
+
+        <span class="s0">int </span><span class="s1">X_Top = x - Limt</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">X_Bottom = x + Limt</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">Y_Top = y - Limt</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">Y_Bottom = y + Limt</span><span class="s0">;</span>
+        <span class="s3">/*****************************/</span>
+        <span class="s0">if </span><span class="s1">(X_Top &lt; </span><span class="s4">0</span><span class="s1">) X_Top = </span><span class="s4">0</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">(X_Bottom &gt; </span><span class="s4">99</span><span class="s1">) X_Bottom = </span><span class="s4">99</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">(Y_Bottom &gt; </span><span class="s4">99</span><span class="s1">) Y_Bottom = </span><span class="s4">99</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">(Y_Top &lt; </span><span class="s4">0</span><span class="s1">) Y_Top = </span><span class="s4">0</span><span class="s0">;</span>
+        <span class="s3">/******************************/</span>
+        <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = X_Top</span><span class="s0">; </span><span class="s1">i &lt;= X_Bottom</span><span class="s0">; </span><span class="s1">i++) {</span>
+            <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">j = Y_Top</span><span class="s0">; </span><span class="s1">j &lt;= Y_Bottom</span><span class="s0">; </span><span class="s1">j++) {</span>
+                <span class="s5">//</span>
+                <span class="s5">//عم يجيب إحداثيات العناصر المهاجمة يلي ضمن المدى</span>
+
+
+                <span class="s0">if </span><span class="s1">(check_not_Attacker(i</span><span class="s0">, </span><span class="s1">j)) {</span>
+                    <span class="s5">//بجيب رمز العنصر المهاجم يلي ضمن المدى وبضيفو عالمصفوفة يلي بتحفظلي رموز العناصر المهاجمة يلي بالمدى</span>
+                    <span class="s1">animes.add(Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j))</span><span class="s0">;</span>
+
+                    <span class="s5">// نظيف احداثيات العنصر للمصفوفة</span>
+                    <span class="s1">String z = Integer.toString(i)</span><span class="s0">;</span>
+
+                    <span class="s1">z += Integer.toString(j)</span><span class="s0">;</span>
+
+                    <span class="s1">position.add(z)</span><span class="s0">;</span>
+                    <span class="s1">z = </span><span class="s2">&quot;&quot;</span><span class="s0">;</span>
+
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+
+        <span class="s1">}</span>
+        <span class="s1">Range_List List = </span><span class="s0">new </span><span class="s1">Range_List()</span><span class="s0">;</span>
+        <span class="s1">List.setAnimes(animes)</span><span class="s0">;</span>
+        <span class="s1">List.setPosition(position)</span><span class="s0">;</span>
+        <span class="s0">return </span><span class="s1">List</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">synchronized   boolean </span><span class="s1">check_blocked(</span><span class="s0">int </span><span class="s1">x</span><span class="s0">, int </span><span class="s1">y</span><span class="s0">, int </span><span class="s1">Limt) {</span>
+        <span class="s0">int </span><span class="s1">X_Top = x - Limt</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">X_Bottom = x + Limt</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">Y_Top = y - Limt</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">Y_Bottom = y + Limt</span><span class="s0">;</span>
+        <span class="s3">/*****************************/</span>
+        <span class="s0">if </span><span class="s1">(X_Top &lt; </span><span class="s4">0</span><span class="s1">) X_Top = </span><span class="s4">0</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">(X_Bottom &gt; </span><span class="s4">99</span><span class="s1">) X_Bottom = </span><span class="s4">99</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">(Y_Bottom &gt; </span><span class="s4">99</span><span class="s1">) Y_Bottom = </span><span class="s4">99</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">(Y_Top &lt; </span><span class="s4">0</span><span class="s1">) Y_Top = </span><span class="s4">0</span><span class="s0">;</span>
+        <span class="s3">/******************************/</span>
+        <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = X_Top</span><span class="s0">; </span><span class="s1">i &lt;= X_Bottom</span><span class="s0">; </span><span class="s1">i++) {</span>
+            <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">j = Y_Top</span><span class="s0">; </span><span class="s1">j &lt;= Y_Bottom</span><span class="s0">; </span><span class="s1">j++) {</span>
+                <span class="s0">if </span><span class="s1">(Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s2">&quot; &quot;</span><span class="s1">))</span>
+                    <span class="s0">return true;</span>
+
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+        <span class="s0">return false;</span>
+    <span class="s1">}</span>
+
+
+     <span class="s0">public synchronized  </span><span class="s1">Cell next_move(Cell cell)  {</span>
+
+
+        <span class="s0">if </span><span class="s1">(cell.getX() &lt; Game.base.getX()) {</span>
+            <span class="s5">//       System.out.println(&quot;1&quot;);</span>
+            <span class="s0">int </span><span class="s1">i = cell.getX()</span><span class="s0">;</span>
+            <span class="s1">i++</span><span class="s0">;</span>
+            <span class="s5">//إذا الخطة الجاي نهر</span>
+            <span class="s0">if </span><span class="s1">(Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">cell.getY()).equals(</span><span class="s2">&quot;*&quot;</span><span class="s1">)) {</span>
+                <span class="s5">// sleep because river</span>
+                <span class="s5">// ++this.x;</span>
+                <span class="s0">int </span><span class="s1">p_x = cell.getX()</span><span class="s0">;</span>
+                <span class="s1">++p_x</span><span class="s0">;</span>
+                <span class="s1">cell.setX(p_x)</span><span class="s0">;</span>
+                <span class="s0">try </span><span class="s1">{</span>
+                    <span class="s1">Thread.sleep(</span><span class="s4">1000</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">} </span><span class="s0">catch </span><span class="s1">(InterruptedException e) {</span>
+                    <span class="s1">e.printStackTrace()</span><span class="s0">;</span>
+                <span class="s1">}</span>
+
+                <span class="s0">return new </span><span class="s1">Cell(cell.getX()</span><span class="s0">, </span><span class="s1">cell.getY())</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+            <span class="s5">//إذا الخطة الجاية فاضية</span>
+            <span class="s0">else if </span><span class="s1">(Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">cell.getY()).equals(</span><span class="s2">&quot; &quot;</span><span class="s1">)) {</span>
+
+                <span class="s1">Game.arena.setArena(cell.getX()</span><span class="s0">, </span><span class="s1">cell.getY()</span><span class="s0">, </span><span class="s2">&quot; &quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s5">//++this.x;</span>
+                <span class="s0">int </span><span class="s1">p_x = cell.getX()</span><span class="s0">;</span>
+                <span class="s1">p_x += </span><span class="s4">1</span><span class="s0">;</span>
+                <span class="s1">cell.setX(p_x)</span><span class="s0">;</span>
+                <span class="s0">return new </span><span class="s1">Cell(cell.getX()</span><span class="s0">, </span><span class="s1">cell.getY())</span><span class="s0">;</span>
+            <span class="s1">} </span><span class="s0">else if </span><span class="s1">(Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">cell.getY()).equals(</span><span class="s2">&quot;/&quot;</span><span class="s1">)) {</span>
+                <span class="s5">// ++this.x;</span>
+
+                <span class="s0">int </span><span class="s1">p_x = cell.getX()</span><span class="s0">;</span>
+                <span class="s1">++p_x</span><span class="s0">;</span>
+                <span class="s1">cell.setX(p_x)</span><span class="s0">;</span>
+
+                <span class="s0">return new </span><span class="s1">Cell(cell.getX()</span><span class="s0">, </span><span class="s1">cell.getY())</span><span class="s0">;</span>
+            <span class="s1">}</span>
+            <span class="s5">//مكان ما بقدر أمشي فيو</span>
+            <span class="s0">else if </span><span class="s1">(Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">cell.getY()).equals(</span><span class="s2">&quot;Z&quot;</span><span class="s1">) || Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">cell.getY()).equals(</span><span class="s2">&quot;+&quot;</span><span class="s1">) || Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">cell.getY()).equals(</span><span class="s2">&quot;#&quot;</span><span class="s1">) || check_Next_Move(i</span><span class="s0">, </span><span class="s1">cell.getY())) {</span>
+
+                <span class="s0">return new </span><span class="s1">Cell(cell.getX()</span><span class="s0">, </span><span class="s1">cell.getY())</span><span class="s0">;</span>
+            <span class="s1">}</span>
+            <span class="s0">else if </span><span class="s1">(Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">cell.getY()).equals(</span><span class="s2">&quot;X&quot;</span><span class="s1">)) {</span>
+
+                <span class="s0">if </span><span class="s1">(check_blocked(cell.getX()</span><span class="s0">, </span><span class="s1">cell.getY()</span><span class="s0">, </span><span class="s4">1</span><span class="s1">)) {</span>
+                    <span class="s0">if </span><span class="s1">(i == Game.arena.X_Base()) {</span>
+                        <span class="s1">Game.arena.setArena(cell.getX()</span><span class="s0">, </span><span class="s1">cell.getY()</span><span class="s0">, </span><span class="s2">&quot; &quot;</span><span class="s1">)</span><span class="s0">;</span>
+                        <span class="s0">if </span><span class="s1">(cell.getY() &lt; Game.arena.Y_Base()) {</span>
+                            <span class="s0">int </span><span class="s1">p_x = cell.getX()</span><span class="s0">;</span>
+                            <span class="s1">++p_x</span><span class="s0">;</span>
+                            <span class="s1">cell.setX(p_x)</span><span class="s0">;</span>
+
+                            <span class="s5">// ++this.x;</span>
+                            <span class="s0">int </span><span class="s1">p_y = cell.getY()</span><span class="s0">;</span>
+                            <span class="s1">++p_y</span><span class="s0">;</span>
+                            <span class="s1">cell.setY(p_y)</span><span class="s0">;</span>
+                            <span class="s5">//++this.y;</span>
+                        <span class="s1">} </span><span class="s0">else if </span><span class="s1">(cell.getY() &gt; Game.arena.Y_Base()) {</span>
+                            <span class="s5">//++this.x;</span>
+                            <span class="s0">int </span><span class="s1">p_x = cell.getX()</span><span class="s0">;</span>
+                            <span class="s1">++p_x</span><span class="s0">;</span>
+                            <span class="s1">cell.setX(p_x)</span><span class="s0">;</span>
+
+                            <span class="s5">// --this.y;</span>
+                            <span class="s0">int </span><span class="s1">p_y = cell.getY()</span><span class="s0">;</span>
+                            <span class="s1">--p_y</span><span class="s0">;</span>
+                            <span class="s1">cell.setY(p_y)</span><span class="s0">;</span>
+                        <span class="s1">}</span>
+
+                        <span class="s0">return new </span><span class="s1">Cell(cell.getX()</span><span class="s0">, </span><span class="s1">cell.getY())</span><span class="s0">;</span>
+                    <span class="s1">}</span>
+
+                    <span class="s1">Game.arena.setArena(cell.getX()</span><span class="s0">, </span><span class="s1">cell.getY()</span><span class="s0">, </span><span class="s2">&quot; &quot;</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">cell.setX(cell.getX() + </span><span class="s4">2</span><span class="s1">)</span><span class="s0">;</span>
+
+                    <span class="s0">return new </span><span class="s1">Cell(cell.getX()</span><span class="s0">, </span><span class="s1">cell.getY())</span><span class="s0">;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+
+
+        <span class="s1">}</span>
+        <span class="s0">else if </span><span class="s1">(cell.getX() &gt; Game.base.getX()) {</span>
+            <span class="s5">//   System.out.println(&quot;2&quot;);</span>
+            <span class="s0">int </span><span class="s1">i = cell.getX()</span><span class="s0">;</span>
+            <span class="s1">i--</span><span class="s0">;</span>
+            <span class="s0">if </span><span class="s1">(Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">cell.getY()).equals(</span><span class="s2">&quot;*&quot;</span><span class="s1">)) {</span>
+                <span class="s5">//--this.x;</span>
+                <span class="s0">int </span><span class="s1">p_x = cell.getX()</span><span class="s0">;</span>
+                <span class="s1">--p_x</span><span class="s0">;</span>
+                <span class="s1">cell.setX(p_x)</span><span class="s0">;</span>
+                <span class="s0">try </span><span class="s1">{</span>
+                    <span class="s1">Thread.sleep(</span><span class="s4">1000</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">} </span><span class="s0">catch </span><span class="s1">(InterruptedException e) {</span>
+                    <span class="s1">e.printStackTrace()</span><span class="s0">;</span>
+                <span class="s1">}</span>
+
+                <span class="s0">return new </span><span class="s1">Cell(cell.getX()</span><span class="s0">, </span><span class="s1">cell.getY())</span><span class="s0">;</span>
+            <span class="s1">}</span>
+            <span class="s0">if </span><span class="s1">(Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">cell.getY()).equals(</span><span class="s2">&quot; &quot;</span><span class="s1">)) {</span>
+                <span class="s1">Game.arena.setArena(cell.getX()</span><span class="s0">, </span><span class="s1">cell.getY()</span><span class="s0">, </span><span class="s2">&quot; &quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s5">//--this.x;</span>
+                <span class="s0">int </span><span class="s1">p_x = cell.getX()</span><span class="s0">;</span>
+                <span class="s1">--p_x</span><span class="s0">;</span>
+                <span class="s1">cell.setX(p_x)</span><span class="s0">;</span>
+                <span class="s0">return new </span><span class="s1">Cell(cell.getX()</span><span class="s0">, </span><span class="s1">cell.getY())</span><span class="s0">;</span>
+            <span class="s1">} </span><span class="s0">else if </span><span class="s1">(Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">cell.getY()).equals(</span><span class="s2">&quot;Z&quot;</span><span class="s1">) || Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">cell.getY()).equals(</span><span class="s2">&quot;+&quot;</span><span class="s1">) || Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">cell.getY()).equals(</span><span class="s2">&quot;#&quot;</span><span class="s1">) || check_Next_Move(i</span><span class="s0">, </span><span class="s1">cell.getY())) {</span>
+                <span class="s0">return new </span><span class="s1">Cell(cell.getX()</span><span class="s0">, </span><span class="s1">cell.getY())</span><span class="s0">;</span>
+
+            <span class="s1">} </span><span class="s0">else if </span><span class="s1">(Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">cell.getY()).equals(</span><span class="s2">&quot;/&quot;</span><span class="s1">)) {</span>
+                <span class="s5">//--this.x;</span>
+                <span class="s0">int </span><span class="s1">p_x = cell.getX()</span><span class="s0">;</span>
+                <span class="s1">--p_x</span><span class="s0">;</span>
+                <span class="s1">cell.setX(p_x)</span><span class="s0">;</span>
+                <span class="s0">return new </span><span class="s1">Cell(cell.getX()</span><span class="s0">, </span><span class="s1">cell.getY())</span><span class="s0">;</span>
+            <span class="s1">} </span><span class="s0">else if </span><span class="s1">(Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">cell.getY()).equals(</span><span class="s2">&quot;X&quot;</span><span class="s1">)) {</span>
+                <span class="s0">if </span><span class="s1">(check_blocked(cell.getX()</span><span class="s0">, </span><span class="s1">cell.getY()</span><span class="s0">, </span><span class="s4">1</span><span class="s1">)) {</span>
+                    <span class="s0">if </span><span class="s1">(i == Game.arena.X_Base()) {</span>
+                        <span class="s1">Game.arena.setArena(cell.getX()</span><span class="s0">, </span><span class="s1">cell.getY()</span><span class="s0">, </span><span class="s2">&quot; &quot;</span><span class="s1">)</span><span class="s0">;</span>
+                        <span class="s0">if </span><span class="s1">(cell.getY() &lt; Game.arena.Y_Base()) {</span>
+                            <span class="s0">int </span><span class="s1">p_x = cell.getX()</span><span class="s0">;</span>
+                            <span class="s1">++p_x</span><span class="s0">;</span>
+                            <span class="s1">cell.setX(p_x)</span><span class="s0">;</span>
+
+                            <span class="s5">// ++this.x;</span>
+                            <span class="s0">int </span><span class="s1">p_y = cell.getY()</span><span class="s0">;</span>
+                            <span class="s1">++p_y</span><span class="s0">;</span>
+                            <span class="s1">cell.setY(p_y)</span><span class="s0">;</span>
+                            <span class="s5">//++this.y;</span>
+                        <span class="s1">} </span><span class="s0">else if </span><span class="s1">(cell.getY() &gt; Game.arena.Y_Base()) {</span>
+                            <span class="s5">// ++this.x;</span>
+                            <span class="s0">int </span><span class="s1">p_x = cell.getX()</span><span class="s0">;</span>
+                            <span class="s1">++p_x</span><span class="s0">;</span>
+                            <span class="s1">cell.setX(p_x)</span><span class="s0">;</span>
+
+                            <span class="s5">//--this.y;</span>
+                            <span class="s0">int </span><span class="s1">p_y = cell.getY()</span><span class="s0">;</span>
+                            <span class="s1">--p_y</span><span class="s0">;</span>
+                            <span class="s1">cell.setY(p_y)</span><span class="s0">;</span>
+                        <span class="s1">}</span>
+
+                        <span class="s0">return new </span><span class="s1">Cell(cell.getX()</span><span class="s0">, </span><span class="s1">cell.getY())</span><span class="s0">;</span>
+                    <span class="s1">}</span>
+
+                    <span class="s1">Game.arena.setArena(cell.getX()</span><span class="s0">, </span><span class="s1">cell.getY()</span><span class="s0">, </span><span class="s2">&quot; &quot;</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s5">// this.x -= 2;</span>
+                    <span class="s1">cell.setX(cell.getX() - </span><span class="s4">2</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s5">//sleep for two step</span>
+                    <span class="s0">return new </span><span class="s1">Cell(cell.getX()</span><span class="s0">, </span><span class="s1">cell.getY())</span><span class="s0">;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+
+
+        <span class="s1">}</span>
+        <span class="s0">else if </span><span class="s1">(cell.getY() &lt; Game.base.getY()) {</span>
+
+            <span class="s0">int </span><span class="s1">i = cell.getY()</span><span class="s0">;</span>
+            <span class="s1">i++</span><span class="s0">;</span>
+            <span class="s0">if </span><span class="s1">(Game.arena.Getcell(cell.getX()</span><span class="s0">, </span><span class="s1">i).equals(</span><span class="s2">&quot;*&quot;</span><span class="s1">)) {</span>
+                <span class="s0">int </span><span class="s1">p_y = cell.getY()</span><span class="s0">;</span>
+                <span class="s1">++p_y</span><span class="s0">;</span>
+                <span class="s1">cell.setY(p_y)</span><span class="s0">;</span>
+                <span class="s5">//++this.y;</span>
+                <span class="s0">try </span><span class="s1">{</span>
+                    <span class="s1">Thread.sleep(</span><span class="s4">1000</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">} </span><span class="s0">catch </span><span class="s1">(InterruptedException e) {</span>
+                    <span class="s1">e.printStackTrace()</span><span class="s0">;</span>
+                <span class="s1">}</span>
+
+                <span class="s0">return new </span><span class="s1">Cell(cell.getX()</span><span class="s0">, </span><span class="s1">cell.getY())</span><span class="s0">;</span>
+            <span class="s1">}</span>
+            <span class="s0">if </span><span class="s1">(Game.arena.Getcell(cell.getX()</span><span class="s0">, </span><span class="s1">i).equals(</span><span class="s2">&quot; &quot;</span><span class="s1">)) {</span>
+                <span class="s1">Game.arena.setArena(cell.getX()</span><span class="s0">, </span><span class="s1">cell.getY()</span><span class="s0">, </span><span class="s2">&quot; &quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s0">int </span><span class="s1">p_y = cell.getY()</span><span class="s0">;</span>
+                <span class="s1">++p_y</span><span class="s0">;</span>
+                <span class="s1">cell.setY(p_y)</span><span class="s0">;</span>
+                <span class="s5">// ++this.y;</span>
+                <span class="s0">return new </span><span class="s1">Cell(cell.getX()</span><span class="s0">, </span><span class="s1">cell.getY())</span><span class="s0">;</span>
+            <span class="s1">}</span>
+            <span class="s0">else if </span><span class="s1">(Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">cell.getY()).equals(</span><span class="s2">&quot;Z&quot;</span><span class="s1">) || Game.arena.Getcell(cell.getX()</span><span class="s0">, </span><span class="s1">i).equals(</span><span class="s2">&quot;+&quot;</span><span class="s1">) || Game.arena.Getcell(cell.getX()</span><span class="s0">, </span><span class="s1">i).equals(</span><span class="s2">&quot;#&quot;</span><span class="s1">) || check_Next_Move(cell.getX()</span><span class="s0">, </span><span class="s1">i)) {</span>
+                <span class="s0">return new </span><span class="s1">Cell(cell.getX()</span><span class="s0">, </span><span class="s1">cell.getY())</span><span class="s0">;</span>
+            <span class="s1">}</span>
+            <span class="s0">else if </span><span class="s1">(Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">cell.getY()).equals(</span><span class="s2">&quot;/&quot;</span><span class="s1">)) {</span>
+                <span class="s5">//++this.y;</span>
+                <span class="s0">int </span><span class="s1">p_y = cell.getY()</span><span class="s0">;</span>
+                <span class="s1">++p_y</span><span class="s0">;</span>
+                <span class="s1">cell.setY(p_y)</span><span class="s0">;</span>
+                <span class="s0">return new </span><span class="s1">Cell(cell.getX()</span><span class="s0">, </span><span class="s1">cell.getY())</span><span class="s0">;</span>
+            <span class="s1">}</span>
+            <span class="s0">else if </span><span class="s1">(Game.arena.Getcell(cell.getX()</span><span class="s0">, </span><span class="s1">i).equals(</span><span class="s2">&quot;X&quot;</span><span class="s1">)) {</span>
+
+                <span class="s0">if </span><span class="s1">(check_blocked(cell.getX()</span><span class="s0">, </span><span class="s1">cell.getY()</span><span class="s0">, </span><span class="s4">1</span><span class="s1">)) {</span>
+
+
+                    <span class="s1">Game.arena.setArena(cell.getX()</span><span class="s0">, </span><span class="s1">cell.getY()</span><span class="s0">, </span><span class="s2">&quot; &quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+                    <span class="s1">cell.setY(cell.getY() + </span><span class="s4">2</span><span class="s1">)</span><span class="s0">;</span>
+
+                    <span class="s0">return new </span><span class="s1">Cell(cell.getX()</span><span class="s0">, </span><span class="s1">cell.getY())</span><span class="s0">;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+            <span class="s0">else if </span><span class="s1">(check_Next_Move(cell.getX()</span><span class="s0">, </span><span class="s1">i)) {</span>
+
+
+                <span class="s0">return new </span><span class="s1">Cell(cell.getX()</span><span class="s0">, </span><span class="s1">cell.getY())</span><span class="s0">;</span>
+            <span class="s1">}</span>
+
+        <span class="s1">}</span>
+        <span class="s0">else if </span><span class="s1">(cell.getY() &gt; Game.base.getY()) {</span>
+
+            <span class="s0">int </span><span class="s1">i = cell.getY()</span><span class="s0">;</span>
+            <span class="s1">i--</span><span class="s0">;</span>
+            <span class="s0">if </span><span class="s1">(Game.arena.Getcell(cell.getX()</span><span class="s0">, </span><span class="s1">i).equals(</span><span class="s2">&quot;*&quot;</span><span class="s1">)) {</span>
+                <span class="s0">int </span><span class="s1">p_y = cell.getY()</span><span class="s0">;</span>
+                <span class="s1">--p_y</span><span class="s0">;</span>
+                <span class="s1">cell.setY(p_y)</span><span class="s0">;</span>
+                <span class="s5">// --this.y;</span>
+                <span class="s0">try </span><span class="s1">{</span>
+                    <span class="s1">Thread.sleep(</span><span class="s4">1000</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">} </span><span class="s0">catch </span><span class="s1">(InterruptedException e) {</span>
+                    <span class="s1">e.printStackTrace()</span><span class="s0">;</span>
+                <span class="s1">}</span>
+
+                <span class="s0">return new </span><span class="s1">Cell(cell.getX()</span><span class="s0">, </span><span class="s1">cell.getY())</span><span class="s0">;</span>
+            <span class="s1">}</span>
+            <span class="s0">if </span><span class="s1">(Game.arena.Getcell(cell.getX()</span><span class="s0">, </span><span class="s1">i).equals(</span><span class="s2">&quot; &quot;</span><span class="s1">)) {</span>
+                <span class="s1">Game.arena.setArena(cell.getX()</span><span class="s0">, </span><span class="s1">cell.getY()</span><span class="s0">, </span><span class="s2">&quot; &quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s0">int </span><span class="s1">p_y = cell.getY()</span><span class="s0">;</span>
+                <span class="s1">--p_y</span><span class="s0">;</span>
+                <span class="s1">cell.setY(p_y)</span><span class="s0">;</span>
+                <span class="s5">// --this.y;</span>
+                <span class="s0">return new </span><span class="s1">Cell(cell.getX()</span><span class="s0">, </span><span class="s1">cell.getY())</span><span class="s0">;</span>
+            <span class="s1">} </span><span class="s0">else if </span><span class="s1">(Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">cell.getY()).equals(</span><span class="s2">&quot;/&quot;</span><span class="s1">)) {</span>
+                <span class="s5">//++this.y;</span>
+                <span class="s0">int </span><span class="s1">p_y = cell.getY()</span><span class="s0">;</span>
+                <span class="s1">++p_y</span><span class="s0">;</span>
+                <span class="s1">cell.setY(p_y)</span><span class="s0">;</span>
+                <span class="s0">return new </span><span class="s1">Cell(cell.getX()</span><span class="s0">, </span><span class="s1">cell.getY())</span><span class="s0">;</span>
+            <span class="s1">} </span><span class="s0">else if </span><span class="s1">(Game.arena.Getcell(cell.getX()</span><span class="s0">, </span><span class="s1">i).equals(</span><span class="s2">&quot;Z&quot;</span><span class="s1">) || Game.arena.Getcell(cell.getX()</span><span class="s0">, </span><span class="s1">i).equals(</span><span class="s2">&quot;+&quot;</span><span class="s1">) || Game.arena.Getcell(cell.getX()</span><span class="s0">, </span><span class="s1">i).equals(</span><span class="s2">&quot;#&quot;</span><span class="s1">) || check_Next_Move(cell.getX()</span><span class="s0">, </span><span class="s1">i)) {</span>
+                <span class="s0">return new </span><span class="s1">Cell(cell.getX()</span><span class="s0">, </span><span class="s1">cell.getY())</span><span class="s0">;</span>
+            <span class="s1">}   </span><span class="s0">else if </span><span class="s1">(Game.arena.Getcell(cell.getX()</span><span class="s0">, </span><span class="s1">i).equals(</span><span class="s2">&quot;X&quot;</span><span class="s1">)) {</span>
+
+                <span class="s0">if </span><span class="s1">(check_blocked(cell.getX()</span><span class="s0">, </span><span class="s1">cell.getY()</span><span class="s0">, </span><span class="s4">1</span><span class="s1">)) {</span>
+
+
+                    <span class="s1">Game.arena.setArena(cell.getX()</span><span class="s0">, </span><span class="s1">cell.getY()</span><span class="s0">, </span><span class="s2">&quot; &quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+                    <span class="s1">cell.setY(cell.getY() - </span><span class="s4">2</span><span class="s1">)</span><span class="s0">;</span>
+
+                    <span class="s0">return new </span><span class="s1">Cell(cell.getX()</span><span class="s0">, </span><span class="s1">cell.getY())</span><span class="s0">;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+            <span class="s0">else if </span><span class="s1">(check_Next_Move(cell.getX()</span><span class="s0">, </span><span class="s1">i)) {</span>
+
+
+                <span class="s0">return new </span><span class="s1">Cell(cell.getX()</span><span class="s0">, </span><span class="s1">cell.getY())</span><span class="s0">;</span>
+            <span class="s1">}</span>
+
+        <span class="s1">}</span>
+
+        <span class="s0">return new </span><span class="s1">Cell(cell.getX()</span><span class="s0">, </span><span class="s1">cell.getY())</span><span class="s0">;</span>
+
+    <span class="s1">}</span>
+
+
+<span class="s1">}</span>
+</pre>
+</body>
+</html>

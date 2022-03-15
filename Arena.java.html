@@ -1,0 +1,358 @@
+<html>
+<head>
+<title>Arena.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6897bb;}
+.s3 { color: #6a8759;}
+.s4 { color: #629755; font-style: italic;}
+.s5 { color: #808080;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Arena.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">sample</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">java.io.File</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.io.IOException</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.Arrays</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.Scanner</span><span class="s0">;</span>
+
+<span class="s0">public class </span><span class="s1">Arena {</span>
+    <span class="s1">String arena[][]</span><span class="s0">;</span>
+
+    <span class="s0">public </span><span class="s1">Arena() {</span>
+        <span class="s0">this</span><span class="s1">.arena = </span><span class="s0">new </span><span class="s1">String[</span><span class="s2">100</span><span class="s1">][</span><span class="s2">100</span><span class="s1">]</span><span class="s0">;</span>
+        <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">0</span><span class="s0">; </span><span class="s1">i &lt; </span><span class="s2">100</span><span class="s0">; </span><span class="s1">i++) {</span>
+            <span class="s1">Arrays.fill(</span><span class="s0">this</span><span class="s1">.arena[i]</span><span class="s0">, </span><span class="s3">&quot; &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">String[][] getArena() {</span>
+        <span class="s0">return </span><span class="s1">arena</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setArena(</span><span class="s0">int </span><span class="s1">x</span><span class="s0">, int </span><span class="s1">y</span><span class="s0">, </span><span class="s1">String str) {</span>
+
+        <span class="s0">this</span><span class="s1">.arena[x][y] = str</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">String Getcell(</span><span class="s0">int </span><span class="s1">x</span><span class="s0">, int </span><span class="s1">y) {</span>
+        <span class="s0">return this</span><span class="s1">.arena[x][y]</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">printer() {</span>
+        <span class="s1">System.out.print(</span><span class="s3">&quot; __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">0</span><span class="s0">; </span><span class="s1">i &lt; </span><span class="s2">100</span><span class="s0">; </span><span class="s1">i++) {</span>
+            <span class="s1">System.out.println()</span><span class="s0">;</span>
+            <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">j = </span><span class="s2">0</span><span class="s0">; </span><span class="s1">j &lt; </span><span class="s2">100</span><span class="s0">; </span><span class="s1">j++) {</span>
+                <span class="s0">if </span><span class="s1">(j == </span><span class="s2">0</span><span class="s1">) {</span>
+                    <span class="s1">System.out.print(</span><span class="s3">&quot;|__&quot; </span><span class="s1">+ </span><span class="s0">this</span><span class="s1">.arena[i][j] + </span><span class="s3">&quot;__|__&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">} </span><span class="s0">else if </span><span class="s1">(j == </span><span class="s2">99</span><span class="s1">)</span>
+                    <span class="s1">System.out.print(</span><span class="s0">this</span><span class="s1">.arena[i][j] + </span><span class="s3">&quot;__|&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s0">else</span>
+                    <span class="s1">System.out.print(</span><span class="s0">this</span><span class="s1">.arena[i][j] + </span><span class="s3">&quot;__|__&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">Zoom(</span><span class="s0">int </span><span class="s1">start</span><span class="s0">,int </span><span class="s1">end) {</span>
+        <span class="s1">System.out.println()</span><span class="s0">;</span>
+        <span class="s1">System.out.println()</span><span class="s0">;</span>
+        <span class="s1">System.out.println()</span><span class="s0">;</span>
+        <span class="s1">System.out.print(</span><span class="s3">&quot; __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = start</span><span class="s0">; </span><span class="s1">i &lt; start+</span><span class="s2">25</span><span class="s0">; </span><span class="s1">i++) {</span>
+            <span class="s1">System.out.println()</span><span class="s0">;</span>
+            <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">j = end</span><span class="s0">; </span><span class="s1">j &lt; end+</span><span class="s2">25</span><span class="s0">; </span><span class="s1">j++) {</span>
+                <span class="s0">if </span><span class="s1">(j == end) {</span>
+                    <span class="s1">System.out.print(</span><span class="s3">&quot;|__&quot; </span><span class="s1">+ </span><span class="s0">this</span><span class="s1">.arena[i][j] + </span><span class="s3">&quot;__|__&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">} </span><span class="s0">else if </span><span class="s1">(j == (end+</span><span class="s2">24</span><span class="s1">))</span>
+                    <span class="s1">System.out.print(</span><span class="s0">this</span><span class="s1">.arena[i][j] + </span><span class="s3">&quot;__|&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s0">else</span>
+                    <span class="s1">System.out.print(</span><span class="s0">this</span><span class="s1">.arena[i][j] + </span><span class="s3">&quot;__|__&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">printer_ATTackeR2() {</span>
+        <span class="s1">System.out.println()</span><span class="s0">;</span>
+        <span class="s1">System.out.println()</span><span class="s0">;</span>
+        <span class="s1">System.out.println()</span><span class="s0">;</span>
+        <span class="s1">System.out.print(</span><span class="s3">&quot; __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">25</span><span class="s0">; </span><span class="s1">i &lt; </span><span class="s2">50</span><span class="s0">; </span><span class="s1">i++) {</span>
+            <span class="s1">System.out.println()</span><span class="s0">;</span>
+            <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">j = </span><span class="s2">25</span><span class="s0">; </span><span class="s1">j &lt; </span><span class="s2">50</span><span class="s0">; </span><span class="s1">j++) {</span>
+                <span class="s0">if </span><span class="s1">(j == </span><span class="s2">25</span><span class="s1">) {</span>
+                    <span class="s1">System.out.print(</span><span class="s3">&quot;|__&quot; </span><span class="s1">+ </span><span class="s0">this</span><span class="s1">.arena[i][j] + </span><span class="s3">&quot;__|__&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">} </span><span class="s0">else if </span><span class="s1">(j == </span><span class="s2">49</span><span class="s1">)</span>
+                    <span class="s1">System.out.print(</span><span class="s0">this</span><span class="s1">.arena[i][j] + </span><span class="s3">&quot;__|&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s0">else</span>
+                    <span class="s1">System.out.print(</span><span class="s0">this</span><span class="s1">.arena[i][j] + </span><span class="s3">&quot;__|__&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">printer_ATTackeR3() {</span>
+        <span class="s1">System.out.println()</span><span class="s0">;</span>
+        <span class="s1">System.out.println()</span><span class="s0">;</span>
+        <span class="s1">System.out.println()</span><span class="s0">;</span>
+        <span class="s1">System.out.print(</span><span class="s3">&quot; __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">50</span><span class="s0">; </span><span class="s1">i &lt; </span><span class="s2">75</span><span class="s0">; </span><span class="s1">i++) {</span>
+            <span class="s1">System.out.println()</span><span class="s0">;</span>
+            <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">j = </span><span class="s2">50</span><span class="s0">; </span><span class="s1">j &lt; </span><span class="s2">75</span><span class="s0">; </span><span class="s1">j++) {</span>
+                <span class="s0">if </span><span class="s1">(j == </span><span class="s2">50</span><span class="s1">) {</span>
+                    <span class="s1">System.out.print(</span><span class="s3">&quot;|__&quot; </span><span class="s1">+ </span><span class="s0">this</span><span class="s1">.arena[i][j] + </span><span class="s3">&quot;__|__&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">} </span><span class="s0">else if </span><span class="s1">(j == </span><span class="s2">74</span><span class="s1">)</span>
+                    <span class="s1">System.out.print(</span><span class="s0">this</span><span class="s1">.arena[i][j] + </span><span class="s3">&quot;__|&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s0">else</span>
+                    <span class="s1">System.out.print(</span><span class="s0">this</span><span class="s1">.arena[i][j] + </span><span class="s3">&quot;__|__&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">printer_Defender4() {</span>
+        <span class="s1">System.out.println()</span><span class="s0">;</span>
+        <span class="s1">System.out.println()</span><span class="s0">;</span>
+        <span class="s1">System.out.println()</span><span class="s0">;</span>
+        <span class="s1">System.out.print(</span><span class="s3">&quot; __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">75</span><span class="s0">; </span><span class="s1">i &lt; </span><span class="s2">100</span><span class="s0">; </span><span class="s1">i++) {</span>
+            <span class="s1">System.out.println()</span><span class="s0">;</span>
+            <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">j = </span><span class="s2">75</span><span class="s0">; </span><span class="s1">j &lt; </span><span class="s2">100</span><span class="s0">; </span><span class="s1">j++) {</span>
+                <span class="s0">if </span><span class="s1">(j == </span><span class="s2">75</span><span class="s1">) {</span>
+                    <span class="s1">System.out.print(</span><span class="s3">&quot;|__&quot; </span><span class="s1">+ </span><span class="s0">this</span><span class="s1">.arena[i][j] + </span><span class="s3">&quot;__|__&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">} </span><span class="s0">else if </span><span class="s1">(j == </span><span class="s2">99</span><span class="s1">)</span>
+                    <span class="s1">System.out.print(</span><span class="s0">this</span><span class="s1">.arena[i][j] + </span><span class="s3">&quot;__|&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s0">else</span>
+                    <span class="s1">System.out.print(</span><span class="s0">this</span><span class="s1">.arena[i][j] + </span><span class="s3">&quot;__|__&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">int </span><span class="s1">X_Base() {</span>
+        <span class="s0">int </span><span class="s1">pos_x = </span><span class="s2">0</span><span class="s0">, </span><span class="s1">pos_y = </span><span class="s2">0</span><span class="s0">;</span>
+        <span class="s0">try </span><span class="s1">{</span>
+            <span class="s1">File myObj = </span><span class="s0">new </span><span class="s1">File(</span><span class="s3">&quot;Base.txt&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+            <span class="s1">Scanner myReader = </span><span class="s0">new </span><span class="s1">Scanner(myObj)</span><span class="s0">;</span>
+            <span class="s0">if </span><span class="s1">(myReader.hasNextInt()) {</span>
+                <span class="s1">pos_x = myReader.nextInt()</span><span class="s0">;</span>
+                <span class="s1">pos_y = myReader.nextInt()</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+            <span class="s1">myReader.close()</span><span class="s0">;</span>
+        <span class="s1">} </span><span class="s0">catch </span><span class="s1">(IOException e) {</span>
+            <span class="s1">System.out.println(</span><span class="s3">&quot;An error occurred.&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">e.printStackTrace()</span><span class="s0">;</span>
+        <span class="s1">}</span>
+        <span class="s0">return </span><span class="s1">pos_x</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">int </span><span class="s1">Y_Base() {</span>
+        <span class="s0">int </span><span class="s1">pos_x = </span><span class="s2">0</span><span class="s0">, </span><span class="s1">pos_y = </span><span class="s2">0</span><span class="s0">;</span>
+        <span class="s0">try </span><span class="s1">{</span>
+            <span class="s1">File myObj = </span><span class="s0">new </span><span class="s1">File(</span><span class="s3">&quot;Base.txt&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+            <span class="s1">Scanner myReader = </span><span class="s0">new </span><span class="s1">Scanner(myObj)</span><span class="s0">;</span>
+            <span class="s0">if </span><span class="s1">(myReader.hasNextInt()) {</span>
+                <span class="s1">pos_x = myReader.nextInt()</span><span class="s0">;</span>
+                <span class="s1">pos_y = myReader.nextInt()</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+            <span class="s1">myReader.close()</span><span class="s0">;</span>
+        <span class="s1">} </span><span class="s0">catch </span><span class="s1">(IOException e) {</span>
+            <span class="s1">System.out.println(</span><span class="s3">&quot;An error occurred.&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">e.printStackTrace()</span><span class="s0">;</span>
+        <span class="s1">}</span>
+        <span class="s0">return </span><span class="s1">pos_y</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s4">/***************************************  Log FILE ATTACKER  ********************************/</span>
+
+    <span class="s0">public </span><span class="s1">String file_name_Atank(</span><span class="s0">int </span><span class="s1">num_attacker</span><span class="s0">, int </span><span class="s1">num_Atank) {</span>
+        <span class="s0">if </span><span class="s1">((num_attacker == </span><span class="s2">1</span><span class="s1">) &amp;&amp; (num_Atank == </span><span class="s2">1</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;ATank</span><span class="s0">\\</span><span class="s3">T11&quot;</span><span class="s0">;</span>
+        <span class="s0">else if </span><span class="s1">((num_attacker == </span><span class="s2">1</span><span class="s1">) &amp;&amp; (num_Atank == </span><span class="s2">2</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;ATank</span><span class="s0">\\</span><span class="s3">T12&quot;</span><span class="s0">;</span>
+        <span class="s0">else if </span><span class="s1">((num_attacker == </span><span class="s2">1</span><span class="s1">) &amp;&amp; (num_Atank == </span><span class="s2">3</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;ATank</span><span class="s0">\\</span><span class="s3">T13&quot;</span><span class="s0">;</span>
+            <span class="s5">//////////////////////////////////////////////////////////////////</span>
+        <span class="s0">else if </span><span class="s1">((num_attacker == </span><span class="s2">2</span><span class="s1">) &amp;&amp; (num_Atank == </span><span class="s2">1</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;ATank</span><span class="s0">\\</span><span class="s3">T21&quot;</span><span class="s0">;</span>
+        <span class="s0">else if </span><span class="s1">((num_attacker == </span><span class="s2">2</span><span class="s1">) &amp;&amp; (num_Atank == </span><span class="s2">2</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;ATank</span><span class="s0">\\</span><span class="s3">T22&quot;</span><span class="s0">;</span>
+        <span class="s0">else if </span><span class="s1">((num_attacker == </span><span class="s2">2</span><span class="s1">) &amp;&amp; (num_Atank == </span><span class="s2">3</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;ATank</span><span class="s0">\\</span><span class="s3">T23&quot;</span><span class="s0">;</span>
+        <span class="s5">//////////////////////////////////////////////////////////////////</span>
+        <span class="s0">if </span><span class="s1">((num_attacker == </span><span class="s2">3</span><span class="s1">) &amp;&amp; (num_Atank == </span><span class="s2">1</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;ATank</span><span class="s0">\\</span><span class="s3">T31&quot;</span><span class="s0">;</span>
+        <span class="s0">else if </span><span class="s1">((num_attacker == </span><span class="s2">3</span><span class="s1">) &amp;&amp; (num_Atank == </span><span class="s2">2</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;ATank</span><span class="s0">\\</span><span class="s3">T32&quot;</span><span class="s0">;</span>
+        <span class="s0">else if </span><span class="s1">((num_attacker == </span><span class="s2">3</span><span class="s1">) &amp;&amp; (num_Atank == </span><span class="s2">3</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;ATank</span><span class="s0">\\</span><span class="s3">T33&quot;</span><span class="s0">;</span>
+        <span class="s0">else</span>
+            <span class="s0">return </span><span class="s3">&quot;ATank</span><span class="s0">\\</span><span class="s3">T&quot; </span><span class="s1">+ Integer.toString(num_attacker) + Integer.toString(num_Atank)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">String file_name_Ssolider(</span><span class="s0">int </span><span class="s1">num_attacker</span><span class="s0">, int </span><span class="s1">num_solider) {</span>
+        <span class="s0">if </span><span class="s1">((num_attacker == </span><span class="s2">1</span><span class="s1">) &amp;&amp; (num_solider == </span><span class="s2">1</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;Ssolider</span><span class="s0">\\</span><span class="s3">S11&quot;</span><span class="s0">;</span>
+        <span class="s0">else if </span><span class="s1">((num_attacker == </span><span class="s2">1</span><span class="s1">) &amp;&amp; (num_solider == </span><span class="s2">2</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;Ssolider</span><span class="s0">\\</span><span class="s3">S12&quot;</span><span class="s0">;</span>
+        <span class="s0">else if </span><span class="s1">((num_attacker == </span><span class="s2">1</span><span class="s1">) &amp;&amp; (num_solider == </span><span class="s2">3</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;Ssolider</span><span class="s0">\\</span><span class="s3">S13&quot;</span><span class="s0">;</span>
+            <span class="s5">//////////////////////////////////////////////////////////////////</span>
+        <span class="s0">else if </span><span class="s1">((num_attacker == </span><span class="s2">2</span><span class="s1">) &amp;&amp; (num_solider == </span><span class="s2">1</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;Ssolider</span><span class="s0">\\</span><span class="s3">S21&quot;</span><span class="s0">;</span>
+        <span class="s0">else if </span><span class="s1">((num_attacker == </span><span class="s2">2</span><span class="s1">) &amp;&amp; (num_solider == </span><span class="s2">2</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;Ssolider</span><span class="s0">\\</span><span class="s3">S22&quot;</span><span class="s0">;</span>
+        <span class="s0">else if </span><span class="s1">((num_attacker == </span><span class="s2">2</span><span class="s1">) &amp;&amp; (num_solider == </span><span class="s2">3</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;Ssolider</span><span class="s0">\\</span><span class="s3">S23&quot;</span><span class="s0">;</span>
+            <span class="s5">//////////////////////////////////////////////////////////////////</span>
+        <span class="s0">else if </span><span class="s1">((num_attacker == </span><span class="s2">3</span><span class="s1">) &amp;&amp; (num_solider == </span><span class="s2">1</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;Ssolider</span><span class="s0">\\</span><span class="s3">S31&quot;</span><span class="s0">;</span>
+        <span class="s0">else if </span><span class="s1">((num_attacker == </span><span class="s2">3</span><span class="s1">) &amp;&amp; (num_solider == </span><span class="s2">2</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;Ssolider</span><span class="s0">\\</span><span class="s3">S32&quot;</span><span class="s0">;</span>
+        <span class="s0">else if </span><span class="s1">((num_attacker == </span><span class="s2">3</span><span class="s1">) &amp;&amp; (num_solider == </span><span class="s2">3</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;Ssolider</span><span class="s0">\\</span><span class="s3">S33&quot;</span><span class="s0">;</span>
+        <span class="s0">else</span>
+            <span class="s0">return </span><span class="s3">&quot;Ssolider</span><span class="s0">\\</span><span class="s3">S&quot; </span><span class="s1">+ Integer.toString(num_attacker) + Integer.toString(num_solider)</span><span class="s0">;</span>
+
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">String file_name_Rsolider(</span><span class="s0">int </span><span class="s1">num_attacker</span><span class="s0">, int </span><span class="s1">num_rolider) {</span>
+        <span class="s0">if </span><span class="s1">((num_attacker == </span><span class="s2">1</span><span class="s1">) &amp;&amp; (num_rolider == </span><span class="s2">1</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;Rsolider</span><span class="s0">\\</span><span class="s3">R11&quot;</span><span class="s0">;</span>
+        <span class="s0">else if </span><span class="s1">((num_attacker == </span><span class="s2">1</span><span class="s1">) &amp;&amp; (num_rolider == </span><span class="s2">2</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;Rsolider</span><span class="s0">\\</span><span class="s3">R12&quot;</span><span class="s0">;</span>
+        <span class="s0">else if </span><span class="s1">((num_attacker == </span><span class="s2">1</span><span class="s1">) &amp;&amp; (num_rolider == </span><span class="s2">3</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;Rsolider</span><span class="s0">\\</span><span class="s3">R13&quot;</span><span class="s0">;</span>
+            <span class="s5">//////////////////////////////////////////////////////////////////</span>
+        <span class="s0">else if </span><span class="s1">((num_attacker == </span><span class="s2">2</span><span class="s1">) &amp;&amp; (num_rolider == </span><span class="s2">1</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;Rsolider</span><span class="s0">\\</span><span class="s3">R21&quot;</span><span class="s0">;</span>
+        <span class="s0">else if </span><span class="s1">((num_attacker == </span><span class="s2">2</span><span class="s1">) &amp;&amp; (num_rolider == </span><span class="s2">2</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;Rsolider</span><span class="s0">\\</span><span class="s3">R22&quot;</span><span class="s0">;</span>
+        <span class="s0">else if </span><span class="s1">((num_attacker == </span><span class="s2">2</span><span class="s1">) &amp;&amp; (num_rolider == </span><span class="s2">3</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;Rsolider</span><span class="s0">\\</span><span class="s3">R23&quot;</span><span class="s0">;</span>
+            <span class="s5">//////////////////////////////////////////////////////////////////</span>
+        <span class="s0">else if </span><span class="s1">((num_attacker == </span><span class="s2">3</span><span class="s1">) &amp;&amp; (num_rolider == </span><span class="s2">1</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;Rsolider</span><span class="s0">\\</span><span class="s3">R31&quot;</span><span class="s0">;</span>
+        <span class="s0">else if </span><span class="s1">((num_attacker == </span><span class="s2">3</span><span class="s1">) &amp;&amp; (num_rolider == </span><span class="s2">2</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;Rsolider</span><span class="s0">\\</span><span class="s3">R32&quot;</span><span class="s0">;</span>
+        <span class="s0">else if </span><span class="s1">((num_attacker == </span><span class="s2">3</span><span class="s1">) &amp;&amp; (num_rolider == </span><span class="s2">3</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;Rsolider</span><span class="s0">\\</span><span class="s3">R33&quot;</span><span class="s0">;</span>
+        <span class="s0">else</span>
+            <span class="s0">return </span><span class="s3">&quot;Rsolider</span><span class="s0">\\</span><span class="s3">R&quot; </span><span class="s1">+ Integer.toString(num_attacker) + Integer.toString(num_rolider)</span><span class="s0">;</span>
+
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">String file_name_Bomb(</span><span class="s0">int </span><span class="s1">num_attacker) {</span>
+        <span class="s0">if </span><span class="s1">((num_attacker == </span><span class="s2">1</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;Bomb</span><span class="s0">\\</span><span class="s3">B1&quot;</span><span class="s0">;</span>
+
+            <span class="s5">//////////////////////////////////////////////////////////////////</span>
+        <span class="s0">else if </span><span class="s1">((num_attacker == </span><span class="s2">2</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;Bomb</span><span class="s0">\\</span><span class="s3">B2&quot;</span><span class="s0">;</span>
+
+            <span class="s5">//////////////////////////////////////////////////////////////////</span>
+        <span class="s0">else if </span><span class="s1">((num_attacker == </span><span class="s2">3</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;Bomb</span><span class="s0">\\</span><span class="s3">B3&quot;</span><span class="s0">;</span>
+
+        <span class="s0">else</span>
+            <span class="s0">return </span><span class="s3">&quot;Bomb</span><span class="s0">\\</span><span class="s3">B&quot; </span><span class="s1">+ Integer.toString(num_attacker)</span><span class="s0">;</span>
+
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">String file_name_airPlane(</span><span class="s0">int </span><span class="s1">num_attacker) {</span>
+        <span class="s0">if </span><span class="s1">((num_attacker == </span><span class="s2">1</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;airPlane</span><span class="s0">\\</span><span class="s3">P1&quot;</span><span class="s0">;</span>
+
+            <span class="s5">//////////////////////////////////////////////////////////////////</span>
+        <span class="s0">else if </span><span class="s1">((num_attacker == </span><span class="s2">2</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;airPlane</span><span class="s0">\\</span><span class="s3">P2&quot;</span><span class="s0">;</span>
+
+            <span class="s5">//////////////////////////////////////////////////////////////////</span>
+        <span class="s0">else if </span><span class="s1">((num_attacker == </span><span class="s2">3</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;airPlane</span><span class="s0">\\</span><span class="s3">P3&quot;</span><span class="s0">;</span>
+
+        <span class="s0">else</span>
+            <span class="s0">return </span><span class="s3">&quot;airPlane</span><span class="s0">\\</span><span class="s3">P&quot; </span><span class="s1">+ Integer.toString(num_attacker)</span><span class="s0">;</span>
+
+    <span class="s1">}</span>
+
+    <span class="s4">/***************************************  Log FILE DEFENDER ********************************/</span>
+    <span class="s0">public </span><span class="s1">String file_name_Cannon(</span><span class="s0">int </span><span class="s1">num_DEFENDER</span><span class="s0">, int </span><span class="s1">num_Cannon) {</span>
+        <span class="s0">if </span><span class="s1">((num_DEFENDER == </span><span class="s2">1</span><span class="s1">) &amp;&amp; (num_Cannon == </span><span class="s2">1</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;Cannon</span><span class="s0">\\</span><span class="s3">C1&quot;</span><span class="s0">;</span>
+
+            <span class="s5">//////////////////////////////////////////////////////////////////</span>
+        <span class="s0">else if </span><span class="s1">((num_DEFENDER == </span><span class="s2">2</span><span class="s1">) &amp;&amp; (num_Cannon == </span><span class="s2">1</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;Cannon</span><span class="s0">\\</span><span class="s3">C2&quot;</span><span class="s0">;</span>
+
+            <span class="s5">//////////////////////////////////////////////////////////////////</span>
+        <span class="s0">else if </span><span class="s1">((num_DEFENDER == </span><span class="s2">3</span><span class="s1">) &amp;&amp; (num_Cannon == </span><span class="s2">1</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;Cannon</span><span class="s0">\\</span><span class="s3">C3&quot;</span><span class="s0">;</span>
+
+        <span class="s0">else</span>
+            <span class="s0">return </span><span class="s3">&quot;Cannon</span><span class="s0">\\</span><span class="s3">C&quot; </span><span class="s1">+ Integer.toString(num_DEFENDER) + Integer.toString(num_Cannon)</span><span class="s0">;</span>
+
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">String file_name_Tower(</span><span class="s0">int </span><span class="s1">num_DEFENDER</span><span class="s0">, int </span><span class="s1">num_Tower) {</span>
+        <span class="s0">if </span><span class="s1">((num_DEFENDER == </span><span class="s2">1</span><span class="s1">) &amp;&amp; (num_Tower == </span><span class="s2">1</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;Tower</span><span class="s0">\\</span><span class="s3">W1&quot;</span><span class="s0">;</span>
+
+            <span class="s5">//////////////////////////////////////////////////////////////////</span>
+        <span class="s0">else if </span><span class="s1">((num_DEFENDER == </span><span class="s2">2</span><span class="s1">) &amp;&amp; (num_Tower == </span><span class="s2">1</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;Tower</span><span class="s0">\\</span><span class="s3">W2&quot;</span><span class="s0">;</span>
+
+            <span class="s5">//////////////////////////////////////////////////////////////////</span>
+        <span class="s0">else if </span><span class="s1">((num_DEFENDER == </span><span class="s2">3</span><span class="s1">) &amp;&amp; (num_Tower == </span><span class="s2">1</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;Tower</span><span class="s0">\\</span><span class="s3">W3&quot;</span><span class="s0">;</span>
+
+        <span class="s0">else</span>
+            <span class="s0">return </span><span class="s3">&quot;Tower</span><span class="s0">\\</span><span class="s3">W&quot; </span><span class="s1">+ Integer.toString(num_DEFENDER) + Integer.toString(num_Tower)</span><span class="s0">;</span>
+
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">String file_name_Support_Rsolider(</span><span class="s0">int </span><span class="s1">num_DEFENDER</span><span class="s0">, int </span><span class="s1">num_Support_Rsolider) {</span>
+        <span class="s0">if </span><span class="s1">((num_DEFENDER == </span><span class="s2">1</span><span class="s1">) &amp;&amp; (num_Support_Rsolider == </span><span class="s2">1</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;suportTeam</span><span class="s0">\\</span><span class="s3">sup1&quot;</span><span class="s0">;</span>
+
+            <span class="s5">//////////////////////////////////////////////////////////////////</span>
+        <span class="s0">else if </span><span class="s1">((num_DEFENDER == </span><span class="s2">1</span><span class="s1">) &amp;&amp; (num_Support_Rsolider == </span><span class="s2">2</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;suportTeam</span><span class="s0">\\</span><span class="s3">sup2&quot;</span><span class="s0">;</span>
+
+            <span class="s5">//////////////////////////////////////////////////////////////////</span>
+        <span class="s0">else if </span><span class="s1">((num_DEFENDER == </span><span class="s2">1</span><span class="s1">) &amp;&amp; (num_Support_Rsolider == </span><span class="s2">3</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;suportTeam</span><span class="s0">\\</span><span class="s3">sup3&quot;</span><span class="s0">;</span>
+        <span class="s0">else if </span><span class="s1">((num_DEFENDER == </span><span class="s2">1</span><span class="s1">) &amp;&amp; (num_Support_Rsolider == </span><span class="s2">4</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;suportTeam</span><span class="s0">\\</span><span class="s3">sup4&quot;</span><span class="s0">;</span>
+        <span class="s0">else</span>
+            <span class="s0">return </span><span class="s3">&quot;suportTeam</span><span class="s0">\\</span><span class="s3">sup&quot; </span><span class="s1">+ Integer.toString(num_DEFENDER) + Integer.toString(num_Support_Rsolider)</span><span class="s0">;</span>
+
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">String file_name_air_Defence(</span><span class="s0">int </span><span class="s1">num_DEFENDER) {</span>
+        <span class="s0">if </span><span class="s1">((num_DEFENDER == </span><span class="s2">1</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;air_Defence</span><span class="s0">\\</span><span class="s3">d1&quot;</span><span class="s0">;</span>
+        <span class="s0">else if </span><span class="s1">((num_DEFENDER == </span><span class="s2">2</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;air_Defence</span><span class="s0">\\</span><span class="s3">d2&quot;</span><span class="s0">;</span>
+        <span class="s0">else if </span><span class="s1">((num_DEFENDER == </span><span class="s2">3</span><span class="s1">))</span>
+            <span class="s0">return </span><span class="s3">&quot;air_Defence</span><span class="s0">\\</span><span class="s3">d3&quot;</span><span class="s0">;</span>
+
+        <span class="s0">else</span>
+            <span class="s0">return </span><span class="s3">&quot;air_Defence</span><span class="s0">\\</span><span class="s3">d&quot;</span><span class="s1">+ Integer.toString(num_DEFENDER)</span><span class="s0">;</span>
+
+    <span class="s1">}</span>
+
+<span class="s1">}</span>
+</pre>
+</body>
+</html>

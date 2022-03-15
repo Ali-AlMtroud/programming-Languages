@@ -1,0 +1,928 @@
+<html>
+<head>
+<title>Main.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #629755; font-style: italic;}
+.s3 { color: #629755; font-weight: bold; font-style: italic;}
+.s4 { color: #6897bb;}
+.s5 { color: #6a8759;}
+.s6 { color: #808080;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Main.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">sample</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.animation.RotateTransition</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.application.Application</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.animation.StrokeTransition</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.Scene</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.layout.StackPane</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.paint.Color</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.paint.ImagePattern</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.shape.Path</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.shape.Polygon</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.shape.Rectangle</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.text.Font</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.animation.PathTransition</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.animation.PathTransition.OrientationType</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.application.Application</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.Group</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.Scene</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.paint.Color</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.shape.CubicCurveTo</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.shape.MoveTo</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.shape.Path</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.shape.Polygon</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.stage.Stage</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.util.Duration</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.text.Text</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.stage.Stage</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.util.Duration</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.animation.RotateTransition</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.animation.TranslateTransition</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.application.Application</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.fxml.FXMLLoader</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.Parent</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.Scene</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.image.ImageView</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.input.KeyCode</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.input.KeyEvent</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.stage.Stage</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.control.ContentDisplay</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.control.Button</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.image.Image</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.image.ImageView</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">javafx.scene.control.ContentDisplay</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.io.BufferedReader</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.io.FileInputStream</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.application.Application</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.event.ActionEvent</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.event.EventHandler</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.geometry.Insets</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.geometry.Pos</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.Cursor</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.Group</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.Scene</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.control.Accordion</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.control.Button</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.control.ScrollPane</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.control.TitledPane</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.media.Media</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.media.MediaPlayer</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.effect.DropShadow</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.image.Image</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.input.MouseEvent</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.layout.Background</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.layout.BackgroundFill</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.layout.BackgroundImage</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.layout.BackgroundPosition</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.layout.BackgroundRepeat</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.layout.BackgroundSize</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.layout.CornerRadii</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.layout.GridPane</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.layout.Pane</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.layout.StackPane</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.layout.VBox</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.paint.Color</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.text.Font</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.stage.Stage</span><span class="s0">;</span>
+
+
+<span class="s0">import </span><span class="s1">java.io.FileNotFoundException</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.io.FileReader</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.io.IOException</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.nio.file.Paths</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.ArrayList</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.Arrays</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.Scanner</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">javafx.scene.control.Label</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.control.ListView</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.control.SelectionMode</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.control.TextField</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.scene.layout.HBox</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javafx.util.Duration</span><span class="s0">;</span>
+
+<span class="s0">import static </span><span class="s1">javafx.scene.input.KeyCode.ENTER</span><span class="s0">;</span>
+
+<span class="s2">/**</span>
+ <span class="s2">*</span>
+ <span class="s2">* </span><span class="s3">@author </span><span class="s2">ASUS</span>
+ <span class="s2">*/</span>
+<span class="s0">public class </span><span class="s1">Main </span><span class="s0">extends </span><span class="s1">Application {</span>
+    <span class="s1">Stage window</span><span class="s0">;</span>
+    <span class="s1">Scene scene</span><span class="s0">,</span><span class="s1">scene1</span><span class="s0">,</span><span class="s1">scene2</span><span class="s0">,</span><span class="s1">scene3</span><span class="s0">;</span>
+    <span class="s0">float </span><span class="s1">x=</span><span class="s4">1</span><span class="s0">;</span>
+    <span class="s1">String k</span><span class="s0">;</span>
+    <span class="s1">String m</span><span class="s0">;</span>
+    <span class="s1">ArrayList&lt;String&gt;a=</span><span class="s0">new </span><span class="s1">ArrayList&lt;String&gt;()</span><span class="s0">;</span>
+    <span class="s1">ListView&lt;String&gt; v</span><span class="s0">;</span>
+
+    <span class="s1">MediaPlayer mediaPlayer</span><span class="s0">;</span>
+
+    <span class="s0">public void </span><span class="s1">Read_log_file1(String type</span><span class="s0">,</span><span class="s1">String num) {</span>
+        <span class="s1">a.clear()</span><span class="s0">;</span>
+        <span class="s0">if</span><span class="s1">(type.length()==</span><span class="s4">0 </span><span class="s1">&amp;&amp; num.length()==</span><span class="s4">0</span><span class="s1">)</span>
+        <span class="s1">{</span>
+            <span class="s1">a.clear()</span><span class="s0">;</span>
+            <span class="s1">a.add(</span><span class="s5">&quot;this file is not found&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+        <span class="s0">try </span><span class="s1">{</span>
+
+            <span class="s1">String jj</span><span class="s0">;</span>
+
+            <span class="s1">BufferedReader file=</span><span class="s0">new </span><span class="s1">BufferedReader(</span><span class="s0">new </span><span class="s1">FileReader(type+</span><span class="s5">&quot;</span><span class="s0">\\</span><span class="s5">&quot;</span><span class="s1">+num))</span><span class="s0">;</span>
+            <span class="s0">while </span><span class="s1">((jj=file.readLine())!=</span><span class="s0">null</span><span class="s1">) {</span>
+                <span class="s6">// System.out.println(jj);</span>
+
+                <span class="s1">a.add(jj)</span><span class="s0">;</span>
+            <span class="s1">}</span>
+
+
+            <span class="s1">file.close()</span><span class="s0">;</span>
+        <span class="s1">} </span><span class="s0">catch </span><span class="s1">(Exception e) {</span>
+            <span class="s1">e.printStackTrace()</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">start(Stage primaryStage)  {</span>
+
+        <span class="s0">try</span><span class="s1">{</span>
+
+            <span class="s1">window=primaryStage</span><span class="s0">;</span>
+
+            <span class="s6">///////////////////PAGE 1 //////////////////</span>
+            <span class="s1">Pane root = </span><span class="s0">new </span><span class="s1">Pane()</span><span class="s0">;</span>
+
+            <span class="s1">primaryStage.setTitle(</span><span class="s5">&quot;Destroy OR Defender&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+            <span class="s1">FileInputStream input= </span><span class="s0">new </span><span class="s1">FileInputStream(</span><span class="s5">&quot;0.jpg&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+            <span class="s1">Image image=</span><span class="s0">new </span><span class="s1">Image(input) </span><span class="s0">;</span>
+
+
+            <span class="s1">BackgroundImage backgroundimage = </span><span class="s0">new </span><span class="s1">BackgroundImage(image</span><span class="s0">, </span><span class="s1">BackgroundRepeat.NO_REPEAT</span><span class="s0">, </span><span class="s1">BackgroundRepeat.NO_REPEAT</span><span class="s0">, </span><span class="s1">BackgroundPosition.DEFAULT</span><span class="s0">, </span><span class="s1">BackgroundSize.DEFAULT)</span><span class="s0">;</span>
+            <span class="s1">Background background = </span><span class="s0">new </span><span class="s1">Background(backgroundimage)</span><span class="s0">;</span>
+
+
+            <span class="s1">Image plane=</span><span class="s0">new </span><span class="s1">Image(</span><span class="s5">&quot;14.png&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">Image plane1=</span><span class="s0">new </span><span class="s1">Image(</span><span class="s5">&quot;plane1.png&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">Image base=</span><span class="s0">new </span><span class="s1">Image(</span><span class="s5">&quot;1.png&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">Image Tank=</span><span class="s0">new </span><span class="s1">Image(</span><span class="s5">&quot;9.png&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">Image Tank1=</span><span class="s0">new </span><span class="s1">Image(</span><span class="s5">&quot;8.png&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">Image Tower=</span><span class="s0">new </span><span class="s1">Image(</span><span class="s5">&quot;Tower.png&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">Image Tower1=</span><span class="s0">new </span><span class="s1">Image(</span><span class="s5">&quot;Tower1.png&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">Image Sniper=</span><span class="s0">new </span><span class="s1">Image(</span><span class="s5">&quot;11.png&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">Image Sniper1=</span><span class="s0">new </span><span class="s1">Image(</span><span class="s5">&quot;111.png&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">Image Canon=</span><span class="s0">new </span><span class="s1">Image(</span><span class="s5">&quot;Canon.png&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">Image Canon1=</span><span class="s0">new </span><span class="s1">Image(</span><span class="s5">&quot;Canon1.png&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">Image Canon2=</span><span class="s0">new </span><span class="s1">Image(</span><span class="s5">&quot;Canon2.png&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">Image Canon3=</span><span class="s0">new </span><span class="s1">Image(</span><span class="s5">&quot;Canon3.png&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">Rectangle rectangle = </span><span class="s0">new </span><span class="s1">Rectangle()</span><span class="s0">;</span>
+            <span class="s1">Rectangle rectangle1 = </span><span class="s0">new </span><span class="s1">Rectangle()</span><span class="s0">;</span>
+            <span class="s1">Rectangle rectangle2 = </span><span class="s0">new </span><span class="s1">Rectangle()</span><span class="s0">;</span>
+            <span class="s6">// rectangle هنا قمنا بتحديد طول و عرض الكائن</span>
+
+
+            <span class="s1">Image airdefence=</span><span class="s0">new </span><span class="s1">Image(</span><span class="s5">&quot;air.png&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+            <span class="s1">rectangle1.setFill(</span><span class="s0">new </span><span class="s1">ImagePattern(base))</span><span class="s0">;</span>
+
+            <span class="s1">Rectangle P2=</span><span class="s0">new </span><span class="s1">Rectangle()</span><span class="s0">;</span>
+            <span class="s1">Rectangle P3=</span><span class="s0">new </span><span class="s1">Rectangle()</span><span class="s0">;</span>
+            <span class="s1">Rectangle T2=</span><span class="s0">new </span><span class="s1">Rectangle()</span><span class="s0">;</span>
+            <span class="s1">Rectangle T3=</span><span class="s0">new </span><span class="s1">Rectangle()</span><span class="s0">;</span>
+            <span class="s1">Rectangle T4=</span><span class="s0">new </span><span class="s1">Rectangle()</span><span class="s0">;</span>
+            <span class="s1">Rectangle T5=</span><span class="s0">new </span><span class="s1">Rectangle()</span><span class="s0">;</span>
+            <span class="s1">Rectangle T6=</span><span class="s0">new </span><span class="s1">Rectangle()</span><span class="s0">;</span>
+            <span class="s1">Rectangle T7=</span><span class="s0">new </span><span class="s1">Rectangle()</span><span class="s0">;</span>
+            <span class="s1">Rectangle T8=</span><span class="s0">new </span><span class="s1">Rectangle()</span><span class="s0">;</span>
+            <span class="s1">Rectangle T9=</span><span class="s0">new </span><span class="s1">Rectangle()</span><span class="s0">;</span>
+            <span class="s1">Rectangle T10=</span><span class="s0">new </span><span class="s1">Rectangle()</span><span class="s0">;</span>
+            <span class="s1">Rectangle T11=</span><span class="s0">new </span><span class="s1">Rectangle()</span><span class="s0">;</span>
+            <span class="s1">Rectangle T12=</span><span class="s0">new </span><span class="s1">Rectangle()</span><span class="s0">;</span>
+            <span class="s1">Rectangle R1=</span><span class="s0">new </span><span class="s1">Rectangle()</span><span class="s0">;</span>
+            <span class="s1">Rectangle S1=</span><span class="s0">new </span><span class="s1">Rectangle()</span><span class="s0">;</span>
+            <span class="s1">Rectangle S2=</span><span class="s0">new </span><span class="s1">Rectangle()</span><span class="s0">;</span>
+            <span class="s1">Rectangle S3=</span><span class="s0">new </span><span class="s1">Rectangle()</span><span class="s0">;</span>
+            <span class="s1">Rectangle S4=</span><span class="s0">new </span><span class="s1">Rectangle()</span><span class="s0">;</span>
+            <span class="s1">Rectangle S5=</span><span class="s0">new </span><span class="s1">Rectangle()</span><span class="s0">;</span>
+            <span class="s1">Rectangle S6=</span><span class="s0">new </span><span class="s1">Rectangle()</span><span class="s0">;</span>
+            <span class="s1">Rectangle c1=</span><span class="s0">new </span><span class="s1">Rectangle()</span><span class="s0">;</span>
+            <span class="s1">Rectangle c2=</span><span class="s0">new </span><span class="s1">Rectangle()</span><span class="s0">;</span>
+            <span class="s1">Rectangle c3=</span><span class="s0">new </span><span class="s1">Rectangle()</span><span class="s0">;</span>
+            <span class="s1">Rectangle c4=</span><span class="s0">new </span><span class="s1">Rectangle()</span><span class="s0">;</span>
+            <span class="s1">Rectangle c5=</span><span class="s0">new </span><span class="s1">Rectangle()</span><span class="s0">;</span>
+            <span class="s1">Rectangle c6=</span><span class="s0">new </span><span class="s1">Rectangle()</span><span class="s0">;</span>
+            <span class="s1">Rectangle c7=</span><span class="s0">new </span><span class="s1">Rectangle()</span><span class="s0">;</span>
+            <span class="s1">Rectangle c8=</span><span class="s0">new </span><span class="s1">Rectangle()</span><span class="s0">;</span>
+
+            <span class="s1">root.setBackground(background)</span><span class="s0">;</span>
+            <span class="s1">VBox vbox=</span><span class="s0">new </span><span class="s1">VBox()</span><span class="s0">;</span>
+            <span class="s1">Button button = </span><span class="s0">new </span><span class="s1">Button(</span><span class="s5">&quot;  newGame &quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">button.setOnAction(e -&gt;{</span>
+
+
+
+                <span class="s1">window.setScene(scene1)</span><span class="s0">;</span>
+                <span class="s1">music()</span><span class="s0">;</span>
+                <span class="s1">movement(rectangle</span><span class="s0">,</span><span class="s4">630</span><span class="s0">,</span><span class="s4">230</span><span class="s0">,</span><span class="s4">10</span><span class="s0">,</span><span class="s4">10</span><span class="s0">,</span><span class="s1">plane)</span><span class="s0">;</span>
+                <span class="s1">movement(rectangle2</span><span class="s0">,</span><span class="s4">540</span><span class="s0">,</span><span class="s4">120</span><span class="s0">,</span><span class="s4">70</span><span class="s0">,</span><span class="s4">10</span><span class="s0">,</span><span class="s1">Tank1)</span><span class="s0">;</span>
+                <span class="s1">movement(T2</span><span class="s0">,</span><span class="s4">450</span><span class="s0">,</span><span class="s4">160</span><span class="s0">,</span><span class="s4">0</span><span class="s0">,</span><span class="s4">150</span><span class="s0">,</span><span class="s1">Tank1)</span><span class="s0">;</span>
+                <span class="s1">movement(T8</span><span class="s0">,</span><span class="s4">350</span><span class="s0">,</span><span class="s4">10</span><span class="s0">,</span><span class="s4">10</span><span class="s0">,</span><span class="s4">300</span><span class="s0">,</span><span class="s1">Tank1)</span><span class="s0">;</span>
+                <span class="s1">movement(T3</span><span class="s0">,</span><span class="s1">-</span><span class="s4">60</span><span class="s0">,</span><span class="s4">80</span><span class="s0">,</span><span class="s4">900</span><span class="s0">,</span><span class="s4">100</span><span class="s0">,</span><span class="s1">Tank)</span><span class="s0">;</span>
+                <span class="s1">movement(T4</span><span class="s0">,</span><span class="s1">-</span><span class="s4">80</span><span class="s0">,</span><span class="s4">80</span><span class="s0">,</span><span class="s4">950</span><span class="s0">,</span><span class="s4">40</span><span class="s0">,</span><span class="s1">Tank)</span><span class="s0">;</span>
+                <span class="s1">movement(T5</span><span class="s0">,</span><span class="s1">-</span><span class="s4">220</span><span class="s0">,</span><span class="s4">80</span><span class="s0">,</span><span class="s4">1000</span><span class="s0">,</span><span class="s4">80</span><span class="s0">,</span><span class="s1">Tank)</span><span class="s0">;</span>
+                <span class="s1">movement(T6</span><span class="s0">,</span><span class="s1">-</span><span class="s4">220</span><span class="s0">,</span><span class="s4">0</span><span class="s0">,</span><span class="s4">1200</span><span class="s0">,</span><span class="s4">280</span><span class="s0">,</span><span class="s1">Tank)</span><span class="s0">;</span>
+                <span class="s1">movement(T7</span><span class="s0">,</span><span class="s1">-</span><span class="s4">220</span><span class="s0">,</span><span class="s4">0</span><span class="s0">,</span><span class="s4">1200</span><span class="s0">,</span><span class="s4">400</span><span class="s0">,</span><span class="s1">Tank)</span><span class="s0">;</span>
+                <span class="s1">movement(P2</span><span class="s0">,</span><span class="s1">-</span><span class="s4">150</span><span class="s0">,</span><span class="s4">250</span><span class="s0">,</span><span class="s4">1000</span><span class="s0">,</span><span class="s4">0</span><span class="s0">,</span><span class="s1">plane1)</span><span class="s0">;</span>
+                <span class="s1">movement(P3</span><span class="s0">,</span><span class="s1">-</span><span class="s4">230</span><span class="s0">,</span><span class="s4">100</span><span class="s0">,</span><span class="s4">1150</span><span class="s0">,</span><span class="s4">150</span><span class="s0">,</span><span class="s1">plane1)</span><span class="s0">;</span>
+                <span class="s1">movement(T9</span><span class="s0">,</span><span class="s4">120</span><span class="s0">,</span><span class="s4">200</span><span class="s0">,</span><span class="s4">270</span><span class="s0">,</span><span class="s4">15</span><span class="s0">,</span><span class="s1">Tank1)</span><span class="s0">;</span>
+                <span class="s1">movement(T10</span><span class="s0">,</span><span class="s4">100</span><span class="s0">,</span><span class="s4">200</span><span class="s0">,</span><span class="s4">400</span><span class="s0">,</span><span class="s4">15</span><span class="s0">,</span><span class="s1">Tank1)</span><span class="s0">;</span>
+                <span class="s1">movement(T11</span><span class="s0">,</span><span class="s4">100</span><span class="s0">,</span><span class="s4">120</span><span class="s0">,</span><span class="s4">500</span><span class="s0">,</span><span class="s4">61</span><span class="s0">,</span><span class="s1">Tank1)</span><span class="s0">;</span>
+                <span class="s1">movement(T12</span><span class="s0">,</span><span class="s4">100</span><span class="s0">,</span><span class="s4">120</span><span class="s0">,</span><span class="s4">590</span><span class="s0">,</span><span class="s4">50</span><span class="s0">,</span><span class="s1">Tank1)</span><span class="s0">;</span>
+                <span class="s1">movement(S1</span><span class="s0">,</span><span class="s4">400</span><span class="s0">,</span><span class="s1">-</span><span class="s4">60</span><span class="s0">,</span><span class="s4">60</span><span class="s0">,</span><span class="s4">400</span><span class="s0">,</span><span class="s1">Sniper)</span><span class="s0">;</span>
+                <span class="s1">movement(S2</span><span class="s0">,</span><span class="s1">-</span><span class="s4">150</span><span class="s0">,</span><span class="s1">-</span><span class="s4">60</span><span class="s0">,</span><span class="s4">1020</span><span class="s0">,</span><span class="s4">460</span><span class="s0">,</span><span class="s1">Sniper1)</span><span class="s0">;</span>
+                <span class="s1">movement(S3</span><span class="s0">,</span><span class="s1">-</span><span class="s4">150</span><span class="s0">,</span><span class="s1">-</span><span class="s4">60</span><span class="s0">,</span><span class="s4">1020</span><span class="s0">,</span><span class="s4">520</span><span class="s0">,</span><span class="s1">Sniper1)</span><span class="s0">;</span>
+                <span class="s1">movement(S4</span><span class="s0">,</span><span class="s4">400</span><span class="s0">,</span><span class="s1">-</span><span class="s4">60</span><span class="s0">,</span><span class="s4">60</span><span class="s0">,</span><span class="s4">580</span><span class="s0">,</span><span class="s1">Sniper)</span><span class="s0">;</span>
+                <span class="s1">movement(c1</span><span class="s0">,</span><span class="s4">0</span><span class="s0">,</span><span class="s4">0</span><span class="s0">,</span><span class="s4">600</span><span class="s0">,</span><span class="s4">280</span><span class="s0">,</span><span class="s1">Canon1)</span><span class="s0">;</span>
+                <span class="s1">movement(c2</span><span class="s0">,</span><span class="s4">0</span><span class="s0">,</span><span class="s4">0</span><span class="s0">,</span><span class="s4">600</span><span class="s0">,</span><span class="s4">420</span><span class="s0">,</span><span class="s1">Canon1)</span><span class="s0">;</span>
+                <span class="s1">movement(c3</span><span class="s0">,</span><span class="s4">0</span><span class="s0">,</span><span class="s4">0</span><span class="s0">,</span><span class="s4">850</span><span class="s0">,</span><span class="s4">280</span><span class="s0">,</span><span class="s1">Canon)</span><span class="s0">;</span>
+                <span class="s1">movement(c4</span><span class="s0">,</span><span class="s4">0</span><span class="s0">,</span><span class="s4">0</span><span class="s0">,</span><span class="s4">850</span><span class="s0">,</span><span class="s4">420</span><span class="s0">,</span><span class="s1">Canon)</span><span class="s0">;</span>
+                <span class="s1">movement(c5</span><span class="s0">,</span><span class="s4">0</span><span class="s0">,</span><span class="s4">0</span><span class="s0">,</span><span class="s4">680</span><span class="s0">,</span><span class="s4">220</span><span class="s0">,</span><span class="s1">airdefence)</span><span class="s0">;</span>
+                <span class="s1">movement(c6</span><span class="s0">,</span><span class="s4">0</span><span class="s0">,</span><span class="s4">0</span><span class="s0">,</span><span class="s4">680</span><span class="s0">,</span><span class="s4">490</span><span class="s0">,</span><span class="s1">Tower1)</span><span class="s0">;</span>
+                <span class="s1">movement(c7</span><span class="s0">,</span><span class="s4">0</span><span class="s0">,</span><span class="s4">0</span><span class="s0">,</span><span class="s4">760</span><span class="s0">,</span><span class="s4">220</span><span class="s0">,</span><span class="s1">Tower)</span><span class="s0">;</span>
+                <span class="s1">movement(c8</span><span class="s0">,</span><span class="s4">0</span><span class="s0">,</span><span class="s4">0</span><span class="s0">,</span><span class="s4">760</span><span class="s0">,</span><span class="s4">490</span><span class="s0">,</span><span class="s1">airdefence)</span><span class="s0">;</span>
+                <span class="s1">rectangle1.setHeight(</span><span class="s4">200</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">rectangle1.setWidth(</span><span class="s4">200</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">rectangle1.setTranslateX(</span><span class="s4">650</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">rectangle1.setTranslateY(</span><span class="s4">280</span><span class="s1">)</span><span class="s0">;</span>
+
+
+                <span class="s1">rectangle1.setArcWidth(</span><span class="s4">30</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">rectangle1.setArcHeight(</span><span class="s4">30</span><span class="s1">)</span><span class="s0">;</span>
+
+
+
+            <span class="s1">})</span><span class="s0">;</span>
+
+            <span class="s1">button.setPrefSize(</span><span class="s4">300</span><span class="s0">, </span><span class="s4">50</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s6">// button هنا قمنا بتغيير نوع و حجم خط الكائن</span>
+            <span class="s1">button.setFont(</span><span class="s0">new </span><span class="s1">Font(</span><span class="s5">&quot;Arial&quot;</span><span class="s0">, </span><span class="s4">40</span><span class="s1">))</span><span class="s0">;</span>
+
+            <span class="s6">// button هنا قمنا بتغيير لون خط الكائن</span>
+            <span class="s1">button.setTextFill(Color.GREEN)</span><span class="s0">;</span>
+            <span class="s1">button.setBackground(</span><span class="s0">new </span><span class="s1">Background(</span><span class="s0">new </span><span class="s1">BackgroundFill(Color.BLACK</span><span class="s0">, new </span><span class="s1">CornerRadii(</span><span class="s4">5</span><span class="s1">)</span><span class="s0">, </span><span class="s1">Insets.EMPTY)))</span><span class="s0">;</span>
+            <span class="s1">button.setOpacity(</span><span class="s4">0.5</span><span class="s1">)</span><span class="s0">;</span>
+
+            <span class="s1">Button button1 = </span><span class="s0">new </span><span class="s1">Button(</span><span class="s5">&quot;  endGame &quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">button1.setOnAction(e -&gt;close())</span><span class="s0">;</span>
+            <span class="s6">// في النافذة button هنا قمنا بتحديد مكان ظهور الكائن</span>
+            <span class="s1">button1.setAlignment(Pos.CENTER)</span><span class="s0">;</span>
+
+            <span class="s1">button1.setPrefSize(</span><span class="s4">300</span><span class="s0">, </span><span class="s4">50</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s6">// button هنا قمنا بتغيير نوع و حجم خط الكائن</span>
+            <span class="s1">button1.setFont(</span><span class="s0">new </span><span class="s1">Font(</span><span class="s5">&quot;Arial&quot;</span><span class="s0">, </span><span class="s4">40</span><span class="s1">))</span><span class="s0">;</span>
+
+            <span class="s6">// button هنا قمنا بتغيير لون خط الكائن</span>
+            <span class="s1">button1.setTextFill(Color.DARKGREEN)</span><span class="s0">;</span>
+            <span class="s1">button1.setBackground(</span><span class="s0">new </span><span class="s1">Background(</span><span class="s0">new </span><span class="s1">BackgroundFill(Color.BLACK</span><span class="s0">, new </span><span class="s1">CornerRadii(</span><span class="s4">5</span><span class="s1">)</span><span class="s0">, </span><span class="s1">Insets.EMPTY)))</span><span class="s0">;</span>
+            <span class="s1">button1.setOpacity(</span><span class="s4">0.5</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">Button button2 = </span><span class="s0">new </span><span class="s1">Button(</span><span class="s5">&quot; loadGame &quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+            <span class="s6">// في النافذة button هنا قمنا بتحديد مكان ظهور الكائن</span>
+            <span class="s1">button2.setAlignment(Pos.CENTER)</span><span class="s0">;</span>
+
+            <span class="s1">button2.setPrefSize(</span><span class="s4">300</span><span class="s0">, </span><span class="s4">50</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s6">// button هنا قمنا بتغيير نوع و حجم خط الكائن</span>
+            <span class="s1">button2.setFont(</span><span class="s0">new </span><span class="s1">Font(</span><span class="s5">&quot;Arial&quot;</span><span class="s0">, </span><span class="s4">40</span><span class="s1">))</span><span class="s0">;</span>
+
+            <span class="s6">// button هنا قمنا بتغيير لون خط الكائن</span>
+            <span class="s1">button2.setTextFill(Color.DARKGREEN)</span><span class="s0">;</span>
+            <span class="s1">button2.setBackground(</span><span class="s0">new </span><span class="s1">Background(</span><span class="s0">new </span><span class="s1">BackgroundFill(Color.BLACK</span><span class="s0">, new </span><span class="s1">CornerRadii(</span><span class="s4">5</span><span class="s1">)</span><span class="s0">, </span><span class="s1">Insets.EMPTY)))</span><span class="s0">;</span>
+            <span class="s1">button2.setOpacity(</span><span class="s4">0.5</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">Button button4 = </span><span class="s0">new </span><span class="s1">Button(</span><span class="s5">&quot;  Resume &quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">button4.setOnAction(e -&gt;{</span>
+
+                <span class="s1">window.setScene(scene1)</span><span class="s0">;</span>
+                <span class="s1">music()</span><span class="s0">;</span>
+            <span class="s1">})</span><span class="s0">;</span>
+
+            <span class="s6">// في النافذة button هنا قمنا بتحديد مكان ظهور الكائن</span>
+            <span class="s1">button4.setAlignment(Pos.CENTER)</span><span class="s0">;</span>
+
+            <span class="s1">button4.setPrefSize(</span><span class="s4">300</span><span class="s0">, </span><span class="s4">50</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s6">// button هنا قمنا بتغيير نوع و حجم خط الكائن</span>
+            <span class="s1">button4.setFont(</span><span class="s0">new </span><span class="s1">Font(</span><span class="s5">&quot;Arial&quot;</span><span class="s0">, </span><span class="s4">40</span><span class="s1">))</span><span class="s0">;</span>
+
+            <span class="s6">// button هنا قمنا بتغيير لون خط الكائن</span>
+            <span class="s1">button4.setTextFill(Color.DARKGREEN)</span><span class="s0">;</span>
+            <span class="s1">button4.setBackground(</span><span class="s0">new </span><span class="s1">Background(</span><span class="s0">new </span><span class="s1">BackgroundFill(Color.BLACK</span><span class="s0">, new </span><span class="s1">CornerRadii(</span><span class="s4">5</span><span class="s1">)</span><span class="s0">, </span><span class="s1">Insets.EMPTY)))</span><span class="s0">;</span>
+
+            <span class="s1">button4.setOpacity(</span><span class="s4">0.5</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">vbox.getChildren().addAll(button</span><span class="s0">,</span><span class="s1">button4</span><span class="s0">,</span><span class="s1">button2</span><span class="s0">,</span><span class="s1">button1)</span><span class="s0">;</span>
+            <span class="s1">vbox.setTranslateX( </span><span class="s4">200</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">vbox.setTranslateY(</span><span class="s4">200</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">vbox.setSpacing(</span><span class="s4">7</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">vbox.setCursor(Cursor.CROSSHAIR)</span><span class="s0">;</span>
+            <span class="s1">root.getChildren().addAll(vbox)</span><span class="s0">;</span>
+
+            <span class="s1">scene = </span><span class="s0">new </span><span class="s1">Scene(root</span><span class="s0">, </span><span class="s4">1370</span><span class="s0">, </span><span class="s4">700</span><span class="s1">)</span><span class="s0">;</span>
+
+            <span class="s1">primaryStage.setScene(scene)</span><span class="s0">;</span>
+            <span class="s6">///////////////////////PAGE 2////////////////////////////////////</span>
+            <span class="s1">Pane root1 = </span><span class="s0">new </span><span class="s1">Pane()</span><span class="s0">;</span>
+            <span class="s1">HBox hbox=</span><span class="s0">new </span><span class="s1">HBox()</span><span class="s0">; </span><span class="s6">// يمثل القائمة التي نريد إضافتها في النافذة ListView هنا قمنا بإنشاء كائن من الكلاس</span>
+
+            <span class="s1">Button btnnn = </span><span class="s0">new </span><span class="s1">Button()</span><span class="s0">;</span>
+
+                <span class="s1">btnnn.setFont(</span><span class="s0">new </span><span class="s1">Font(</span><span class="s5">&quot;Arial&quot;</span><span class="s0">, </span><span class="s4">30</span><span class="s1">))</span><span class="s0">;</span>
+                <span class="s1">btnnn.setTextFill(Color.DARKGREEN)</span><span class="s0">;</span>
+                <span class="s1">btnnn.setBackground(</span><span class="s0">new </span><span class="s1">Background(</span><span class="s0">new </span><span class="s1">BackgroundFill(Color.BLACK</span><span class="s0">, new </span><span class="s1">CornerRadii(</span><span class="s4">5</span><span class="s1">)</span><span class="s0">, </span><span class="s1">Insets.EMPTY)))</span><span class="s0">;</span>
+                <span class="s1">btnnn.setOpacity(</span><span class="s4">0.5</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">hbox.getChildren().add(btnnn)</span><span class="s0">;</span>
+                <span class="s1">btnnn.setTranslateX(</span><span class="s4">500</span><span class="s1">)</span><span class="s0">;</span>
+
+            <span class="s1">btnnn.setText(</span><span class="s5">&quot;BaCK&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+            <span class="s1">btnnn.setOnAction(e -&gt;{</span>
+
+                <span class="s1">window.setScene(scene)</span><span class="s0">;</span>
+                <span class="s1">mediaPlayer.pause()</span><span class="s0">;</span>
+            <span class="s1">})</span><span class="s0">;</span>
+
+
+
+            <span class="s6">//////////////////////////////////////////</span>
+            <span class="s1">Pane rt=</span><span class="s0">new </span><span class="s1">Pane()</span><span class="s0">;</span>
+            <span class="s1">Pane rot=</span><span class="s0">new </span><span class="s1">Pane()</span><span class="s0">;</span>
+
+            <span class="s1">Label nameLabel = </span><span class="s0">new </span><span class="s1">Label(</span><span class="s5">&quot;Enter type of machine&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">TextField textField = </span><span class="s0">new </span><span class="s1">TextField()</span><span class="s0">;</span>
+            <span class="s1">Label nameLabel1 = </span><span class="s0">new </span><span class="s1">Label(</span><span class="s5">&quot;Enter Num of machine&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">TextField textField1 = </span><span class="s0">new </span><span class="s1">TextField()</span><span class="s0">;</span>
+            <span class="s1">nameLabel.setTranslateX(</span><span class="s4">50</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">nameLabel.setTranslateY(</span><span class="s4">30</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">textField.setTranslateX(</span><span class="s4">80</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">textField.setTranslateY(</span><span class="s4">30</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">nameLabel1.setTranslateX(</span><span class="s4">50</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">nameLabel1.setTranslateY(</span><span class="s4">60</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">textField1.setTranslateX(</span><span class="s4">80</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">textField1.setTranslateY(</span><span class="s4">60</span><span class="s1">)</span><span class="s0">;</span>
+
+            <span class="s1">Button y=</span><span class="s0">new </span><span class="s1">Button(</span><span class="s5">&quot;Submit&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">y.setTranslateX(</span><span class="s4">600</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">y.setTranslateY(</span><span class="s4">50</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">y.setPrefSize(</span><span class="s4">90</span><span class="s0">, </span><span class="s4">60</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">y.setOnAction( e -&gt; {</span>
+                <span class="s6">// و وضعه كنص  textField عند النقر على الزر سيتم جلب نص الـ</span>
+
+                <span class="s1">v.getItems().clear()</span><span class="s0">;</span>
+
+                <span class="s1">Read_log_file1(textField.getText().toString()</span><span class="s0">,</span><span class="s1">textField1.getText().toString())</span><span class="s0">;</span>
+                <span class="s0">for</span><span class="s1">(</span><span class="s0">int </span><span class="s1">i=</span><span class="s4">0</span><span class="s0">;</span><span class="s1">i&lt;a.size()</span><span class="s0">;</span><span class="s1">i++)</span>
+                <span class="s1">{</span>
+
+                    <span class="s1">v.getItems().addAll(a.get(i))</span><span class="s0">;</span>
+
+                <span class="s1">}</span>
+                <span class="s1">window.setScene(scene2)</span><span class="s0">;</span>
+            <span class="s1">})</span><span class="s0">;</span>
+            <span class="s1">v=</span><span class="s0">new </span><span class="s1">ListView&lt;&gt;()</span><span class="s0">;</span>
+            <span class="s1">v.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE)</span><span class="s0">;</span>
+            <span class="s1">v.setPrefSize(</span><span class="s4">500</span><span class="s0">,</span><span class="s4">500</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">v.setTranslateX(</span><span class="s4">350</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">v.setTranslateY(</span><span class="s4">150</span><span class="s1">)</span><span class="s0">;</span>
+
+            <span class="s1">v.setOpacity(</span><span class="s4">1</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s0">for</span><span class="s1">(</span><span class="s0">int </span><span class="s1">i=</span><span class="s4">0</span><span class="s0">;</span><span class="s1">i&lt;a.size()</span><span class="s0">;</span><span class="s1">i++)</span>
+            <span class="s1">{</span>
+
+                <span class="s1">v.getItems().addAll(a.get(i))</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+
+
+
+
+            <span class="s1">Button back1=</span><span class="s0">new </span><span class="s1">Button(</span><span class="s5">&quot;BACK  &quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">back1.setPrefSize(</span><span class="s4">150</span><span class="s0">, </span><span class="s4">65</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">back1.setFont(</span><span class="s0">new </span><span class="s1">Font(</span><span class="s5">&quot;Arial&quot;</span><span class="s0">, </span><span class="s4">30</span><span class="s1">))</span><span class="s0">;</span>
+            <span class="s1">back1.setTextFill(Color.DARKGREEN)</span><span class="s0">;</span>
+            <span class="s1">back1.setAlignment(Pos.TOP_RIGHT)</span><span class="s0">;</span>
+            <span class="s1">back1.setTranslateY(</span><span class="s4">600</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">back1.setTranslateX(</span><span class="s4">1200</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">back1.setOnAction(e -&gt; window.setScene(scene3))</span><span class="s0">;</span>
+            <span class="s1">back1.setBackground(</span><span class="s0">new </span><span class="s1">Background(</span><span class="s0">new </span><span class="s1">BackgroundFill(Color.BLACK</span><span class="s0">, new </span><span class="s1">CornerRadii(</span><span class="s4">5</span><span class="s1">)</span><span class="s0">, </span><span class="s1">Insets.EMPTY)))</span><span class="s0">;</span>
+            <span class="s1">back1.setOpacity(</span><span class="s4">0.5</span><span class="s1">)</span><span class="s0">;</span>
+
+
+
+
+            <span class="s1">rt.getChildren().addAll(v</span><span class="s0">,</span><span class="s1">back1)</span><span class="s0">;</span>
+            <span class="s1">Button back=</span><span class="s0">new </span><span class="s1">Button(</span><span class="s5">&quot;BACK  &quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">back.setPrefSize(</span><span class="s4">150</span><span class="s0">, </span><span class="s4">65</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">back.setFont(</span><span class="s0">new </span><span class="s1">Font(</span><span class="s5">&quot;Arial&quot;</span><span class="s0">, </span><span class="s4">30</span><span class="s1">))</span><span class="s0">;</span>
+            <span class="s1">back.setTextFill(Color.DARKGREEN)</span><span class="s0">;</span>
+            <span class="s1">back.setAlignment(Pos.TOP_RIGHT)</span><span class="s0">;</span>
+            <span class="s1">back.setTranslateY(</span><span class="s4">600</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">back.setTranslateX(</span><span class="s4">1200</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">back.setOnAction(e -&gt; window.setScene(scene))</span><span class="s0">;</span>
+            <span class="s1">back.setBackground(</span><span class="s0">new </span><span class="s1">Background(</span><span class="s0">new </span><span class="s1">BackgroundFill(Color.BLACK</span><span class="s0">, new </span><span class="s1">CornerRadii(</span><span class="s4">5</span><span class="s1">)</span><span class="s0">, </span><span class="s1">Insets.EMPTY)))</span><span class="s0">;</span>
+            <span class="s1">back.setOpacity(</span><span class="s4">0.5</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">HBox hbox1=</span><span class="s0">new </span><span class="s1">HBox()</span><span class="s0">;</span>
+            <span class="s1">hbox1.setSpacing(</span><span class="s4">20</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">hbox1.setTranslateX(</span><span class="s4">300</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">hbox1.setTranslateY(</span><span class="s4">20</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">Button[] btnn = </span><span class="s0">new </span><span class="s1">Button[</span><span class="s4">2</span><span class="s1">]</span><span class="s0">;</span>
+            <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s4">0</span><span class="s0">; </span><span class="s1">i &lt; btnn.length</span><span class="s0">; </span><span class="s1">i++) {</span>
+                <span class="s1">btnn[i] = </span><span class="s0">new </span><span class="s1">Button()</span><span class="s0">;</span>
+                <span class="s1">btnn[i].setPrefSize(</span><span class="s4">10</span><span class="s0">, </span><span class="s4">10</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">btnn[i].setFont(</span><span class="s0">new </span><span class="s1">Font(</span><span class="s5">&quot;Arial&quot;</span><span class="s0">, </span><span class="s4">30</span><span class="s1">))</span><span class="s0">;</span>
+                <span class="s1">btnn[i].setTextFill(Color.DARKGREEN)</span><span class="s0">;</span>
+                <span class="s1">btnn[i].setBackground(</span><span class="s0">new </span><span class="s1">Background(</span><span class="s0">new </span><span class="s1">BackgroundFill(Color.BLACK</span><span class="s0">, new </span><span class="s1">CornerRadii(</span><span class="s4">5</span><span class="s1">)</span><span class="s0">, </span><span class="s1">Insets.EMPTY)))</span><span class="s0">;</span>
+                <span class="s1">btnn[i].setOpacity(</span><span class="s4">0.5</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">hbox.getChildren().add(btnn[i])</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+
+
+            <span class="s1">btnn[</span><span class="s4">0</span><span class="s1">].setText(</span><span class="s5">&quot;+&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">DropShadow shadow = </span><span class="s0">new </span><span class="s1">DropShadow(</span><span class="s4">10</span><span class="s0">, </span><span class="s1">Color.DEEPSKYBLUE)</span><span class="s0">;</span>
+
+            <span class="s1">btnn[</span><span class="s4">1</span><span class="s1">].setText(</span><span class="s5">&quot;-&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">btnn[</span><span class="s4">0</span><span class="s1">].setTranslateX(</span><span class="s4">300</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">btnn[</span><span class="s4">1</span><span class="s1">].setTranslateX(</span><span class="s4">406</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">HBox vbox1=</span><span class="s0">new </span><span class="s1">HBox()</span><span class="s0">;</span>
+            <span class="s1">vbox1.getChildren().addAll(hbox</span><span class="s0">,</span><span class="s1">hbox1)</span><span class="s0">;</span>
+            <span class="s1">vbox1.setSpacing(</span><span class="s4">15</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">rot.getChildren().addAll(y</span><span class="s0">,</span><span class="s1">nameLabel</span><span class="s0">,</span><span class="s1">nameLabel1</span><span class="s0">,</span><span class="s1">textField</span><span class="s0">,</span><span class="s1">textField1</span><span class="s0">,</span><span class="s1">back)</span><span class="s0">;</span>
+            <span class="s1">rt.setBackground(background)</span><span class="s0">;</span>
+            <span class="s1">rot.setBackground(background)</span><span class="s0">;</span>
+
+            <span class="s1">scene2 = </span><span class="s0">new </span><span class="s1">Scene(rt</span><span class="s0">, </span><span class="s4">1370</span><span class="s0">, </span><span class="s4">700</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">scene3 = </span><span class="s0">new </span><span class="s1">Scene(rot</span><span class="s0">, </span><span class="s4">1370</span><span class="s0">, </span><span class="s4">700</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">button2.setOnAction(e -&gt;{</span>
+
+                <span class="s1">window.setScene(scene3)</span><span class="s0">;</span>
+
+
+            <span class="s1">})</span><span class="s0">;</span>
+
+
+
+
+
+
+
+            <span class="s1">hbox.setSpacing(</span><span class="s4">20</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">hbox.setTranslateX(</span><span class="s4">150</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">hbox.setTranslateY(</span><span class="s4">20</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s6">// يمثل القائمة التي نريد إضافتها في النافذة ListView هنا قمنا بإنشاء كائن من الكلاس1</span>
+
+
+            <span class="s6">///////////////////////////////////////////////////</span>
+
+
+            <span class="s1">GridPane gridPane=</span><span class="s0">new </span><span class="s1">GridPane()</span><span class="s0">;</span>
+
+
+
+            <span class="s1">String style = </span><span class="s5">&quot;-fx-background-color: &quot; </span><span class="s1">+ </span><span class="s5">&quot;linear-gradient(#686868 0%, #232723 25%, #373837 75%, #757575 100%),&quot; </span><span class="s1">+ </span><span class="s5">&quot;linear-gradient(#020b02, #3a3a3a),&quot; </span><span class="s1">+ </span><span class="s5">&quot;linear-gradient(#9d9e9d 0%, #6b6a6b 20%, #343534 80%, #242424 100%),&quot; </span><span class="s1">+ </span><span class="s5">&quot;linear-gradient(#8a8a8a 0%, #6b6a6b 20%, #343534 80%, #262626 100%),&quot; </span><span class="s1">+ </span><span class="s5">&quot;linear-gradient(#777777 0%, #606060 50%, #505250 51%, #2a2b2a 100%);&quot;  </span><span class="s1">+ </span><span class="s5">&quot;-fx-background-radius: 9,8,5,4,3;&quot;  </span><span class="s1">+ </span><span class="s5">&quot;-fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1)&quot;</span><span class="s0">;</span>
+
+       <span class="s1">Pane spo=</span><span class="s0">new </span><span class="s1">Pane()</span><span class="s0">;</span>
+            <span class="s1">spo.setPrefSize(</span><span class="s4">1400</span><span class="s0">,</span><span class="s4">650</span><span class="s1">)</span><span class="s0">;</span>
+
+       <span class="s1">spo.getChildren().addAll(rectangle</span><span class="s0">,</span><span class="s1">rectangle1</span><span class="s0">,</span><span class="s1">rectangle2</span><span class="s0">,</span><span class="s1">T2</span><span class="s0">,</span><span class="s1">T3</span><span class="s0">,</span><span class="s1">T4</span><span class="s0">,</span><span class="s1">T5</span><span class="s0">,</span><span class="s1">T6</span><span class="s0">,</span><span class="s1">T7</span><span class="s0">,</span><span class="s1">T8</span><span class="s0">,</span><span class="s1">P2</span><span class="s0">,</span><span class="s1">P3</span><span class="s0">,</span><span class="s1">T9</span><span class="s0">,</span><span class="s1">T10</span><span class="s0">,</span><span class="s1">T11</span><span class="s0">,</span><span class="s1">T12</span><span class="s0">,</span><span class="s1">S1</span><span class="s0">,</span><span class="s1">S2</span><span class="s0">,</span><span class="s1">S3</span><span class="s0">,</span><span class="s1">S4</span><span class="s0">,</span><span class="s1">S5</span><span class="s0">,</span><span class="s1">c1</span><span class="s0">,</span><span class="s1">c2</span><span class="s0">,</span><span class="s1">c3</span><span class="s0">,</span><span class="s1">c4</span><span class="s0">,</span><span class="s1">c5</span><span class="s0">,</span><span class="s1">c6</span><span class="s0">,</span><span class="s1">c8</span><span class="s0">,</span><span class="s1">c7)</span><span class="s0">;</span>
+
+
+            <span class="s6">/////////////////////////////////////////////////////</span>
+            <span class="s1">VBox v1=</span><span class="s0">new </span><span class="s1">VBox(vbox1</span><span class="s0">,</span><span class="s1">spo)</span><span class="s0">;</span>
+
+            <span class="s1">v1.setSpacing(</span><span class="s4">25</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">Pane page=</span><span class="s0">new </span><span class="s1">Pane()</span><span class="s0">;</span>
+
+
+            <span class="s1">page.getChildren().addAll(v1)</span><span class="s0">;</span>
+           <span class="s1">page.setStyle(</span><span class="s5">&quot;-fx-background-image: url('grass.jpg');-fx-background-size:cover;&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">root1.getChildren().addAll(page)</span><span class="s0">;</span>
+            <span class="s1">scene1 = </span><span class="s0">new </span><span class="s1">Scene(root1</span><span class="s0">, </span><span class="s4">1370</span><span class="s0">, </span><span class="s4">700</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s6">////////////////////////////////////////////////////</span>
+
+            <span class="s6">///////////////////////////////////////////</span>
+
+
+            <span class="s1">button.addEventHandler(MouseEvent.MOUSE_ENTERED</span><span class="s0">, </span><span class="s1">(MouseEvent e) -&gt; {</span>
+                <span class="s1">button.setEffect(shadow)</span><span class="s0">;</span>
+                <span class="s1">button.setOpacity(</span><span class="s4">1</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">button.setTextFill(Color.DARKCYAN)</span><span class="s0">;</span>
+
+            <span class="s1">})</span><span class="s0">;</span>
+            <span class="s1">button.addEventHandler(MouseEvent.MOUSE_EXITED</span><span class="s0">, </span><span class="s1">(MouseEvent e) -&gt; {</span>
+                <span class="s1">button.setEffect(</span><span class="s0">null</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">button.setOpacity(</span><span class="s4">0.5</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">button.setTextFill(Color.GREEN)</span><span class="s0">;</span>
+            <span class="s1">})</span><span class="s0">;</span>
+            <span class="s1">button1.addEventHandler(MouseEvent.MOUSE_ENTERED</span><span class="s0">, </span><span class="s1">(MouseEvent e) -&gt; {</span>
+                <span class="s1">button1.setEffect(shadow)</span><span class="s0">;</span>
+                <span class="s1">button1.setOpacity(</span><span class="s4">1</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">button1.setTextFill(Color.DARKCYAN)</span><span class="s0">;</span>
+            <span class="s1">})</span><span class="s0">;</span>
+            <span class="s1">button1.addEventHandler(MouseEvent.MOUSE_EXITED</span><span class="s0">, </span><span class="s1">(MouseEvent e) -&gt; {</span>
+                <span class="s1">button1.setEffect(</span><span class="s0">null</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">button1.setOpacity(</span><span class="s4">0.5</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">button1.setTextFill(Color.GREEN)</span><span class="s0">;</span>
+            <span class="s1">})</span><span class="s0">;</span>
+            <span class="s1">button2.addEventHandler(MouseEvent.MOUSE_ENTERED</span><span class="s0">, </span><span class="s1">(MouseEvent e) -&gt; {</span>
+                <span class="s1">button2.setEffect(shadow)</span><span class="s0">;</span>
+                <span class="s1">button2.setOpacity(</span><span class="s4">1</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">button2.setTextFill(Color.DARKCYAN)</span><span class="s0">;</span>
+            <span class="s1">})</span><span class="s0">;</span>
+            <span class="s1">button2.addEventHandler(MouseEvent.MOUSE_EXITED</span><span class="s0">, </span><span class="s1">(MouseEvent e) -&gt; {</span>
+                <span class="s1">button2.setEffect(</span><span class="s0">null</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">button2.setOpacity(</span><span class="s4">0.5</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">button2.setTextFill(Color.GREEN)</span><span class="s0">;</span>
+            <span class="s1">})</span><span class="s0">;</span>
+            <span class="s1">button4.addEventHandler(MouseEvent.MOUSE_ENTERED</span><span class="s0">, </span><span class="s1">(MouseEvent e) -&gt; {</span>
+                <span class="s1">button4.setEffect(shadow)</span><span class="s0">;</span>
+                <span class="s1">button4.setOpacity(</span><span class="s4">1</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">button4.setTextFill(Color.DARKCYAN)</span><span class="s0">;</span>
+            <span class="s1">})</span><span class="s0">;</span>
+            <span class="s1">button4.addEventHandler(MouseEvent.MOUSE_EXITED</span><span class="s0">, </span><span class="s1">(MouseEvent e) -&gt; {</span>
+                <span class="s1">button4.setEffect(</span><span class="s0">null</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">button4.setOpacity(</span><span class="s4">0.5</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">button4.setTextFill(Color.GREEN)</span><span class="s0">;</span>
+            <span class="s1">})</span><span class="s0">;</span>
+            <span class="s1">btnnn.addEventHandler(MouseEvent.MOUSE_ENTERED</span><span class="s0">, </span><span class="s1">(MouseEvent e) -&gt; {</span>
+                <span class="s1">btnnn.setEffect(shadow)</span><span class="s0">;</span>
+                <span class="s1">btnnn.setOpacity(</span><span class="s4">1</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">btnnn.setTextFill(Color.DARKCYAN)</span><span class="s0">;</span>
+            <span class="s1">})</span><span class="s0">;</span>
+            <span class="s1">btnnn.addEventHandler(MouseEvent.MOUSE_EXITED</span><span class="s0">, </span><span class="s1">(MouseEvent e) -&gt; {</span>
+                <span class="s1">btnnn.setEffect(</span><span class="s0">null</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">btnnn.setOpacity(</span><span class="s4">0.5</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">btnnn.setTextFill(Color.GREEN)</span><span class="s0">;</span>
+            <span class="s1">})</span><span class="s0">; </span><span class="s1">btnnn.addEventHandler(MouseEvent.MOUSE_ENTERED</span><span class="s0">, </span><span class="s1">(MouseEvent e) -&gt; {</span>
+                <span class="s1">btnnn.setEffect(shadow)</span><span class="s0">;</span>
+                <span class="s1">btnnn.setOpacity(</span><span class="s4">1</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">btnnn.setTextFill(Color.DARKCYAN)</span><span class="s0">;</span>
+            <span class="s1">})</span><span class="s0">;</span>
+
+            <span class="s1">btnn[</span><span class="s4">0</span><span class="s1">].addEventHandler(MouseEvent.MOUSE_ENTERED</span><span class="s0">, </span><span class="s1">(MouseEvent e) -&gt; {</span>
+                <span class="s1">btnn[</span><span class="s4">0</span><span class="s1">].setEffect(shadow)</span><span class="s0">;</span>
+                <span class="s1">btnn[</span><span class="s4">0</span><span class="s1">].setOpacity(</span><span class="s4">1</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">btnn[</span><span class="s4">0</span><span class="s1">].setTextFill(Color.DARKCYAN)</span><span class="s0">;</span>
+            <span class="s1">})</span><span class="s0">;</span>
+            <span class="s1">back.addEventHandler(MouseEvent.MOUSE_EXITED</span><span class="s0">, </span><span class="s1">(MouseEvent e) -&gt; {</span>
+                <span class="s1">back.setEffect(</span><span class="s0">null</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">back.setOpacity(</span><span class="s4">0.5</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">back.setTextFill(Color.GREEN)</span><span class="s0">;</span>
+            <span class="s1">})</span><span class="s0">;</span>
+
+            <span class="s1">back.addEventHandler(MouseEvent.MOUSE_ENTERED</span><span class="s0">, </span><span class="s1">(MouseEvent e) -&gt; {</span>
+                <span class="s1">back.setEffect(shadow)</span><span class="s0">;</span>
+                <span class="s1">back.setOpacity(</span><span class="s4">1</span><span class="s1">)</span><span class="s0">;</span>
+
+                <span class="s1">back.setTextFill(Color.DARKCYAN)</span><span class="s0">;</span>
+            <span class="s1">})</span><span class="s0">;</span>
+            <span class="s1">btnn[</span><span class="s4">0</span><span class="s1">].addEventHandler(MouseEvent.MOUSE_EXITED</span><span class="s0">, </span><span class="s1">(MouseEvent e) -&gt; {</span>
+                <span class="s1">btnn[</span><span class="s4">0</span><span class="s1">].setEffect(</span><span class="s0">null</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">btnn[</span><span class="s4">0</span><span class="s1">].setOpacity(</span><span class="s4">0.5</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">btnn[</span><span class="s4">0</span><span class="s1">].setTextFill(Color.GREEN)</span><span class="s0">;</span>
+            <span class="s1">})</span><span class="s0">;</span>
+            <span class="s1">btnn[</span><span class="s4">1</span><span class="s1">].addEventHandler(MouseEvent.MOUSE_ENTERED</span><span class="s0">, </span><span class="s1">(MouseEvent e) -&gt; {</span>
+                <span class="s1">btnn[</span><span class="s4">1</span><span class="s1">].setEffect(shadow)</span><span class="s0">;</span>
+                <span class="s1">btnn[</span><span class="s4">1</span><span class="s1">].setOpacity(</span><span class="s4">1</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">btnn[</span><span class="s4">1</span><span class="s1">].setTextFill(Color.DARKCYAN)</span><span class="s0">;</span>
+            <span class="s1">})</span><span class="s0">;</span>
+            <span class="s1">btnn[</span><span class="s4">1</span><span class="s1">].addEventHandler(MouseEvent.MOUSE_EXITED</span><span class="s0">, </span><span class="s1">(MouseEvent e) -&gt; {</span>
+                <span class="s1">btnn[</span><span class="s4">1</span><span class="s1">].setEffect(</span><span class="s0">null</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">btnn[</span><span class="s4">1</span><span class="s1">].setOpacity(</span><span class="s4">0.5</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">btnn[</span><span class="s4">1</span><span class="s1">].setTextFill(Color.GREEN)</span><span class="s0">;</span>
+            <span class="s1">})</span><span class="s0">;</span>
+            <span class="s1">back1.addEventHandler(MouseEvent.MOUSE_ENTERED</span><span class="s0">, </span><span class="s1">(MouseEvent e) -&gt; {</span>
+                <span class="s1">back1.setEffect(shadow)</span><span class="s0">;</span>
+                <span class="s1">back1.setOpacity(</span><span class="s4">1</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">back1.setTextFill(Color.DARKCYAN)</span><span class="s0">;</span>
+            <span class="s1">})</span><span class="s0">;</span>
+            <span class="s1">back1.addEventHandler(MouseEvent.MOUSE_EXITED</span><span class="s0">, </span><span class="s1">(MouseEvent e) -&gt; {</span>
+                <span class="s1">back1.setEffect(</span><span class="s0">null</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">back1.setOpacity(</span><span class="s4">0.5</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">back1.setTextFill(Color.GREEN)</span><span class="s0">;</span>
+            <span class="s1">})</span><span class="s0">;</span>
+
+
+            <span class="s6">///////////////////////////////////////////</span>
+
+            <span class="s1">btnn[</span><span class="s4">0</span><span class="s1">].setOnAction(e-&gt;</span>
+                    <span class="s1">{</span>
+                        <span class="s0">if</span><span class="s1">(x&lt;</span><span class="s4">1.2</span><span class="s1">){</span>
+                        <span class="s1">x+=</span><span class="s4">0.1</span><span class="s0">;</span><span class="s1">}</span>
+                        <span class="s1">btnn[</span><span class="s4">0</span><span class="s1">].setEffect(shadow)</span><span class="s0">;</span>
+                        <span class="s1">btnn[</span><span class="s4">0</span><span class="s1">].setOpacity(</span><span class="s4">1</span><span class="s1">)</span><span class="s0">;</span>
+
+
+
+
+                     <span class="s1">page.setScaleX(x)</span><span class="s0">;</span>
+                     <span class="s1">page.setScaleY(x)</span><span class="s0">;</span>
+
+
+                    <span class="s1">}</span>
+            <span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">btnn[</span><span class="s4">1</span><span class="s1">].setOnAction(e-&gt;</span>
+                    <span class="s1">{</span>
+                       <span class="s0">if</span><span class="s1">(x&gt;</span><span class="s4">1</span><span class="s1">){</span>
+                        <span class="s1">x-=</span><span class="s4">0.1</span><span class="s0">;</span><span class="s1">}</span>
+                        <span class="s1">btnn[</span><span class="s4">0</span><span class="s1">].setEffect(shadow)</span><span class="s0">;</span>
+                        <span class="s1">btnn[</span><span class="s4">1</span><span class="s1">].setOpacity(</span><span class="s4">1</span><span class="s1">)</span><span class="s0">;</span>
+                        <span class="s1">page.setScaleX(x)</span><span class="s0">;</span>
+                        <span class="s1">page.setScaleY(x)</span><span class="s0">;</span>
+                    <span class="s1">}</span>
+            <span class="s1">)</span><span class="s0">;</span>
+            <span class="s6">///////////////////////////////</span>
+
+            <span class="s1">primaryStage.show()</span><span class="s0">;</span>
+
+        <span class="s1">}</span>
+        <span class="s0">catch</span><span class="s1">(Exception e)</span>
+        <span class="s1">{</span>
+            <span class="s1">e.printStackTrace()</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s2">/**</span>
+     <span class="s2">* </span><span class="s3">@param </span><span class="s2">args the command line arguments</span>
+     <span class="s2">*/</span>
+    <span class="s0">public static void </span><span class="s1">main(String[] args) {</span>
+
+      <span class="s1">destroyORDEFENDER(args)</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">start</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">end</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">choice</span><span class="s0">;</span>
+        <span class="s1">System.out.println(</span><span class="s5">&quot;enter ( 1 ) to print specific part of arena:&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">System.out.println(</span><span class="s5">&quot;enter ( 2 ) to exit:&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">Scanner scanner=</span><span class="s0">new </span><span class="s1">Scanner(System.in)</span><span class="s0">;</span>
+        <span class="s1">choice=scanner.nextInt()</span><span class="s0">;</span>
+        <span class="s0">switch </span><span class="s1">(choice)</span>
+        <span class="s1">{</span>
+            <span class="s0">case </span><span class="s4">1</span><span class="s1">:</span>
+                <span class="s1">System.out.println(</span><span class="s5">&quot;enter start element:&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">start=scanner.nextInt()</span><span class="s0">;</span>
+                <span class="s1">System.out.println(</span><span class="s5">&quot;enter end element:&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">end=scanner.nextInt()</span><span class="s0">;</span>
+                <span class="s1">Game.arena.Zoom(start</span><span class="s0">,</span><span class="s1">end)</span><span class="s0">;</span>
+                <span class="s1">System.out.println()</span><span class="s0">;</span>
+                <span class="s1">System.out.println()</span><span class="s0">;</span>
+                <span class="s1">System.out.println()</span><span class="s0">;</span>
+                <span class="s0">break;</span>
+            <span class="s0">case </span><span class="s4">2</span><span class="s1">:System.exit(</span><span class="s4">0</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s0">default</span><span class="s1">:</span>
+                <span class="s1">System.out.println(</span><span class="s5">&quot;Wrong choice...&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s0">break;</span>
+
+        <span class="s1">}</span>
+
+    <span class="s1">}</span>
+
+    <span class="s0">private void </span><span class="s1">close()</span>
+    <span class="s1">{</span>
+        <span class="s1">System.out.println(</span><span class="s5">&quot;The Gui Is Closed&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">window.close()</span><span class="s0">;</span>
+    <span class="s1">}</span>
+    <span class="s0">public void </span><span class="s1">movement(Rectangle r</span><span class="s0">,int </span><span class="s1">x</span><span class="s0">,int </span><span class="s1">y</span><span class="s0">,int </span><span class="s1">xx</span><span class="s0">,int </span><span class="s1">yy</span><span class="s0">,</span><span class="s1">Image p)</span>
+    <span class="s1">{</span>
+       <span class="s1">r.setHeight(</span><span class="s4">50</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">r.setWidth(</span><span class="s4">50</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">r.setFill(</span><span class="s0">new </span><span class="s1">ImagePattern(p))</span><span class="s0">;</span>
+         <span class="s1">r.setTranslateX(xx)</span><span class="s0">;</span>
+         <span class="s1">r.setTranslateY(yy)</span><span class="s0">;</span>
+        <span class="s6">// بالعرض و الطول rectangle هنا قنما بتحديد درجة إنحناء زوايا الكائن</span>
+        <span class="s1">r.setArcWidth(</span><span class="s4">30</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">r.setArcHeight(</span><span class="s4">30</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">TranslateTransition translateTransition = </span><span class="s0">new </span><span class="s1">TranslateTransition()</span><span class="s0">;</span>
+        <span class="s6">// عندما يتم تشغيله translateTransition هنا قمنا بتحديد المدة التي سيتنفذ خلالها التأثير الذي يمثل الكائن</span>
+        <span class="s1">translateTransition.setDuration(Duration.seconds(</span><span class="s4">80</span><span class="s1">))</span><span class="s0">;</span>
+
+        <span class="s6">//  سيتم تطبيقه على الكائن translateTransition هنا حددنا أن التأثير الذي سنحصل عليه عند تشغيل الكائن</span>
+        <span class="s1">translateTransition.setNode(r)</span><span class="s0">;</span>
+        <span class="s6">// هو التحرك للأسفل بنسبة 80 بيكسل translateTransition هنا قلنا أن التأثير الذي سنحصل عليه عند تشغيل الكائن</span>
+        <span class="s1">translateTransition.setByX(x)</span><span class="s0">;</span>
+        <span class="s1">translateTransition.setByY(y)</span><span class="s0">;</span>
+        <span class="s6">// هنا وضعنا 1- للإشارة إلى أننا لا نريد أن يتم إيقاف التأثير</span>
+       <span class="s6">// translateTransition.setCycleCount(-1);</span>
+        <span class="s6">// كلما تم تشغيله translateTransition هنا قلنا أننا نريد أن يتم إرجاع التأثير الذي يفعله الكائن</span>
+      <span class="s6">//  translateTransition.setAutoReverse(true);</span>
+        <span class="s6">// translateTransition هنا قمنا بتشغيل التأثير الذي يمثله الكائن</span>
+        <span class="s1">translateTransition.play()</span><span class="s0">;</span>
+    <span class="s1">}</span>
+ <span class="s0">public void </span><span class="s1">music()</span>
+ <span class="s1">{</span>
+     <span class="s1">String s=</span><span class="s5">&quot;media.mp3&quot;</span><span class="s0">;</span>
+     <span class="s1">Media h=</span><span class="s0">new </span><span class="s1">Media(Paths.get(s).toUri().toString())</span><span class="s0">;</span>
+     <span class="s1">mediaPlayer=</span><span class="s0">new </span><span class="s1">MediaPlayer(h)</span><span class="s0">;</span>
+     <span class="s1">mediaPlayer.play()</span><span class="s0">;</span>
+ <span class="s1">}</span>
+    <span class="s0">public static void </span><span class="s1">destroyORDEFENDER(String []args) {</span>
+        <span class="s1">Game game = </span><span class="s0">new </span><span class="s1">Game()</span><span class="s0">;</span>
+        <span class="s1">Thread t = </span><span class="s0">new </span><span class="s1">Thread(game)</span><span class="s0">;</span>
+        <span class="s2">/******************************************* A T T A C K E R 1    ********************************************/</span>
+        <span class="s1">Attacker Ataccker1 = </span><span class="s0">new </span><span class="s1">Attacker()</span><span class="s0">;</span>
+        <span class="s1">Attacker Ataccker2 = </span><span class="s0">new </span><span class="s1">Attacker()</span><span class="s0">;</span>
+        <span class="s1">Attacker Ataccker3 = </span><span class="s0">new </span><span class="s1">Attacker()</span><span class="s0">;</span>
+        <span class="s1">Defender devender1 = </span><span class="s0">new </span><span class="s1">Defender()</span><span class="s0">;</span>
+        <span class="s1">Attacker.ATank T11 = Ataccker1.</span><span class="s0">new </span><span class="s1">ATank(</span><span class="s4">0</span><span class="s0">, </span><span class="s4">1</span><span class="s0">, </span><span class="s4">1</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">Attacker.ATank T12 = Ataccker1.</span><span class="s0">new </span><span class="s1">ATank(</span><span class="s4">2</span><span class="s0">, </span><span class="s4">1</span><span class="s0">, </span><span class="s4">2</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s6">///////////////////////////////</span>
+        <span class="s1">Attacker.Rsolider R11 = Ataccker1.</span><span class="s0">new </span><span class="s1">Rsolider(</span><span class="s4">0</span><span class="s0">, </span><span class="s4">1</span><span class="s0">, </span><span class="s4">1</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">Attacker.Rsolider R12 = Ataccker1.</span><span class="s0">new </span><span class="s1">Rsolider(</span><span class="s4">2</span><span class="s0">, </span><span class="s4">1</span><span class="s0">, </span><span class="s4">2</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s6">/////////////////////////////</span>
+        <span class="s1">Attacker.Ssolider S11 = Ataccker1.</span><span class="s0">new </span><span class="s1">Ssolider(</span><span class="s4">0</span><span class="s0">, </span><span class="s4">1</span><span class="s0">, </span><span class="s4">1</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">Attacker.Ssolider S12 = Ataccker1.</span><span class="s0">new </span><span class="s1">Ssolider(</span><span class="s4">2</span><span class="s0">, </span><span class="s4">2</span><span class="s0">, </span><span class="s4">1</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s6">/////////////////////////////</span>
+        <span class="s1">Attacker.air_Plane P1 = Ataccker1.</span><span class="s0">new </span><span class="s1">air_Plane(</span><span class="s4">0</span><span class="s0">, </span><span class="s4">1</span><span class="s0">, </span><span class="s4">1</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s6">/////////////////////////////</span>
+        <span class="s1">Attacker.Bomb B1 = Ataccker1.</span><span class="s0">new </span><span class="s1">Bomb(</span><span class="s4">0</span><span class="s0">, </span><span class="s4">1</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s2">/******************************************* A T T A C K E R 2    ********************************************/</span>
+
+        <span class="s1">Attacker.ATank T21 = Ataccker2.</span><span class="s0">new </span><span class="s1">ATank(</span><span class="s4">10</span><span class="s0">, </span><span class="s4">2</span><span class="s0">, </span><span class="s4">1</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">Attacker.ATank T22 = Ataccker2.</span><span class="s0">new </span><span class="s1">ATank(</span><span class="s4">12</span><span class="s0">, </span><span class="s4">2</span><span class="s0">, </span><span class="s4">2</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s6">///////////////////////////</span>
+        <span class="s1">Attacker.Rsolider R21 = Ataccker2.</span><span class="s0">new </span><span class="s1">Rsolider(</span><span class="s4">12</span><span class="s0">, </span><span class="s4">2</span><span class="s0">, </span><span class="s4">1</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">Attacker.Rsolider R22 = Ataccker2.</span><span class="s0">new </span><span class="s1">Rsolider(</span><span class="s4">14</span><span class="s0">, </span><span class="s4">2</span><span class="s0">, </span><span class="s4">2</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s6">/////////////////////////////</span>
+        <span class="s1">Attacker.Ssolider S21 = Ataccker2.</span><span class="s0">new </span><span class="s1">Ssolider(</span><span class="s4">16</span><span class="s0">, </span><span class="s4">1</span><span class="s0">, </span><span class="s4">2</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">Attacker.Ssolider S22 = Ataccker2.</span><span class="s0">new </span><span class="s1">Ssolider(</span><span class="s4">18</span><span class="s0">, </span><span class="s4">2</span><span class="s0">, </span><span class="s4">2</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s6">////////////////////////</span>
+        <span class="s1">Attacker.air_Plane P2 = Ataccker2.</span><span class="s0">new </span><span class="s1">air_Plane(</span><span class="s4">2</span><span class="s0">, </span><span class="s4">1</span><span class="s0">, </span><span class="s4">2</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s6">//////////////////////////</span>
+        <span class="s1">Attacker.Bomb B2 = Ataccker2.</span><span class="s0">new </span><span class="s1">Bomb(</span><span class="s4">2</span><span class="s0">, </span><span class="s4">2</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s2">/******************************************* A T T A C K E R 3    ********************************************/</span>
+
+        <span class="s1">Attacker.ATank T31 = Ataccker3.</span><span class="s0">new </span><span class="s1">ATank(</span><span class="s4">26</span><span class="s0">, </span><span class="s4">3</span><span class="s0">, </span><span class="s4">1</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">Attacker.ATank T32 = Ataccker3.</span><span class="s0">new </span><span class="s1">ATank(</span><span class="s4">28</span><span class="s0">, </span><span class="s4">3</span><span class="s0">, </span><span class="s4">2</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s6">//////////////////////////////</span>
+        <span class="s1">Attacker.Rsolider R31 = Ataccker3.</span><span class="s0">new </span><span class="s1">Rsolider(</span><span class="s4">20</span><span class="s0">, </span><span class="s4">3</span><span class="s0">, </span><span class="s4">1</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">Attacker.Rsolider R32 = Ataccker3.</span><span class="s0">new </span><span class="s1">Rsolider(</span><span class="s4">22</span><span class="s0">, </span><span class="s4">3</span><span class="s0">, </span><span class="s4">2</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s6">////////// /////////////////</span>
+        <span class="s1">Attacker.Ssolider S31 = Ataccker3.</span><span class="s0">new </span><span class="s1">Ssolider(</span><span class="s4">26</span><span class="s0">, </span><span class="s4">1</span><span class="s0">, </span><span class="s4">3</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">Attacker.Ssolider S32 = Ataccker3.</span><span class="s0">new </span><span class="s1">Ssolider(</span><span class="s4">28</span><span class="s0">, </span><span class="s4">2</span><span class="s0">, </span><span class="s4">3</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s6">/////////////////////////</span>
+        <span class="s1">Attacker.air_Plane P3 = Ataccker3.</span><span class="s0">new </span><span class="s1">air_Plane(</span><span class="s4">4</span><span class="s0">, </span><span class="s4">1</span><span class="s0">, </span><span class="s4">3</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s6">/////////////////////////</span>
+        <span class="s1">Attacker.Bomb B3 = Ataccker3.</span><span class="s0">new </span><span class="s1">Bomb(</span><span class="s4">4</span><span class="s0">, </span><span class="s4">3</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s2">/******************************************* D E F E N D E R   ********************************************/</span>
+
+        <span class="s1">Defender.Canon C1 = devender1.</span><span class="s0">new </span><span class="s1">Canon(</span><span class="s4">0</span><span class="s0">, </span><span class="s4">1</span><span class="s0">, </span><span class="s4">1</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">Defender.Canon C2 = devender1.</span><span class="s0">new </span><span class="s1">Canon(</span><span class="s4">2</span><span class="s0">, </span><span class="s4">1</span><span class="s0">, </span><span class="s4">2</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">Defender.Canon C3 = devender1.</span><span class="s0">new </span><span class="s1">Canon(</span><span class="s4">4</span><span class="s0">, </span><span class="s4">1</span><span class="s0">, </span><span class="s4">3</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">Defender.Tower twoer4 = devender1.</span><span class="s0">new </span><span class="s1">Tower(</span><span class="s4">6</span><span class="s0">, </span><span class="s4">1</span><span class="s0">, </span><span class="s4">4</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">Defender.Tower twoer5 = devender1.</span><span class="s0">new </span><span class="s1">Tower(</span><span class="s4">8</span><span class="s0">, </span><span class="s4">1</span><span class="s0">, </span><span class="s4">5</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">Defender.Tower twoer6 = devender1.</span><span class="s0">new </span><span class="s1">Tower(</span><span class="s4">10</span><span class="s0">, </span><span class="s4">1</span><span class="s0">, </span><span class="s4">6</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s6">////////////////////////////////</span>
+        <span class="s1">Defender.support_Team Defend = devender1.</span><span class="s0">new </span><span class="s1">support_Team()</span><span class="s0">;</span>
+        <span class="s6">/////////////////////////////////</span>
+        <span class="s1">Defender.air_Defence Air_Devender1 = devender1.</span><span class="s0">new </span><span class="s1">air_Defence(</span><span class="s4">0</span><span class="s0">, </span><span class="s4">1</span><span class="s0">, </span><span class="s4">1</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">Defender.air_Defence Air_Devender2 = devender1.</span><span class="s0">new </span><span class="s1">air_Defence(</span><span class="s4">0</span><span class="s0">, </span><span class="s4">1</span><span class="s0">, </span><span class="s4">2</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s2">/*************************************************************************************************************/</span>
+
+        <span class="s1">t.start()</span><span class="s0">;</span>
+
+        <span class="s0">try </span><span class="s1">{</span>
+            <span class="s1">t.join()</span><span class="s0">;</span>
+
+        <span class="s1">} </span><span class="s0">catch </span><span class="s1">(InterruptedException e) {</span>
+            <span class="s1">e.printStackTrace()</span><span class="s0">;</span>
+        <span class="s1">}</span>
+        <span class="s6">///////////////////////////////////////////////////////////</span>
+        <span class="s6">////////////////////////////////////////////////////////////////</span>
+
+        <span class="s1">ThreadGroup tg = </span><span class="s0">new </span><span class="s1">ThreadGroup(</span><span class="s5">&quot;tg group&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s6">//////////////THREAD    TANKS /////////////////</span>
+        <span class="s1">Thread Th1 = </span><span class="s0">new </span><span class="s1">Thread(tg</span><span class="s0">, </span><span class="s1">T11</span><span class="s0">, </span><span class="s5">&quot;T11&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">Thread Th2 = </span><span class="s0">new </span><span class="s1">Thread(tg</span><span class="s0">, </span><span class="s1">T12</span><span class="s0">, </span><span class="s5">&quot;T12&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">Thread Th6 = </span><span class="s0">new </span><span class="s1">Thread(tg</span><span class="s0">, </span><span class="s1">T21</span><span class="s0">, </span><span class="s5">&quot;T21&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">Thread Th7 = </span><span class="s0">new </span><span class="s1">Thread(tg</span><span class="s0">, </span><span class="s1">T22</span><span class="s0">, </span><span class="s5">&quot;T22&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s6">///////////////THREAD     SNIPER /////////////</span>
+        <span class="s1">Thread Th17 = </span><span class="s0">new </span><span class="s1">Thread(tg</span><span class="s0">, </span><span class="s1">S11</span><span class="s0">, </span><span class="s5">&quot;S11&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">Thread Th18 = </span><span class="s0">new </span><span class="s1">Thread(tg</span><span class="s0">, </span><span class="s1">S12</span><span class="s0">, </span><span class="s5">&quot;S12&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">Thread Th25 = </span><span class="s0">new </span><span class="s1">Thread(tg</span><span class="s0">, </span><span class="s1">S21</span><span class="s0">, </span><span class="s5">&quot;S21&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">Thread Th26 = </span><span class="s0">new </span><span class="s1">Thread(tg</span><span class="s0">, </span><span class="s1">S22</span><span class="s0">, </span><span class="s5">&quot;S22&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">Thread Th30 = </span><span class="s0">new </span><span class="s1">Thread(tg</span><span class="s0">, </span><span class="s1">S31</span><span class="s0">, </span><span class="s5">&quot;S31&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">Thread Th31 = </span><span class="s0">new </span><span class="s1">Thread(tg</span><span class="s0">, </span><span class="s1">S32</span><span class="s0">, </span><span class="s5">&quot;S32&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s6">/////////////////THREAD   RBG ////////////////</span>
+        <span class="s1">Thread Th34 = </span><span class="s0">new </span><span class="s1">Thread(tg</span><span class="s0">, </span><span class="s1">R11</span><span class="s0">, </span><span class="s5">&quot;R11&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">Thread Th35 = </span><span class="s0">new </span><span class="s1">Thread(tg</span><span class="s0">, </span><span class="s1">R12</span><span class="s0">, </span><span class="s5">&quot;R12&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">Thread Th40 = </span><span class="s0">new </span><span class="s1">Thread(tg</span><span class="s0">, </span><span class="s1">R21</span><span class="s0">, </span><span class="s5">&quot;R21&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">Thread Th41 = </span><span class="s0">new </span><span class="s1">Thread(tg</span><span class="s0">, </span><span class="s1">R22</span><span class="s0">, </span><span class="s5">&quot;R22&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">Thread Th44 = </span><span class="s0">new </span><span class="s1">Thread(tg</span><span class="s0">, </span><span class="s1">R31</span><span class="s0">, </span><span class="s5">&quot;R31&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">Thread Th45 = </span><span class="s0">new </span><span class="s1">Thread(tg</span><span class="s0">, </span><span class="s1">R32</span><span class="s0">, </span><span class="s5">&quot;R32&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s6">/////////////////////////THREAD    BOMB ////////</span>
+        <span class="s1">Thread Th50 = </span><span class="s0">new </span><span class="s1">Thread(tg</span><span class="s0">, </span><span class="s1">B1</span><span class="s0">, </span><span class="s5">&quot;B1&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">Thread Th51 = </span><span class="s0">new </span><span class="s1">Thread(tg</span><span class="s0">, </span><span class="s1">B2</span><span class="s0">, </span><span class="s5">&quot;B2&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">Thread Th52 = </span><span class="s0">new </span><span class="s1">Thread(tg</span><span class="s0">, </span><span class="s1">B3</span><span class="s0">, </span><span class="s5">&quot;B3&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s6">////////////////THREAD     PLANE ///////////</span>
+        <span class="s1">Thread Th53 = </span><span class="s0">new </span><span class="s1">Thread(tg</span><span class="s0">, </span><span class="s1">P1</span><span class="s0">, </span><span class="s5">&quot;P1&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">Thread Th54 = </span><span class="s0">new </span><span class="s1">Thread(tg</span><span class="s0">, </span><span class="s1">P2</span><span class="s0">, </span><span class="s5">&quot;P2&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">Thread Th55 = </span><span class="s0">new </span><span class="s1">Thread(tg</span><span class="s0">, </span><span class="s1">P3</span><span class="s0">, </span><span class="s5">&quot;p3&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s6">//////////////////THREAD   Canon///////////</span>
+        <span class="s1">Thread Th56 = </span><span class="s0">new </span><span class="s1">Thread(tg</span><span class="s0">, </span><span class="s1">C1</span><span class="s0">, </span><span class="s5">&quot;C1&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">Thread Th57 = </span><span class="s0">new </span><span class="s1">Thread(tg</span><span class="s0">, </span><span class="s1">C2</span><span class="s0">, </span><span class="s5">&quot;C2&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">Thread Th58 = </span><span class="s0">new </span><span class="s1">Thread(tg</span><span class="s0">, </span><span class="s1">C3</span><span class="s0">, </span><span class="s5">&quot;C3&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">Thread Th59 = </span><span class="s0">new </span><span class="s1">Thread(tg</span><span class="s0">, </span><span class="s1">Defend</span><span class="s0">, </span><span class="s5">&quot;C3&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s6">////////////////////////////////</span>
+        <span class="s1">Th1.start()</span><span class="s0">;</span>
+        <span class="s1">Th30.start()</span><span class="s0">;</span>
+        <span class="s1">Th2.start()</span><span class="s0">;</span>
+
+        <span class="s1">Th6.start()</span><span class="s0">;</span>
+        <span class="s1">Th34.start()</span><span class="s0">;</span>
+        <span class="s1">Th7.start()</span><span class="s0">;</span>
+        <span class="s1">Th40.start()</span><span class="s0">;</span>
+        <span class="s1">Th41.start()</span><span class="s0">;</span>
+
+        <span class="s1">Th17.start()</span><span class="s0">;</span>
+        <span class="s1">Th44.start()</span><span class="s0">;</span>
+        <span class="s1">Th45.start()</span><span class="s0">;</span>
+        <span class="s1">Th31.start()</span><span class="s0">;</span>
+        <span class="s1">Th18.start()</span><span class="s0">;</span>
+        <span class="s1">Th26.start()</span><span class="s0">;</span>
+        <span class="s1">Th25.start()</span><span class="s0">;</span>
+        <span class="s1">Th53.start()</span><span class="s0">;</span>
+        <span class="s1">Th54.start()</span><span class="s0">;</span>
+        <span class="s1">Th55.start()</span><span class="s0">;</span>
+        <span class="s1">Th56.start()</span><span class="s0">;</span>
+        <span class="s1">Th58.start()</span><span class="s0">;</span>
+        <span class="s1">Th59.start()</span><span class="s0">;</span>
+        <span class="s1">Th57.start()</span><span class="s0">;</span>
+
+        <span class="s6">/* 
+         * 
+         * 
+         * 
+         * */</span>
+        <span class="s0">if </span><span class="s1">(Game.endGame() != Game_state.Running) {</span>
+            <span class="s1">System.out.println()</span><span class="s0">;</span>
+            <span class="s1">System.out.println(Game.endGame())</span><span class="s0">;</span>
+            <span class="s1">System.exit(</span><span class="s4">1</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+        <span class="s6">/* 
+         * 
+         * 
+         * 
+         * */</span>
+
+        <span class="s0">try </span><span class="s1">{</span>
+           <span class="s6">// Thread.sleep(300000);</span>
+            <span class="s1">Thread.sleep(</span><span class="s4">200000</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">} </span><span class="s0">catch </span><span class="s1">(Exception e) {</span>
+            <span class="s1">System.out.println(e.getMessage())</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+
+        <span class="s1">tg.stop()</span><span class="s0">;</span>
+
+        <span class="s6">// في الأخير سيتم عرض الجملة التالية</span>
+        <span class="s1">System.out.println()</span><span class="s0">;</span>
+        <span class="s1">Game.arena.printer()</span><span class="s0">;</span>
+        <span class="s1">System.out.println(</span><span class="s5">&quot;</span><span class="s0">\n </span><span class="s5">Health of Base:&quot;</span><span class="s1">+Game.base.getHealtBase())</span><span class="s0">;</span>
+        <span class="s1">System.out.println()</span><span class="s0">;</span>
+        <span class="s1">System.out.println()</span><span class="s0">;</span>
+        <span class="s1">System.out.println(Game.state.getValue())</span><span class="s0">;</span>
+        <span class="s1">System.out.println()</span><span class="s0">;</span>
+
+        <span class="s1">launch(args)</span><span class="s0">;</span>
+        <span class="s6">/////////////////////////////////////////////////////////////</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+</pre>
+</body>
+</html>

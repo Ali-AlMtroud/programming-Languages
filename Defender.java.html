@@ -1,0 +1,1164 @@
+<html>
+<head>
+<title>Defender.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6897bb;}
+.s3 { color: #6a8759;}
+.s4 { color: #629755; font-style: italic;}
+.s5 { color: #808080;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Defender.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">sample</span><span class="s0">;</span>
+
+
+
+<span class="s0">import </span><span class="s1">java.io.BufferedReader</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.io.File</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.io.FileReader</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.io.IOException</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.ArrayList</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.Random</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.Scanner</span><span class="s0">;</span>
+
+<span class="s0">public class </span><span class="s1">Defender </span><span class="s0">extends </span><span class="s1">Player {</span>
+    <span class="s0">public static int </span><span class="s1">MoneyD = </span><span class="s2">3000</span><span class="s0">;</span>
+    <span class="s1">ArrayList&lt;Integer&gt; canonlist = </span><span class="s0">new </span><span class="s1">ArrayList&lt;Integer&gt;()</span><span class="s0">;</span>
+    <span class="s1">ArrayList&lt;Integer&gt; towerlist = </span><span class="s0">new </span><span class="s1">ArrayList&lt;Integer&gt;()</span><span class="s0">;</span>
+    <span class="s1">ArrayList&lt;Integer&gt; suport_solider = </span><span class="s0">new </span><span class="s1">ArrayList&lt;Integer&gt;()</span><span class="s0">;</span>
+    <span class="s1">ArrayList&lt;Integer&gt; Airlist = </span><span class="s0">new </span><span class="s1">ArrayList&lt;Integer&gt;()</span><span class="s0">;</span>
+
+
+    <span class="s1">Defender() {</span>
+
+        <span class="s1">MoneyD = </span><span class="s2">3000</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">boolean </span><span class="s1">check_Attacker(</span><span class="s0">int </span><span class="s1">i</span><span class="s0">, int </span><span class="s1">j) {</span>
+        <span class="s0">return </span><span class="s1">(Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s3">&quot;T&quot;</span><span class="s1">)) || (Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s3">&quot;R&quot;</span><span class="s1">)) || (Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s3">&quot;S&quot;</span><span class="s1">)) || (Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s3">&quot;B&quot;</span><span class="s1">)) || (Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s3">&quot;/&quot;</span><span class="s1">)) || (Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s3">&quot;1&quot;</span><span class="s1">)) || (Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s3">&quot;2&quot;</span><span class="s1">)) || (Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s3">&quot;3&quot;</span><span class="s1">)) || (Game.arena.Getcell(i</span><span class="s0">, </span><span class="s1">j).equals(</span><span class="s3">&quot;4&quot;</span><span class="s1">))</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s4">/**************************************************************************/</span>
+    <span class="s0">public synchronized </span><span class="s1">String Set_Damage_Bomb(Attacker.Bomb obj</span><span class="s0">, </span><span class="s1">ArrayList&lt;Attacker.Bomb&gt; list</span><span class="s0">, </span><span class="s1">String info</span><span class="s0">, int </span><span class="s1">damage) {</span>
+        <span class="s1">obj.setHealth(obj.getHealth() - (damage * obj.getArrmor()))</span><span class="s0">;</span>
+        <span class="s1">info += </span><span class="s3">&quot; attack Bomb in ( &quot; </span><span class="s1">+ Integer.toString(obj.getX()) + </span><span class="s3">&quot;, &quot; </span><span class="s1">+ Integer.toString(obj.getY()) + </span><span class="s3">&quot;) and Health anime is :&quot; </span><span class="s1">+ Integer.toString(obj.getHealth())</span><span class="s0">;</span>
+
+        <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">0</span><span class="s0">; </span><span class="s1">i &lt; list.size()</span><span class="s0">; </span><span class="s1">i++) {</span>
+            <span class="s0">if </span><span class="s1">(list.get(i).getX() == obj.getX() &amp;&amp; list.get(i).getY() == obj.getY()) {</span>
+
+                <span class="s1">list.set(i</span><span class="s0">, </span><span class="s1">obj)</span><span class="s0">;</span>
+
+                <span class="s0">if </span><span class="s1">(list.get(i).getHealth() &lt;= </span><span class="s2">0</span><span class="s1">) {</span>
+                    <span class="s1">Game.arena.setArena(list.get(i).getX()</span><span class="s0">, </span><span class="s1">list.get(i).getY()</span><span class="s0">, </span><span class="s3">&quot;X&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">list.remove(list.get(i))</span><span class="s0">;</span>
+                <span class="s1">}</span>
+
+            <span class="s1">}</span>
+
+        <span class="s1">}</span>
+        <span class="s0">return </span><span class="s1">info</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public synchronized </span><span class="s1">String Set_Damage_Atank(Attacker.ATank obj</span><span class="s0">, </span><span class="s1">ArrayList&lt;Attacker.ATank&gt; list</span><span class="s0">, </span><span class="s1">String info</span><span class="s0">, int </span><span class="s1">damage) {</span>
+        <span class="s1">obj.setHealth(obj.getHealth() - (damage * obj.getArrmor()))</span><span class="s0">;</span>
+        <span class="s1">info += </span><span class="s3">&quot; attack Atank in ( &quot; </span><span class="s1">+ Integer.toString(obj.getX()) + </span><span class="s3">&quot;, &quot; </span><span class="s1">+ Integer.toString(obj.getY()) + </span><span class="s3">&quot;) and Health anime is :&quot; </span><span class="s1">+ Integer.toString(obj.getHealth())</span><span class="s0">;</span>
+
+        <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">0</span><span class="s0">; </span><span class="s1">i &lt; list.size()</span><span class="s0">; </span><span class="s1">i++) {</span>
+            <span class="s0">if </span><span class="s1">(list.get(i).getX() == obj.getX() &amp;&amp; list.get(i).getY() == obj.getY()) {</span>
+
+                <span class="s1">list.set(i</span><span class="s0">, </span><span class="s1">obj)</span><span class="s0">;</span>
+
+                <span class="s0">if </span><span class="s1">(list.get(i).getHealth() &lt;= </span><span class="s2">0</span><span class="s1">) {</span>
+                    <span class="s1">Game.arena.setArena(list.get(i).getX()</span><span class="s0">, </span><span class="s1">list.get(i).getY()</span><span class="s0">, </span><span class="s3">&quot;X&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">list.remove(list.get(i))</span><span class="s0">;</span>
+                <span class="s1">}</span>
+
+            <span class="s1">}</span>
+
+        <span class="s1">}</span>
+        <span class="s0">return </span><span class="s1">info</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public synchronized </span><span class="s1">String Set_Damage_Rsolider(Attacker.Rsolider obj</span><span class="s0">, </span><span class="s1">ArrayList&lt;Attacker.Rsolider&gt; list</span><span class="s0">, </span><span class="s1">String info</span><span class="s0">, int </span><span class="s1">damage) {</span>
+        <span class="s1">obj.setHealth(obj.getHealth() - (damage * obj.getArrmor()))</span><span class="s0">;</span>
+        <span class="s1">info += </span><span class="s3">&quot; atack Rsolider in ( &quot; </span><span class="s1">+ Integer.toString(obj.getX()) + </span><span class="s3">&quot;, &quot; </span><span class="s1">+ Integer.toString(obj.getY()) + </span><span class="s3">&quot;) and Health anime is :&quot; </span><span class="s1">+ Integer.toString(obj.getHealth())</span><span class="s0">;</span>
+
+        <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">0</span><span class="s0">; </span><span class="s1">i &lt; list.size()</span><span class="s0">; </span><span class="s1">i++) {</span>
+            <span class="s0">if </span><span class="s1">(list.get(i).getX() == obj.getX() &amp;&amp; list.get(i).getY() == obj.getY()) {</span>
+
+                <span class="s1">list.set(i</span><span class="s0">, </span><span class="s1">obj)</span><span class="s0">;</span>
+
+                <span class="s0">if </span><span class="s1">(list.get(i).getHealth() &lt;= </span><span class="s2">0</span><span class="s1">) {</span>
+                    <span class="s1">Game.arena.setArena(list.get(i).getX()</span><span class="s0">, </span><span class="s1">list.get(i).getY()</span><span class="s0">, </span><span class="s3">&quot;X&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">list.remove(list.get(i))</span><span class="s0">;</span>
+                <span class="s1">}</span>
+
+            <span class="s1">}</span>
+
+        <span class="s1">}</span>
+        <span class="s0">return </span><span class="s1">info</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public synchronized </span><span class="s1">String Set_Damage_Solider(Attacker.Ssolider obj</span><span class="s0">, </span><span class="s1">ArrayList&lt;Attacker.Ssolider&gt; list</span><span class="s0">, </span><span class="s1">String info</span><span class="s0">, int </span><span class="s1">damage) {</span>
+        <span class="s1">obj.setHealth(obj.getHealth() - (damage * obj.getArrmor()))</span><span class="s0">;</span>
+        <span class="s1">info += </span><span class="s3">&quot; atack Solider in ( &quot; </span><span class="s1">+ Integer.toString(obj.getX()) + </span><span class="s3">&quot;, &quot; </span><span class="s1">+ Integer.toString(obj.getY()) + </span><span class="s3">&quot;) and Health anime is :&quot; </span><span class="s1">+ Integer.toString(obj.getHealth())</span><span class="s0">;</span>
+
+        <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">0</span><span class="s0">; </span><span class="s1">i &lt; list.size()</span><span class="s0">; </span><span class="s1">i++) {</span>
+            <span class="s0">if </span><span class="s1">(list.get(i).getX() == obj.getX() &amp;&amp; list.get(i).getY() == obj.getY()) {</span>
+
+                <span class="s1">list.set(i</span><span class="s0">, </span><span class="s1">obj)</span><span class="s0">;</span>
+
+                <span class="s0">if </span><span class="s1">(list.get(i).getHealth() &lt;= </span><span class="s2">0</span><span class="s1">) {</span>
+                    <span class="s1">Game.arena.setArena(list.get(i).getX()</span><span class="s0">, </span><span class="s1">list.get(i).getY()</span><span class="s0">, </span><span class="s3">&quot;X&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">list.remove(list.get(i))</span><span class="s0">;</span>
+                <span class="s1">}</span>
+
+            <span class="s1">}</span>
+
+        <span class="s1">}</span>
+        <span class="s0">return </span><span class="s1">info</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public synchronized </span><span class="s1">String Set_Damage_air_plane(Attacker.air_Plane obj</span><span class="s0">, </span><span class="s1">ArrayList&lt;Attacker.air_Plane&gt; list</span><span class="s0">, </span><span class="s1">String info</span><span class="s0">, int </span><span class="s1">damage) {</span>
+        <span class="s1">obj.setHealth(obj.getHealth() - (damage * obj.getArrmor()))</span><span class="s0">;</span>
+        <span class="s1">info += </span><span class="s3">&quot; atack Solider in ( &quot; </span><span class="s1">+ Integer.toString(obj.getX()) + </span><span class="s3">&quot;, &quot; </span><span class="s1">+ Integer.toString(obj.getY()) + </span><span class="s3">&quot;) and Health anime is :&quot; </span><span class="s1">+ Integer.toString(obj.getHealth())</span><span class="s0">;</span>
+
+        <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">0</span><span class="s0">; </span><span class="s1">i &lt; list.size()</span><span class="s0">; </span><span class="s1">i++) {</span>
+            <span class="s0">if </span><span class="s1">(list.get(i).getX() == obj.getX() &amp;&amp; list.get(i).getY() == obj.getY()) {</span>
+
+                <span class="s1">list.set(i</span><span class="s0">, </span><span class="s1">obj)</span><span class="s0">;</span>
+
+                <span class="s0">if </span><span class="s1">(list.get(i).getHealth() &lt;= </span><span class="s2">0</span><span class="s1">) {</span>
+                    <span class="s1">Game.arena.setArena(list.get(i).getX()</span><span class="s0">, </span><span class="s1">list.get(i).getY()</span><span class="s0">, </span><span class="s3">&quot;X&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">list.remove(list.get(i))</span><span class="s0">;</span>
+                <span class="s1">}</span>
+
+            <span class="s1">}</span>
+
+        <span class="s1">}</span>
+        <span class="s0">return </span><span class="s1">info</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s4">/***********************************************************************************************************************/</span>
+    <span class="s0">synchronized </span><span class="s1">ArrayList&lt;Attacker.ATank&gt; check_Attack_Tanks(ArrayList&lt;String&gt; b</span><span class="s0">, </span><span class="s1">ArrayList&lt;String&gt; bb) {</span>
+
+        <span class="s0">if </span><span class="s1">(bb.size() == </span><span class="s2">0</span><span class="s1">)</span>
+            <span class="s0">return null;</span>
+        <span class="s1">ArrayList&lt;Attacker.ATank&gt; Tanks_health = </span><span class="s0">new </span><span class="s1">ArrayList&lt;Attacker.ATank&gt;()</span><span class="s0">;</span>
+
+        <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">0</span><span class="s0">; </span><span class="s1">i &lt; b.size()</span><span class="s0">; </span><span class="s1">i++) {</span>
+            <span class="s0">if </span><span class="s1">(b.get(i).equals(</span><span class="s3">&quot;T&quot;</span><span class="s1">)) {</span>
+
+                <span class="s0">if </span><span class="s1">(bb.get(i).length() == </span><span class="s2">2</span><span class="s1">) {</span>
+
+                    <span class="s0">int </span><span class="s1">t = bb.get(i).charAt(</span><span class="s2">0</span><span class="s1">) - </span><span class="s2">48</span><span class="s0">;</span>
+
+                    <span class="s0">int </span><span class="s1">tt = bb.get(i).charAt(</span><span class="s2">1</span><span class="s1">) - </span><span class="s2">48</span><span class="s0">;</span>
+
+                    <span class="s0">for </span><span class="s1">(Attacker.ATank tank : s1) {</span>
+
+                        <span class="s0">if </span><span class="s1">(tank.getX() == t &amp;&amp; tank.getY() == tt) {</span>
+
+                            <span class="s1">Tanks_health.add(tank)</span><span class="s0">;</span>
+                        <span class="s1">}</span>
+                    <span class="s1">}</span>
+                <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+
+                    <span class="s0">int </span><span class="s1">t = </span><span class="s2">10 </span><span class="s1">* ((</span><span class="s0">int</span><span class="s1">) bb.get(i).charAt(</span><span class="s2">0</span><span class="s1">) - </span><span class="s2">48</span><span class="s1">)</span><span class="s0">;</span>
+
+                    <span class="s0">int </span><span class="s1">tt = ((</span><span class="s0">int</span><span class="s1">) bb.get(i).charAt(</span><span class="s2">1</span><span class="s1">) - </span><span class="s2">48</span><span class="s1">)</span><span class="s0">;</span>
+
+                    <span class="s0">int </span><span class="s1">k = t + tt</span><span class="s0">;</span>
+
+                    <span class="s0">int </span><span class="s1">ttt = </span><span class="s2">10 </span><span class="s1">* ((</span><span class="s0">int</span><span class="s1">) bb.get(i).charAt(</span><span class="s2">2</span><span class="s1">) - </span><span class="s2">48</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s0">int </span><span class="s1">tttt = ((</span><span class="s0">int</span><span class="s1">) bb.get(i).charAt(</span><span class="s2">3</span><span class="s1">) - </span><span class="s2">48</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s0">int </span><span class="s1">kk = ttt + tttt</span><span class="s0">;</span>
+
+                    <span class="s0">for </span><span class="s1">(Attacker.ATank tank : s1) {</span>
+
+                        <span class="s0">if </span><span class="s1">(tank.getX() == k &amp;&amp; tank.getY() == kk) {</span>
+
+                            <span class="s1">Tanks_health.add(tank)</span><span class="s0">;</span>
+                        <span class="s1">}</span>
+                    <span class="s1">}</span>
+
+                <span class="s1">}</span>
+
+            <span class="s1">}</span>
+
+        <span class="s1">}</span>
+        <span class="s0">return </span><span class="s1">Tanks_health</span><span class="s0">;</span>
+
+    <span class="s1">}</span>
+
+    <span class="s0">synchronized </span><span class="s1">Attacker.ATank check_Attack_Tanks_less_health(ArrayList&lt;Attacker.ATank&gt; k) {</span>
+
+        <span class="s0">if </span><span class="s1">(k.size() == </span><span class="s2">0</span><span class="s1">)</span>
+            <span class="s0">return null;</span>
+        <span class="s1">Attacker.ATank min = k.get(</span><span class="s2">0</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s0">for </span><span class="s1">(Attacker.ATank h : k) {</span>
+
+            <span class="s0">if </span><span class="s1">(min.getHealth() &gt;= h.getHealth()) {</span>
+
+                <span class="s1">min = h</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+        <span class="s0">return </span><span class="s1">min</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">synchronized </span><span class="s1">ArrayList&lt;Attacker.Ssolider&gt; check_Attack_s_solider(ArrayList&lt;String&gt; b</span><span class="s0">, </span><span class="s1">ArrayList&lt;String&gt; bb) {</span>
+        <span class="s0">if </span><span class="s1">(bb.size() == </span><span class="s2">0</span><span class="s1">)</span>
+            <span class="s0">return null;</span>
+        <span class="s1">ArrayList&lt;Attacker.Ssolider&gt; Ssolider_health = </span><span class="s0">new </span><span class="s1">ArrayList&lt;Attacker.Ssolider&gt;()</span><span class="s0">;</span>
+        <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">0</span><span class="s0">; </span><span class="s1">i &lt; b.size()</span><span class="s0">; </span><span class="s1">i++) {</span>
+            <span class="s0">if </span><span class="s1">(b.get(i) == </span><span class="s3">&quot;S&quot;</span><span class="s1">) {</span>
+
+                <span class="s0">if </span><span class="s1">(bb.get(i).length() == </span><span class="s2">2</span><span class="s1">) {</span>
+
+                    <span class="s0">int </span><span class="s1">t = bb.get(i).charAt(</span><span class="s2">0</span><span class="s1">) - </span><span class="s2">48</span><span class="s0">;</span>
+                    <span class="s0">int </span><span class="s1">tt = bb.get(i).charAt(</span><span class="s2">1</span><span class="s1">) - </span><span class="s2">48</span><span class="s0">;</span>
+                    <span class="s0">for </span><span class="s1">(Attacker.Ssolider solider : s2) {</span>
+                        <span class="s0">if </span><span class="s1">(solider.getX() == t &amp;&amp; solider.getY() == tt) {</span>
+                            <span class="s1">Ssolider_health.add(solider)</span><span class="s0">;</span>
+                        <span class="s1">}</span>
+                    <span class="s1">}</span>
+                <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+
+                    <span class="s0">int </span><span class="s1">t = </span><span class="s2">10 </span><span class="s1">* ((</span><span class="s0">int</span><span class="s1">) bb.get(i).charAt(</span><span class="s2">0</span><span class="s1">) - </span><span class="s2">48</span><span class="s1">)</span><span class="s0">;</span>
+
+                    <span class="s0">int </span><span class="s1">tt = ((</span><span class="s0">int</span><span class="s1">) bb.get(i).charAt(</span><span class="s2">1</span><span class="s1">) - </span><span class="s2">48</span><span class="s1">)</span><span class="s0">;</span>
+
+                    <span class="s0">int </span><span class="s1">k = t + tt</span><span class="s0">;</span>
+
+                    <span class="s0">int </span><span class="s1">ttt = </span><span class="s2">10 </span><span class="s1">* ((</span><span class="s0">int</span><span class="s1">) bb.get(i).charAt(</span><span class="s2">2</span><span class="s1">) - </span><span class="s2">48</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s0">int </span><span class="s1">tttt = ((</span><span class="s0">int</span><span class="s1">) bb.get(i).charAt(</span><span class="s2">3</span><span class="s1">) - </span><span class="s2">48</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s0">int </span><span class="s1">kk = ttt + tttt</span><span class="s0">;</span>
+
+                    <span class="s0">for </span><span class="s1">(Attacker.Ssolider solider : s2) {</span>
+
+                        <span class="s0">if </span><span class="s1">(solider.getX() == k &amp;&amp; solider.getY() == kk) {</span>
+
+                            <span class="s1">Ssolider_health.add(solider)</span><span class="s0">;</span>
+                        <span class="s1">}</span>
+                    <span class="s1">}</span>
+
+                <span class="s1">}</span>
+
+            <span class="s1">}</span>
+
+        <span class="s1">}</span>
+        <span class="s0">return </span><span class="s1">Ssolider_health</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">synchronized </span><span class="s1">Attacker.Ssolider check_Attack_Ssolider_less_health(ArrayList&lt;Attacker.Ssolider&gt; k) {</span>
+        <span class="s0">if </span><span class="s1">(k.size() == </span><span class="s2">0</span><span class="s1">)</span>
+            <span class="s0">return null;</span>
+        <span class="s1">Attacker.Ssolider min = k.get(</span><span class="s2">0</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s0">for </span><span class="s1">(Attacker.Ssolider h : k) {</span>
+            <span class="s0">if </span><span class="s1">(min.getHealth() &gt; h.getHealth())</span>
+                <span class="s1">min = h</span><span class="s0">;</span>
+        <span class="s1">}</span>
+        <span class="s0">return </span><span class="s1">min</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">synchronized </span><span class="s1">ArrayList&lt;Attacker.Rsolider&gt; check_Attack_r_solider(ArrayList&lt;String&gt; b</span><span class="s0">, </span><span class="s1">ArrayList&lt;String&gt; bb) {</span>
+        <span class="s0">if </span><span class="s1">(bb.size() == </span><span class="s2">0</span><span class="s1">)</span>
+            <span class="s0">return null;</span>
+        <span class="s1">ArrayList&lt;Attacker.Rsolider&gt; rsolider_health = </span><span class="s0">new </span><span class="s1">ArrayList&lt;Attacker.Rsolider&gt;()</span><span class="s0">;</span>
+        <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">0</span><span class="s0">; </span><span class="s1">i &lt; b.size()</span><span class="s0">; </span><span class="s1">i++) {</span>
+            <span class="s0">if </span><span class="s1">(b.get(i) == </span><span class="s3">&quot;R&quot;</span><span class="s1">) {</span>
+
+                <span class="s0">if </span><span class="s1">(bb.get(i).length() == </span><span class="s2">2</span><span class="s1">) {</span>
+
+                    <span class="s0">int </span><span class="s1">t = bb.get(i).charAt(</span><span class="s2">0</span><span class="s1">) - </span><span class="s2">48</span><span class="s0">;</span>
+                    <span class="s0">int </span><span class="s1">tt = bb.get(i).charAt(</span><span class="s2">1</span><span class="s1">) - </span><span class="s2">48</span><span class="s0">;</span>
+                    <span class="s0">for </span><span class="s1">(Attacker.Rsolider solider : s3) {</span>
+                        <span class="s0">if </span><span class="s1">(solider.getX() == t &amp;&amp; solider.getY() == tt) {</span>
+                            <span class="s1">rsolider_health.add(solider)</span><span class="s0">;</span>
+                        <span class="s1">}</span>
+                    <span class="s1">}</span>
+                <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+
+                    <span class="s0">int </span><span class="s1">t = </span><span class="s2">10 </span><span class="s1">* ((</span><span class="s0">int</span><span class="s1">) bb.get(i).charAt(</span><span class="s2">0</span><span class="s1">) - </span><span class="s2">48</span><span class="s1">)</span><span class="s0">;</span>
+
+                    <span class="s0">int </span><span class="s1">tt = ((</span><span class="s0">int</span><span class="s1">) bb.get(i).charAt(</span><span class="s2">1</span><span class="s1">) - </span><span class="s2">48</span><span class="s1">)</span><span class="s0">;</span>
+
+                    <span class="s0">int </span><span class="s1">k = t + tt</span><span class="s0">;</span>
+
+                    <span class="s0">int </span><span class="s1">ttt = </span><span class="s2">10 </span><span class="s1">* ((</span><span class="s0">int</span><span class="s1">) bb.get(i).charAt(</span><span class="s2">2</span><span class="s1">) - </span><span class="s2">48</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s0">int </span><span class="s1">tttt = ((</span><span class="s0">int</span><span class="s1">) bb.get(i).charAt(</span><span class="s2">3</span><span class="s1">) - </span><span class="s2">48</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s0">int </span><span class="s1">kk = ttt + tttt</span><span class="s0">;</span>
+
+                    <span class="s0">for </span><span class="s1">(Attacker.Rsolider solider : s3) {</span>
+
+                        <span class="s0">if </span><span class="s1">(solider.getX() == k &amp;&amp; solider.getY() == kk) {</span>
+
+                            <span class="s1">rsolider_health.add(solider)</span><span class="s0">;</span>
+                        <span class="s1">}</span>
+                    <span class="s1">}</span>
+
+                <span class="s1">}</span>
+
+            <span class="s1">}</span>
+
+        <span class="s1">}</span>
+        <span class="s0">return </span><span class="s1">rsolider_health</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">synchronized </span><span class="s1">Attacker.Rsolider check_Attack_Rsolider_less_health(ArrayList&lt;Attacker.Rsolider&gt; k) {</span>
+        <span class="s0">if </span><span class="s1">(k.size() == </span><span class="s2">0</span><span class="s1">)</span>
+            <span class="s0">return null;</span>
+        <span class="s1">Attacker.Rsolider min = k.get(</span><span class="s2">0</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s0">for </span><span class="s1">(Attacker.Rsolider h : k) {</span>
+            <span class="s0">if </span><span class="s1">(min.getHealth() &gt; h.getHealth())</span>
+                <span class="s1">min = h</span><span class="s0">;</span>
+        <span class="s1">}</span>
+        <span class="s0">return </span><span class="s1">min</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">synchronized void </span><span class="s1">check_Attack_Bridge(ArrayList&lt;String&gt; b</span><span class="s0">, </span><span class="s1">ArrayList&lt;String&gt; bb) {</span>
+
+        <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">0</span><span class="s0">; </span><span class="s1">i &lt; b.size()</span><span class="s0">; </span><span class="s1">i++) {</span>
+            <span class="s0">if </span><span class="s1">(b.get(i).equals(</span><span class="s3">&quot;/&quot;</span><span class="s1">)) {</span>
+
+                <span class="s0">if </span><span class="s1">(bb.get(i).length() == </span><span class="s2">2</span><span class="s1">) {</span>
+
+                    <span class="s0">int </span><span class="s1">t = bb.get(i).charAt(</span><span class="s2">0</span><span class="s1">) - </span><span class="s2">48</span><span class="s0">;</span>
+                    <span class="s0">int </span><span class="s1">tt = bb.get(i).charAt(</span><span class="s2">1</span><span class="s1">) - </span><span class="s2">48</span><span class="s0">;</span>
+                    <span class="s1">Game.arena.setArena(t</span><span class="s0">, </span><span class="s1">tt</span><span class="s0">, </span><span class="s3">&quot;Z&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+
+                    <span class="s0">int </span><span class="s1">t = </span><span class="s2">10 </span><span class="s1">* ((</span><span class="s0">int</span><span class="s1">) bb.get(i).charAt(</span><span class="s2">0</span><span class="s1">) - </span><span class="s2">48</span><span class="s1">)</span><span class="s0">;</span>
+
+                    <span class="s0">int </span><span class="s1">tt = ((</span><span class="s0">int</span><span class="s1">) bb.get(i).charAt(</span><span class="s2">1</span><span class="s1">) - </span><span class="s2">48</span><span class="s1">)</span><span class="s0">;</span>
+
+                    <span class="s0">int </span><span class="s1">k = t + tt</span><span class="s0">;</span>
+
+                    <span class="s0">int </span><span class="s1">ttt = </span><span class="s2">10 </span><span class="s1">* ((</span><span class="s0">int</span><span class="s1">) bb.get(i).charAt(</span><span class="s2">2</span><span class="s1">) - </span><span class="s2">48</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s0">int </span><span class="s1">tttt = ((</span><span class="s0">int</span><span class="s1">) bb.get(i).charAt(</span><span class="s2">3</span><span class="s1">) - </span><span class="s2">48</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s0">int </span><span class="s1">kk = ttt + tttt</span><span class="s0">;</span>
+                    <span class="s1">Game.arena.setArena(k</span><span class="s0">, </span><span class="s1">kk</span><span class="s0">, </span><span class="s3">&quot;Z&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+
+                <span class="s1">}</span>
+
+            <span class="s1">}</span>
+
+        <span class="s1">}</span>
+        <span class="s0">return;</span>
+
+    <span class="s1">}</span>
+
+    <span class="s0">synchronized </span><span class="s1">ArrayList&lt;Attacker.Bomb&gt; check_Attack_r_Bomb(ArrayList&lt;String&gt; b</span><span class="s0">, </span><span class="s1">ArrayList&lt;String&gt; bb) {</span>
+        <span class="s0">if </span><span class="s1">(bb.size() == </span><span class="s2">0</span><span class="s1">)</span>
+            <span class="s0">return null;</span>
+        <span class="s1">ArrayList&lt;Attacker.Bomb&gt; Bomb_health = </span><span class="s0">new </span><span class="s1">ArrayList&lt;Attacker.Bomb&gt;()</span><span class="s0">;</span>
+        <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">0</span><span class="s0">; </span><span class="s1">i &lt; b.size()</span><span class="s0">; </span><span class="s1">i++) {</span>
+            <span class="s0">if </span><span class="s1">(b.get(i).equals(</span><span class="s3">&quot;B&quot;</span><span class="s1">)) {</span>
+
+                <span class="s0">if </span><span class="s1">(bb.get(i).length() == </span><span class="s2">2</span><span class="s1">) {</span>
+
+                    <span class="s0">int </span><span class="s1">t = bb.get(i).charAt(</span><span class="s2">0</span><span class="s1">) - </span><span class="s2">48</span><span class="s0">;</span>
+                    <span class="s0">int </span><span class="s1">tt = bb.get(i).charAt(</span><span class="s2">1</span><span class="s1">) - </span><span class="s2">48</span><span class="s0">;</span>
+                    <span class="s0">for </span><span class="s1">(Attacker.Bomb Bom : s8) {</span>
+                        <span class="s0">if </span><span class="s1">(Bom.getX() == t &amp;&amp; Bom.getY() == tt) {</span>
+                            <span class="s1">Bomb_health.add(Bom)</span><span class="s0">;</span>
+                        <span class="s1">}</span>
+                    <span class="s1">}</span>
+                <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+
+                    <span class="s0">int </span><span class="s1">t = </span><span class="s2">10 </span><span class="s1">* ((</span><span class="s0">int</span><span class="s1">) bb.get(i).charAt(</span><span class="s2">0</span><span class="s1">) - </span><span class="s2">48</span><span class="s1">)</span><span class="s0">;</span>
+
+                    <span class="s0">int </span><span class="s1">tt = ((</span><span class="s0">int</span><span class="s1">) bb.get(i).charAt(</span><span class="s2">1</span><span class="s1">) - </span><span class="s2">48</span><span class="s1">)</span><span class="s0">;</span>
+
+                    <span class="s0">int </span><span class="s1">k = t + tt</span><span class="s0">;</span>
+
+                    <span class="s0">int </span><span class="s1">ttt = </span><span class="s2">10 </span><span class="s1">* ((</span><span class="s0">int</span><span class="s1">) bb.get(i).charAt(</span><span class="s2">2</span><span class="s1">) - </span><span class="s2">48</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s0">int </span><span class="s1">tttt = ((</span><span class="s0">int</span><span class="s1">) bb.get(i).charAt(</span><span class="s2">3</span><span class="s1">) - </span><span class="s2">48</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s0">int </span><span class="s1">kk = ttt + tttt</span><span class="s0">;</span>
+
+                    <span class="s0">for </span><span class="s1">(Attacker.Bomb Bom : s8) {</span>
+
+                        <span class="s0">if </span><span class="s1">(Bom.getX() == k &amp;&amp; Bom.getY() == kk) {</span>
+
+                            <span class="s1">Bomb_health.add(Bom)</span><span class="s0">;</span>
+                        <span class="s1">}</span>
+                    <span class="s1">}</span>
+
+                <span class="s1">}</span>
+
+            <span class="s1">}</span>
+
+        <span class="s1">}</span>
+        <span class="s0">return </span><span class="s1">Bomb_health</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">synchronized </span><span class="s1">Attacker.Bomb check_Attack_Bomb_less_health(ArrayList&lt;Attacker.Bomb&gt; k) {</span>
+        <span class="s0">if </span><span class="s1">(k.size() == </span><span class="s2">0</span><span class="s1">)</span>
+            <span class="s0">return null;</span>
+        <span class="s1">Attacker.Bomb min = k.get(</span><span class="s2">0</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s0">for </span><span class="s1">(Attacker.Bomb h : k) {</span>
+            <span class="s0">if </span><span class="s1">(min.getHealth() &gt; h.getHealth())</span>
+                <span class="s1">min = h</span><span class="s0">;</span>
+        <span class="s1">}</span>
+        <span class="s0">return </span><span class="s1">min</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">synchronized </span><span class="s1">ArrayList&lt;Attacker.air_Plane&gt; check_Attack_air_plane(ArrayList&lt;String&gt; b</span><span class="s0">, </span><span class="s1">ArrayList&lt;String&gt; bb) {</span>
+        <span class="s0">if </span><span class="s1">(bb.size() == </span><span class="s2">0</span><span class="s1">)</span>
+            <span class="s0">return null;</span>
+        <span class="s1">ArrayList&lt;Attacker.air_Plane&gt; air_health = </span><span class="s0">new </span><span class="s1">ArrayList&lt;Attacker.air_Plane&gt;()</span><span class="s0">;</span>
+        <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">0</span><span class="s0">; </span><span class="s1">i &lt; b.size()</span><span class="s0">; </span><span class="s1">i++) {</span>
+            <span class="s0">if </span><span class="s1">(b.get(i).equals(</span><span class="s3">&quot;@&quot;</span><span class="s1">) || b.get(i).equals(</span><span class="s3">&quot;1&quot;</span><span class="s1">) || b.get(i).equals(</span><span class="s3">&quot;2&quot;</span><span class="s1">) || b.get(i) == </span><span class="s3">&quot;3&quot; </span><span class="s1">|| b.get(i) == </span><span class="s3">&quot;4&quot; </span><span class="s1">|| b.get(i) == </span><span class="s3">&quot;5&quot; </span><span class="s1">|| b.get(i) == </span><span class="s3">&quot;6&quot; </span><span class="s1">|| b.get(i) == </span><span class="s3">&quot;7&quot; </span><span class="s1">|| b.get(i) == </span><span class="s3">&quot;8&quot; </span><span class="s1">|| b.get(i) == </span><span class="s3">&quot;9&quot; </span><span class="s1">|| b.get(i) == </span><span class="s3">&quot;10&quot;</span><span class="s1">) {</span>
+
+                <span class="s0">if </span><span class="s1">(bb.get(i).length() == </span><span class="s2">2</span><span class="s1">) {</span>
+
+                    <span class="s0">int </span><span class="s1">t = bb.get(i).charAt(</span><span class="s2">0</span><span class="s1">) - </span><span class="s2">48</span><span class="s0">;</span>
+                    <span class="s0">int </span><span class="s1">tt = bb.get(i).charAt(</span><span class="s2">1</span><span class="s1">) - </span><span class="s2">48</span><span class="s0">;</span>
+                    <span class="s0">for </span><span class="s1">(Attacker.air_Plane air : s7) {</span>
+                        <span class="s0">if </span><span class="s1">(air.getX() == t &amp;&amp; air.getY() == tt) {</span>
+                            <span class="s1">air_health.add(air)</span><span class="s0">;</span>
+                        <span class="s1">}</span>
+                    <span class="s1">}</span>
+                <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+
+                    <span class="s0">int </span><span class="s1">t = </span><span class="s2">10 </span><span class="s1">* ((</span><span class="s0">int</span><span class="s1">) bb.get(i).charAt(</span><span class="s2">0</span><span class="s1">) - </span><span class="s2">48</span><span class="s1">)</span><span class="s0">;</span>
+
+                    <span class="s0">int </span><span class="s1">tt = ((</span><span class="s0">int</span><span class="s1">) bb.get(i).charAt(</span><span class="s2">1</span><span class="s1">) - </span><span class="s2">48</span><span class="s1">)</span><span class="s0">;</span>
+
+                    <span class="s0">int </span><span class="s1">k = t + tt</span><span class="s0">;</span>
+
+                    <span class="s0">int </span><span class="s1">ttt = </span><span class="s2">10 </span><span class="s1">* ((</span><span class="s0">int</span><span class="s1">) bb.get(i).charAt(</span><span class="s2">2</span><span class="s1">) - </span><span class="s2">48</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s0">int </span><span class="s1">tttt = ((</span><span class="s0">int</span><span class="s1">) bb.get(i).charAt(</span><span class="s2">3</span><span class="s1">) - </span><span class="s2">48</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s0">int </span><span class="s1">kk = ttt + tttt</span><span class="s0">;</span>
+
+                    <span class="s0">for </span><span class="s1">(Attacker.air_Plane air : s7) {</span>
+
+                        <span class="s0">if </span><span class="s1">(air.getX() == k &amp;&amp; air.getY() == kk) {</span>
+
+                            <span class="s1">air_health.add(air)</span><span class="s0">;</span>
+                        <span class="s1">}</span>
+                    <span class="s1">}</span>
+
+                <span class="s1">}</span>
+
+            <span class="s1">}</span>
+
+        <span class="s1">}</span>
+        <span class="s0">return </span><span class="s1">air_health</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s5">//تابع أولوية</span>
+    <span class="s0">synchronized </span><span class="s1">Attacker.air_Plane heck_Attack_air_Plane_less_health(ArrayList&lt;Attacker.air_Plane&gt; k) {</span>
+        <span class="s0">if </span><span class="s1">(k.size() == </span><span class="s2">0</span><span class="s1">) {</span>
+            <span class="s0">return null;</span>
+        <span class="s1">}</span>
+        <span class="s1">Attacker.air_Plane min = k.get(</span><span class="s2">0</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s0">for </span><span class="s1">(Attacker.air_Plane h : k) {</span>
+            <span class="s0">if </span><span class="s1">(min.getHealth() &gt; h.getHealth())</span>
+                <span class="s1">min = h</span><span class="s0">;</span>
+        <span class="s1">}</span>
+        <span class="s0">return </span><span class="s1">min</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s4">/****************************************************************************************************************/</span>
+
+    <span class="s0">public class </span><span class="s1">Canon </span><span class="s0">implements </span><span class="s1">Runnable {</span>
+        <span class="s0">int </span><span class="s1">x</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">y</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">Health = </span><span class="s2">100</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">armor = </span><span class="s2">1</span><span class="s0">;</span>
+        <span class="s0">final int </span><span class="s1">damage = </span><span class="s2">50</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">num_Devender</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">num_Canon</span><span class="s0">;</span>
+
+        <span class="s0">public int </span><span class="s1">getArmor() {</span>
+            <span class="s0">return </span><span class="s1">armor</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">public </span><span class="s1">Canon(</span><span class="s0">int </span><span class="s1">f</span><span class="s0">, int </span><span class="s1">num_Devender</span><span class="s0">, int </span><span class="s1">num_Canon) {</span>
+            <span class="s0">if </span><span class="s1">(MoneyD - </span><span class="s2">200 </span><span class="s1">&lt; </span><span class="s2">0</span><span class="s1">) {</span>
+                <span class="s1">System.out.println(</span><span class="s3">&quot;your money isn't enogh&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">System.gc()</span><span class="s0">;</span>
+                <span class="s0">return;</span>
+            <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+                <span class="s1">MoneyD -= </span><span class="s2">200</span><span class="s0">;</span>
+                <span class="s0">try </span><span class="s1">{</span>
+                    <span class="s1">File myObj = </span><span class="s0">new </span><span class="s1">File(</span><span class="s3">&quot;Canon.txt&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">Scanner myReader = </span><span class="s0">new </span><span class="s1">Scanner(myObj)</span><span class="s0">;</span>
+
+                    <span class="s0">while </span><span class="s1">(myReader.hasNextInt()) {</span>
+
+                        <span class="s1">canonlist.add(myReader.nextInt())</span><span class="s0">;</span>
+
+
+                    <span class="s1">}</span>
+
+
+                    <span class="s1">myReader.close()</span><span class="s0">;</span>
+                <span class="s1">} </span><span class="s0">catch </span><span class="s1">(IOException e) {</span>
+                    <span class="s1">System.out.println(</span><span class="s3">&quot;An error occurred.&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">e.printStackTrace()</span><span class="s0">;</span>
+                <span class="s1">}</span>
+                <span class="s0">this</span><span class="s1">.x = canonlist.get(f)</span><span class="s0">;</span>
+
+                <span class="s0">this</span><span class="s1">.y = canonlist.get(++f)</span><span class="s0">;</span>
+
+                <span class="s1">arena.setArena(</span><span class="s0">this</span><span class="s1">.x</span><span class="s0">, this</span><span class="s1">.y</span><span class="s0">, </span><span class="s3">&quot;&amp;&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+
+                <span class="s1">s4.add(</span><span class="s0">this</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s0">this</span><span class="s1">.num_Devender = num_Devender</span><span class="s0">;</span>
+                <span class="s0">this</span><span class="s1">.num_Canon = num_Canon</span><span class="s0">;</span>
+                <span class="s1">canonlist.clear()</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+
+        <span class="s0">public int </span><span class="s1">getX() {</span>
+            <span class="s0">return </span><span class="s1">x</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+
+        <span class="s0">public int </span><span class="s1">getY() {</span>
+            <span class="s0">return </span><span class="s1">y</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+
+        <span class="s0">public int </span><span class="s1">getHealth() {</span>
+            <span class="s0">return </span><span class="s1">Health</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">public void </span><span class="s1">setHealth(</span><span class="s0">int </span><span class="s1">health) {</span>
+            <span class="s1">Health = health</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">public int </span><span class="s1">getDamage() {</span>
+            <span class="s0">return </span><span class="s1">damage</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">void </span><span class="s1">set_canon_in_arena() {</span>
+
+            <span class="s1">Game.arena.setArena(</span><span class="s0">this</span><span class="s1">.x</span><span class="s0">, this</span><span class="s1">.y</span><span class="s0">, </span><span class="s3">&quot;&amp;&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+
+        <span class="s0">void </span><span class="s1">Attack_Range_canon(</span><span class="s0">int </span><span class="s1">random) {</span>
+            <span class="s0">if </span><span class="s1">(</span><span class="s0">this</span><span class="s1">.getHealth() &lt;= </span><span class="s2">0</span><span class="s1">)</span>
+                <span class="s0">return;</span>
+            <span class="s1">String info = </span><span class="s3">&quot;&quot;</span><span class="s0">;</span>
+            <span class="s1">Range_List List = Defender.Range(</span><span class="s0">this</span><span class="s1">.x</span><span class="s0">, this</span><span class="s1">.y</span><span class="s0">, </span><span class="s2">2</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">info += </span><span class="s3">&quot;Cannon in ( &quot; </span><span class="s1">+ Integer.toString(</span><span class="s0">this</span><span class="s1">.x) + </span><span class="s3">&quot;, &quot; </span><span class="s1">+ Integer.toString(</span><span class="s0">this</span><span class="s1">.y) + </span><span class="s3">&quot;) and Health: &quot; </span><span class="s1">+ Integer.toString(</span><span class="s0">this</span><span class="s1">.getHealth())</span><span class="s0">;</span>
+            <span class="s0">if </span><span class="s1">(List.getAnimes().size() == </span><span class="s2">0 </span><span class="s1">|| List.getPosition().size() == </span><span class="s2">0</span><span class="s1">) {</span>
+                <span class="s1">Write_log_file(Game.arena.file_name_Cannon(num_Devender</span><span class="s0">, </span><span class="s1">num_Canon)</span><span class="s0">, </span><span class="s1">info)</span><span class="s0">;</span>
+                <span class="s0">return;</span>
+            <span class="s1">}</span>
+            <span class="s0">if </span><span class="s1">(List.getAnimes().contains(</span><span class="s3">&quot;/&quot;</span><span class="s1">)) {</span>
+                <span class="s1">info += </span><span class="s3">&quot; and attack Bridge &quot;</span><span class="s0">;</span>
+                <span class="s1">Write_log_file(Game.arena.file_name_Cannon(</span><span class="s0">this</span><span class="s1">.num_Devender</span><span class="s0">, this</span><span class="s1">.num_Canon)</span><span class="s0">, </span><span class="s1">info)</span><span class="s0">;</span>
+                <span class="s1">check_Attack_Bridge(List.getAnimes()</span><span class="s0">, </span><span class="s1">List.getPosition())</span><span class="s0">;</span>
+                <span class="s0">return;</span>
+            <span class="s1">}</span>
+            <span class="s1">ArrayList&lt;Attacker.ATank&gt; check = check_Attack_Tanks(List.getAnimes()</span><span class="s0">, </span><span class="s1">List.getPosition())</span><span class="s0">;</span>
+            <span class="s1">ArrayList&lt;Attacker.Rsolider&gt; check1 = check_Attack_r_solider(List.getAnimes()</span><span class="s0">, </span><span class="s1">List.getPosition())</span><span class="s0">;</span>
+            <span class="s1">ArrayList&lt;Attacker.Ssolider&gt; check2 = check_Attack_s_solider(List.getAnimes()</span><span class="s0">, </span><span class="s1">List.getPosition())</span><span class="s0">;</span>
+            <span class="s1">ArrayList&lt;Attacker.Bomb&gt; check4 = check_Attack_r_Bomb(List.getAnimes()</span><span class="s0">, </span><span class="s1">List.getPosition())</span><span class="s0">;</span>
+            <span class="s0">if </span><span class="s1">(random == </span><span class="s2">1</span><span class="s1">) {</span>
+                <span class="s1">Attacker.ATank kk = check.get(</span><span class="s2">0</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">Attacker.Rsolider jj = check1.get(</span><span class="s2">0</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">Attacker.Ssolider ll = check2.get(</span><span class="s2">0</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">Attacker.Bomb mm = check4.get(</span><span class="s2">0</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s0">if </span><span class="s1">(mm != </span><span class="s0">null</span><span class="s1">) {</span>
+                    <span class="s1">info += Set_Damage_Bomb(mm</span><span class="s0">, </span><span class="s1">Player.s8</span><span class="s0">, </span><span class="s1">info</span><span class="s0">, this</span><span class="s1">.damage)</span><span class="s0">;</span>
+                    <span class="s1">Write_log_file(Game.arena.file_name_Cannon(</span><span class="s0">this</span><span class="s1">.num_Devender</span><span class="s0">, this</span><span class="s1">.num_Canon)</span><span class="s0">, </span><span class="s1">info)</span><span class="s0">;</span>
+                    <span class="s0">return;</span>
+                <span class="s1">} </span><span class="s0">else if </span><span class="s1">(kk != </span><span class="s0">null</span><span class="s1">) {</span>
+                    <span class="s1">info += Set_Damage_Atank(kk</span><span class="s0">, </span><span class="s1">Player.s1</span><span class="s0">, </span><span class="s1">info</span><span class="s0">, this</span><span class="s1">.damage)</span><span class="s0">;</span>
+                    <span class="s1">Write_log_file(Game.arena.file_name_Cannon(</span><span class="s0">this</span><span class="s1">.num_Devender</span><span class="s0">, this</span><span class="s1">.num_Canon)</span><span class="s0">, </span><span class="s1">info)</span><span class="s0">;</span>
+                    <span class="s0">return;</span>
+
+                <span class="s1">} </span><span class="s0">else if </span><span class="s1">(jj != </span><span class="s0">null</span><span class="s1">) {</span>
+                    <span class="s1">info += Set_Damage_Rsolider(jj</span><span class="s0">, </span><span class="s1">Player.s3</span><span class="s0">, </span><span class="s1">info</span><span class="s0">, this</span><span class="s1">.damage)</span><span class="s0">;</span>
+                    <span class="s1">Write_log_file(Game.arena.file_name_Cannon(</span><span class="s0">this</span><span class="s1">.num_Devender</span><span class="s0">, this</span><span class="s1">.num_Canon)</span><span class="s0">, </span><span class="s1">info)</span><span class="s0">;</span>
+                    <span class="s0">return;</span>
+                <span class="s1">} </span><span class="s0">else if </span><span class="s1">(ll != </span><span class="s0">null</span><span class="s1">) {</span>
+
+                    <span class="s1">info += Set_Damage_Solider(ll</span><span class="s0">, </span><span class="s1">Player.s2</span><span class="s0">, </span><span class="s1">info</span><span class="s0">, this</span><span class="s1">.damage)</span><span class="s0">;</span>
+                    <span class="s1">Write_log_file(Game.arena.file_name_Cannon(</span><span class="s0">this</span><span class="s1">.num_Devender</span><span class="s0">, this</span><span class="s1">.num_Canon)</span><span class="s0">, </span><span class="s1">info)</span><span class="s0">;</span>
+                    <span class="s0">return;</span>
+                <span class="s1">}</span>
+            <span class="s1">} </span><span class="s0">else if </span><span class="s1">(random == </span><span class="s2">0</span><span class="s1">) {</span>
+                <span class="s1">Attacker.ATank kk = check_Attack_Tanks_less_health(check)</span><span class="s0">;</span>
+                <span class="s1">Attacker.Rsolider jj = check_Attack_Rsolider_less_health(check1)</span><span class="s0">;</span>
+                <span class="s1">Attacker.Ssolider ll = check_Attack_Ssolider_less_health(check2)</span><span class="s0">;</span>
+                <span class="s1">Attacker.Bomb mm = check_Attack_Bomb_less_health(check4)</span><span class="s0">;</span>
+                <span class="s0">if </span><span class="s1">(mm != </span><span class="s0">null</span><span class="s1">) {</span>
+                    <span class="s1">info += Set_Damage_Bomb(mm</span><span class="s0">, </span><span class="s1">Player.s8</span><span class="s0">, </span><span class="s1">info</span><span class="s0">, this</span><span class="s1">.damage)</span><span class="s0">;</span>
+                    <span class="s1">Write_log_file(Game.arena.file_name_Cannon(</span><span class="s0">this</span><span class="s1">.num_Devender</span><span class="s0">, this</span><span class="s1">.num_Canon)</span><span class="s0">, </span><span class="s1">info)</span><span class="s0">;</span>
+                    <span class="s0">return;</span>
+                <span class="s1">} </span><span class="s0">else if </span><span class="s1">(kk != </span><span class="s0">null</span><span class="s1">) {</span>
+                    <span class="s1">info += Set_Damage_Atank(kk</span><span class="s0">, </span><span class="s1">Player.s1</span><span class="s0">, </span><span class="s1">info</span><span class="s0">, this</span><span class="s1">.damage)</span><span class="s0">;</span>
+                    <span class="s1">Write_log_file(Game.arena.file_name_Cannon(</span><span class="s0">this</span><span class="s1">.num_Devender</span><span class="s0">, this</span><span class="s1">.num_Canon)</span><span class="s0">, </span><span class="s1">info)</span><span class="s0">;</span>
+                    <span class="s0">return;</span>
+
+                <span class="s1">} </span><span class="s0">else if </span><span class="s1">(jj != </span><span class="s0">null</span><span class="s1">) {</span>
+                    <span class="s1">info += Set_Damage_Rsolider(jj</span><span class="s0">, </span><span class="s1">Player.s3</span><span class="s0">, </span><span class="s1">info</span><span class="s0">, this</span><span class="s1">.damage)</span><span class="s0">;</span>
+                    <span class="s1">Write_log_file(Game.arena.file_name_Cannon(</span><span class="s0">this</span><span class="s1">.num_Devender</span><span class="s0">, this</span><span class="s1">.num_Canon)</span><span class="s0">, </span><span class="s1">info)</span><span class="s0">;</span>
+                    <span class="s0">return;</span>
+                <span class="s1">} </span><span class="s0">else if </span><span class="s1">(ll != </span><span class="s0">null</span><span class="s1">) {</span>
+                    <span class="s1">info += Set_Damage_Solider(ll</span><span class="s0">, </span><span class="s1">Player.s2</span><span class="s0">, </span><span class="s1">info</span><span class="s0">, this</span><span class="s1">.damage)</span><span class="s0">;</span>
+                    <span class="s1">Write_log_file(Game.arena.file_name_Cannon(</span><span class="s0">this</span><span class="s1">.num_Devender</span><span class="s0">, this</span><span class="s1">.num_Canon)</span><span class="s0">, </span><span class="s1">info)</span><span class="s0">;</span>
+                    <span class="s0">return;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+
+        <span class="s1">}</span>
+
+
+        <span class="s1">@Override</span>
+        <span class="s0">public void </span><span class="s1">run() {</span>
+            <span class="s0">while </span><span class="s1">(Game.endGame() == Game_state.Running) {</span>
+                <span class="s0">this</span><span class="s1">.Attack_Range_canon(</span><span class="s2">0</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s5">//   Game.Sleep_Unit(0.05);</span>
+                <span class="s0">try </span><span class="s1">{</span>
+                    <span class="s1">Thread.sleep(</span><span class="s2">500</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">} </span><span class="s0">catch </span><span class="s1">(InterruptedException e) {</span>
+                    <span class="s1">e.printStackTrace()</span><span class="s0">;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+            <span class="s1">Thread.currentThread().stop()</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+
+    <span class="s0">public class </span><span class="s1">Tower </span><span class="s0">implements </span><span class="s1">Runnable {</span>
+        <span class="s0">int </span><span class="s1">x</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">y</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">Health = </span><span class="s2">100</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">armor = </span><span class="s2">1</span><span class="s0">;</span>
+        <span class="s0">final int </span><span class="s1">damage = </span><span class="s2">35</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">num_Devender</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">num_Twoer</span><span class="s0">;</span>
+
+        <span class="s0">public int </span><span class="s1">getArmor() {</span>
+            <span class="s0">return </span><span class="s1">armor</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">public </span><span class="s1">Tower(</span><span class="s0">int </span><span class="s1">f</span><span class="s0">, int </span><span class="s1">num_Devender</span><span class="s0">, int </span><span class="s1">num_Twoer) {</span>
+            <span class="s0">if </span><span class="s1">(MoneyD - </span><span class="s2">150 </span><span class="s1">&lt; </span><span class="s2">0</span><span class="s1">) {</span>
+                <span class="s1">System.out.println(</span><span class="s3">&quot;your money isn't enogh&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">System.gc()</span><span class="s0">;</span>
+                <span class="s0">return;</span>
+            <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+                <span class="s1">MoneyD -= </span><span class="s2">150</span><span class="s0">;</span>
+                <span class="s0">try </span><span class="s1">{</span>
+                    <span class="s1">File myObj = </span><span class="s0">new </span><span class="s1">File(</span><span class="s3">&quot;Tower.txt&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">Scanner myReader = </span><span class="s0">new </span><span class="s1">Scanner(myObj)</span><span class="s0">;</span>
+
+                    <span class="s0">while </span><span class="s1">(myReader.hasNextInt()) {</span>
+
+                        <span class="s1">towerlist.add(myReader.nextInt())</span><span class="s0">;</span>
+
+
+                    <span class="s1">}</span>
+
+
+                    <span class="s1">myReader.close()</span><span class="s0">;</span>
+                <span class="s1">} </span><span class="s0">catch </span><span class="s1">(IOException e) {</span>
+                    <span class="s1">System.out.println(</span><span class="s3">&quot;An error occurred.&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">e.printStackTrace()</span><span class="s0">;</span>
+                <span class="s1">}</span>
+                <span class="s0">this</span><span class="s1">.x = towerlist.get(f)</span><span class="s0">;</span>
+
+                <span class="s0">this</span><span class="s1">.y = towerlist.get(++f)</span><span class="s0">;</span>
+
+                <span class="s1">arena.setArena(</span><span class="s0">this</span><span class="s1">.x</span><span class="s0">, this</span><span class="s1">.y</span><span class="s0">, </span><span class="s3">&quot;$&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s0">this</span><span class="s1">.num_Devender = num_Devender</span><span class="s0">;</span>
+                <span class="s0">this</span><span class="s1">.num_Twoer = num_Twoer</span><span class="s0">;</span>
+
+                <span class="s1">s5.add(</span><span class="s0">this</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">towerlist.clear()</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+
+        <span class="s0">public int </span><span class="s1">getX() {</span>
+            <span class="s0">return </span><span class="s1">x</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+
+        <span class="s0">public int </span><span class="s1">getY() {</span>
+            <span class="s0">return </span><span class="s1">y</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+
+        <span class="s0">public int </span><span class="s1">getHealth() {</span>
+            <span class="s0">return </span><span class="s1">Health</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">public void </span><span class="s1">setHealth(</span><span class="s0">int </span><span class="s1">health) {</span>
+            <span class="s1">Health = health</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">public int </span><span class="s1">getDamage() {</span>
+            <span class="s0">return </span><span class="s1">damage</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">void </span><span class="s1">set_tower_in_arena() {</span>
+
+            <span class="s1">Game.arena.setArena(</span><span class="s0">this</span><span class="s1">.x</span><span class="s0">, this</span><span class="s1">.y</span><span class="s0">, </span><span class="s3">&quot;$&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+
+        <span class="s0">void </span><span class="s1">Attack_Range_tower(</span><span class="s0">int </span><span class="s1">random) {</span>
+            <span class="s0">if </span><span class="s1">(</span><span class="s0">this</span><span class="s1">.getHealth() &lt;= </span><span class="s2">0</span><span class="s1">)</span>
+                <span class="s0">return;</span>
+            <span class="s1">String info = </span><span class="s3">&quot;&quot;</span><span class="s0">;</span>
+            <span class="s1">Range_List List = Defender.Range(</span><span class="s0">this</span><span class="s1">.x</span><span class="s0">, this</span><span class="s1">.y</span><span class="s0">, </span><span class="s2">2</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">info += </span><span class="s3">&quot;Tower in ( &quot; </span><span class="s1">+ Integer.toString(</span><span class="s0">this</span><span class="s1">.x) + </span><span class="s3">&quot;, &quot; </span><span class="s1">+ Integer.toString(</span><span class="s0">this</span><span class="s1">.y) + </span><span class="s3">&quot;) and Health: &quot; </span><span class="s1">+ Integer.toString(</span><span class="s0">this</span><span class="s1">.getHealth())</span><span class="s0">;</span>
+            <span class="s0">if </span><span class="s1">(List.getAnimes().size() == </span><span class="s2">0 </span><span class="s1">|| List.getPosition().size() == </span><span class="s2">0</span><span class="s1">) {</span>
+                <span class="s1">Write_log_file(Game.arena.file_name_Tower(</span><span class="s0">this</span><span class="s1">.num_Devender</span><span class="s0">, this</span><span class="s1">.num_Twoer)</span><span class="s0">, </span><span class="s1">info)</span><span class="s0">;</span>
+                <span class="s0">return;</span>
+            <span class="s1">}</span>
+            <span class="s1">ArrayList&lt;Attacker.ATank&gt; check = check_Attack_Tanks(List.getAnimes()</span><span class="s0">, </span><span class="s1">List.getPosition())</span><span class="s0">;</span>
+            <span class="s1">ArrayList&lt;Attacker.Rsolider&gt; check1 = check_Attack_r_solider(List.getAnimes()</span><span class="s0">, </span><span class="s1">List.getPosition())</span><span class="s0">;</span>
+            <span class="s1">ArrayList&lt;Attacker.Ssolider&gt; check2 = check_Attack_s_solider(List.getAnimes()</span><span class="s0">, </span><span class="s1">List.getPosition())</span><span class="s0">;</span>
+
+            <span class="s0">if </span><span class="s1">(random == </span><span class="s2">1</span><span class="s1">) {</span>
+                <span class="s1">Attacker.ATank kk = check.get(</span><span class="s2">0</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">Attacker.Rsolider jj = check1.get(</span><span class="s2">0</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">Attacker.Ssolider ll = check2.get(</span><span class="s2">0</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s0">if </span><span class="s1">(kk != </span><span class="s0">null</span><span class="s1">) {</span>
+                    <span class="s1">info += Set_Damage_Atank(kk</span><span class="s0">, </span><span class="s1">Player.s1</span><span class="s0">, </span><span class="s1">info</span><span class="s0">, this</span><span class="s1">.damage)</span><span class="s0">;</span>
+                    <span class="s1">Write_log_file(Game.arena.file_name_Tower(</span><span class="s0">this</span><span class="s1">.num_Devender</span><span class="s0">, this</span><span class="s1">.num_Twoer)</span><span class="s0">, </span><span class="s1">info)</span><span class="s0">;</span>
+                    <span class="s0">return;</span>
+
+                <span class="s1">} </span><span class="s0">else if </span><span class="s1">(jj != </span><span class="s0">null</span><span class="s1">) {</span>
+                    <span class="s1">info += Set_Damage_Rsolider(jj</span><span class="s0">, </span><span class="s1">Player.s3</span><span class="s0">, </span><span class="s1">info</span><span class="s0">, this</span><span class="s1">.damage)</span><span class="s0">;</span>
+                    <span class="s1">Write_log_file(Game.arena.file_name_Tower(</span><span class="s0">this</span><span class="s1">.num_Devender</span><span class="s0">, this</span><span class="s1">.num_Twoer)</span><span class="s0">, </span><span class="s1">info)</span><span class="s0">;</span>
+                    <span class="s0">return;</span>
+                <span class="s1">} </span><span class="s0">else if </span><span class="s1">(ll != </span><span class="s0">null</span><span class="s1">) {</span>
+                    <span class="s1">info += Set_Damage_Solider(ll</span><span class="s0">, </span><span class="s1">Player.s2</span><span class="s0">, </span><span class="s1">info</span><span class="s0">, this</span><span class="s1">.damage)</span><span class="s0">;</span>
+                    <span class="s1">Write_log_file(Game.arena.file_name_Tower(</span><span class="s0">this</span><span class="s1">.num_Devender</span><span class="s0">, this</span><span class="s1">.num_Twoer)</span><span class="s0">, </span><span class="s1">info)</span><span class="s0">;</span>
+                    <span class="s0">return;</span>
+                <span class="s1">}</span>
+            <span class="s1">} </span><span class="s0">else if </span><span class="s1">(random == </span><span class="s2">0</span><span class="s1">) {</span>
+                <span class="s1">Attacker.ATank kk = check_Attack_Tanks_less_health(check)</span><span class="s0">;</span>
+                <span class="s1">Attacker.Rsolider jj = check_Attack_Rsolider_less_health(check1)</span><span class="s0">;</span>
+                <span class="s1">Attacker.Ssolider ll = check_Attack_Ssolider_less_health(check2)</span><span class="s0">;</span>
+                <span class="s0">if </span><span class="s1">(kk != </span><span class="s0">null</span><span class="s1">) {</span>
+                    <span class="s1">info += Set_Damage_Atank(kk</span><span class="s0">, </span><span class="s1">Player.s1</span><span class="s0">, </span><span class="s1">info</span><span class="s0">, this</span><span class="s1">.damage)</span><span class="s0">;</span>
+                    <span class="s1">Write_log_file(Game.arena.file_name_Tower(</span><span class="s0">this</span><span class="s1">.num_Devender</span><span class="s0">, this</span><span class="s1">.num_Twoer)</span><span class="s0">, </span><span class="s1">info)</span><span class="s0">;</span>
+                    <span class="s0">return;</span>
+
+                <span class="s1">} </span><span class="s0">else if </span><span class="s1">(jj != </span><span class="s0">null</span><span class="s1">) {</span>
+                    <span class="s1">info += Set_Damage_Rsolider(jj</span><span class="s0">, </span><span class="s1">Player.s3</span><span class="s0">, </span><span class="s1">info</span><span class="s0">, this</span><span class="s1">.damage)</span><span class="s0">;</span>
+                    <span class="s1">Write_log_file(Game.arena.file_name_Tower(</span><span class="s0">this</span><span class="s1">.num_Devender</span><span class="s0">, this</span><span class="s1">.num_Twoer)</span><span class="s0">, </span><span class="s1">info)</span><span class="s0">;</span>
+                    <span class="s0">return;</span>
+                <span class="s1">} </span><span class="s0">else if </span><span class="s1">(ll != </span><span class="s0">null</span><span class="s1">) {</span>
+                    <span class="s1">info += Set_Damage_Solider(ll</span><span class="s0">, </span><span class="s1">Player.s2</span><span class="s0">, </span><span class="s1">info</span><span class="s0">, this</span><span class="s1">.damage)</span><span class="s0">;</span>
+                    <span class="s1">Write_log_file(Game.arena.file_name_Tower(</span><span class="s0">this</span><span class="s1">.num_Devender</span><span class="s0">, this</span><span class="s1">.num_Twoer)</span><span class="s0">, </span><span class="s1">info)</span><span class="s0">;</span>
+                    <span class="s0">return;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+
+        <span class="s1">}</span>
+
+        <span class="s1">@Override</span>
+        <span class="s0">public void </span><span class="s1">run() {</span>
+            <span class="s0">while </span><span class="s1">(Game.endGame() == Game_state.Running) {</span>
+                <span class="s0">this</span><span class="s1">.Attack_Range_tower(</span><span class="s2">0</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s5">//Game.Sleep_Unit(0.05);</span>
+                <span class="s0">try </span><span class="s1">{</span>
+                    <span class="s1">Thread.sleep(</span><span class="s2">500</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">} </span><span class="s0">catch </span><span class="s1">(InterruptedException e) {</span>
+                    <span class="s1">e.printStackTrace()</span><span class="s0">;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+            <span class="s1">Thread.currentThread().stop()</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public class </span><span class="s1">Support_Rsolider </span><span class="s0">implements </span><span class="s1">Runnable {</span>
+        <span class="s0">int </span><span class="s1">x</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">y</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">Health = </span><span class="s2">100</span><span class="s0">;</span>
+        <span class="s0">final int </span><span class="s1">damage = </span><span class="s2">25</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">arrmor = </span><span class="s2">1</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">Deffender_num</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">Suport_item_num</span><span class="s0">;</span>
+
+        <span class="s0">public </span><span class="s1">Support_Rsolider(</span><span class="s0">int </span><span class="s1">f</span><span class="s0">, int </span><span class="s1">Deffender_num</span><span class="s0">, int </span><span class="s1">Suport_item_num) {</span>
+
+            <span class="s0">if </span><span class="s1">(f == </span><span class="s2">0</span><span class="s1">) {</span>
+                <span class="s0">this</span><span class="s1">.x = Game.arena.X_Base() - </span><span class="s2">2</span><span class="s0">;</span>
+                <span class="s0">this</span><span class="s1">.y = Game.arena.Y_Base()</span><span class="s0">;</span>
+
+            <span class="s1">} </span><span class="s0">else if </span><span class="s1">(f == </span><span class="s2">1</span><span class="s1">) {</span>
+                <span class="s0">this</span><span class="s1">.x = Game.arena.X_Base() + </span><span class="s2">2</span><span class="s0">;</span>
+                <span class="s0">this</span><span class="s1">.y = Game.arena.Y_Base()</span><span class="s0">;</span>
+
+            <span class="s1">} </span><span class="s0">else if </span><span class="s1">(f == </span><span class="s2">3</span><span class="s1">) {</span>
+                <span class="s0">this</span><span class="s1">.x = Game.arena.X_Base()</span><span class="s0">;</span>
+                <span class="s0">this</span><span class="s1">.y = Game.arena.Y_Base() - </span><span class="s2">2</span><span class="s0">;</span>
+
+            <span class="s1">} </span><span class="s0">else if </span><span class="s1">(f == </span><span class="s2">2</span><span class="s1">) {</span>
+                <span class="s0">this</span><span class="s1">.x = Game.arena.X_Base()</span><span class="s0">;</span>
+                <span class="s0">this</span><span class="s1">.y = Game.arena.Y_Base() + </span><span class="s2">2</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+
+            <span class="s1">arena.setArena(</span><span class="s0">this</span><span class="s1">.x</span><span class="s0">, this</span><span class="s1">.y</span><span class="s0">, </span><span class="s3">&quot;D&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+
+            <span class="s1">Support_item.add(</span><span class="s0">this</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">suport_solider.clear()</span><span class="s0">;</span>
+
+            <span class="s0">this</span><span class="s1">.Deffender_num = Deffender_num</span><span class="s0">;</span>
+            <span class="s0">this</span><span class="s1">.Suport_item_num = Suport_item_num</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">public int </span><span class="s1">getArrmor() {</span>
+            <span class="s0">return </span><span class="s1">arrmor</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">public void </span><span class="s1">setArrmor(</span><span class="s0">int </span><span class="s1">arrmor) {</span>
+            <span class="s0">this</span><span class="s1">.arrmor = arrmor</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">public int </span><span class="s1">getX() {</span>
+            <span class="s0">return </span><span class="s1">x</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+
+        <span class="s0">public int </span><span class="s1">getY() {</span>
+            <span class="s0">return </span><span class="s1">y</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+
+        <span class="s0">public int </span><span class="s1">getHealth() {</span>
+            <span class="s0">return </span><span class="s1">Health</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">public void </span><span class="s1">setHealth(</span><span class="s0">int </span><span class="s1">health) {</span>
+            <span class="s1">Health = health</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">public int </span><span class="s1">getDamage() {</span>
+            <span class="s0">return </span><span class="s1">damage</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">void </span><span class="s1">set_suport_Rsolider_in_arena() {</span>
+
+            <span class="s1">Game.arena.setArena(</span><span class="s0">this</span><span class="s1">.x</span><span class="s0">, this</span><span class="s1">.y</span><span class="s0">, </span><span class="s3">&quot;D&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">void </span><span class="s1">Attack_Range_support_Rsolider(</span><span class="s0">int </span><span class="s1">random) {</span>
+            <span class="s0">if </span><span class="s1">(</span><span class="s0">this</span><span class="s1">.getHealth() &lt;= </span><span class="s2">0</span><span class="s1">)</span>
+                <span class="s0">return;</span>
+            <span class="s1">String info = </span><span class="s3">&quot;&quot;</span><span class="s0">;</span>
+            <span class="s1">Range_List List = Defender.Range(</span><span class="s0">this</span><span class="s1">.x</span><span class="s0">, this</span><span class="s1">.y</span><span class="s0">, </span><span class="s2">1</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">info += </span><span class="s3">&quot;support_item in ( &quot; </span><span class="s1">+ Integer.toString(</span><span class="s0">this</span><span class="s1">.x) + </span><span class="s3">&quot;, &quot; </span><span class="s1">+ Integer.toString(</span><span class="s0">this</span><span class="s1">.y) + </span><span class="s3">&quot;) and Health: &quot; </span><span class="s1">+ Integer.toString(</span><span class="s0">this</span><span class="s1">.getHealth())</span><span class="s0">;</span>
+            <span class="s0">if </span><span class="s1">(List.getAnimes().size() == </span><span class="s2">0 </span><span class="s1">|| List.getPosition().size() == </span><span class="s2">0</span><span class="s1">) {</span>
+                <span class="s1">Write_log_file(Game.arena.file_name_Support_Rsolider(</span><span class="s0">this</span><span class="s1">.Suport_item_num</span><span class="s0">, this</span><span class="s1">.Suport_item_num)</span><span class="s0">, </span><span class="s1">info)</span><span class="s0">;</span>
+                <span class="s0">this</span><span class="s1">.move()</span><span class="s0">;</span>
+
+                <span class="s0">return;</span>
+            <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+                <span class="s1">check_Attack_Bridge(List.getAnimes()</span><span class="s0">, </span><span class="s1">List.getPosition())</span><span class="s0">;</span>
+                <span class="s1">ArrayList&lt;Attacker.Bomb&gt; check4 = check_Attack_r_Bomb(List.getAnimes()</span><span class="s0">, </span><span class="s1">List.getPosition())</span><span class="s0">;</span>
+                <span class="s1">ArrayList&lt;Attacker.ATank&gt; check = check_Attack_Tanks(List.getAnimes()</span><span class="s0">, </span><span class="s1">List.getPosition())</span><span class="s0">;</span>
+                <span class="s1">ArrayList&lt;Attacker.Rsolider&gt; check1 = check_Attack_r_solider(List.getAnimes()</span><span class="s0">, </span><span class="s1">List.getPosition())</span><span class="s0">;</span>
+                <span class="s1">ArrayList&lt;Attacker.Ssolider&gt; check2 = check_Attack_s_solider(List.getAnimes()</span><span class="s0">, </span><span class="s1">List.getPosition())</span><span class="s0">;</span>
+                <span class="s5">//من هنا نحدد الاولويات للدفاع حسب إذا المصفوفة مش فاضية</span>
+                <span class="s0">if </span><span class="s1">(random == </span><span class="s2">1</span><span class="s1">) {</span>
+                    <span class="s1">Attacker.ATank kk = check.get(</span><span class="s2">0</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">Attacker.Rsolider jj = check1.get(</span><span class="s2">0</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">Attacker.Ssolider ll = check2.get(</span><span class="s2">0</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">Attacker.Bomb mm = check4.get(</span><span class="s2">0</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s0">if </span><span class="s1">(mm != </span><span class="s0">null</span><span class="s1">) {</span>
+                        <span class="s1">info += Set_Damage_Bomb(mm</span><span class="s0">, </span><span class="s1">Player.s8</span><span class="s0">, </span><span class="s1">info</span><span class="s0">, this</span><span class="s1">.damage)</span><span class="s0">;</span>
+                        <span class="s1">Write_log_file(Game.arena.file_name_Support_Rsolider(</span><span class="s0">this</span><span class="s1">.Deffender_num</span><span class="s0">, this</span><span class="s1">.Suport_item_num)</span><span class="s0">, </span><span class="s1">info)</span><span class="s0">;</span>
+                        <span class="s0">return;</span>
+                    <span class="s1">} </span><span class="s0">else if </span><span class="s1">(kk != </span><span class="s0">null</span><span class="s1">) {</span>
+                        <span class="s1">info += Set_Damage_Atank(kk</span><span class="s0">, </span><span class="s1">Player.s1</span><span class="s0">, </span><span class="s1">info</span><span class="s0">, this</span><span class="s1">.damage)</span><span class="s0">;</span>
+                        <span class="s1">Write_log_file(Game.arena.file_name_Support_Rsolider(</span><span class="s0">this</span><span class="s1">.Deffender_num</span><span class="s0">, this</span><span class="s1">.Suport_item_num)</span><span class="s0">, </span><span class="s1">info)</span><span class="s0">;</span>
+                        <span class="s0">return;</span>
+
+                    <span class="s1">} </span><span class="s0">else if </span><span class="s1">(jj != </span><span class="s0">null</span><span class="s1">) {</span>
+                        <span class="s1">info += Set_Damage_Rsolider(jj</span><span class="s0">, </span><span class="s1">Player.s3</span><span class="s0">, </span><span class="s1">info</span><span class="s0">, this</span><span class="s1">.damage)</span><span class="s0">;</span>
+                        <span class="s1">Write_log_file(Game.arena.file_name_Support_Rsolider(</span><span class="s0">this</span><span class="s1">.Deffender_num</span><span class="s0">, this</span><span class="s1">.Suport_item_num)</span><span class="s0">, </span><span class="s1">info)</span><span class="s0">;</span>
+                        <span class="s0">return;</span>
+                    <span class="s1">} </span><span class="s0">else if </span><span class="s1">(ll != </span><span class="s0">null</span><span class="s1">) {</span>
+                        <span class="s1">info += Set_Damage_Solider(ll</span><span class="s0">, </span><span class="s1">Player.s2</span><span class="s0">, </span><span class="s1">info</span><span class="s0">, this</span><span class="s1">.damage)</span><span class="s0">;</span>
+                        <span class="s1">Write_log_file(Game.arena.file_name_Support_Rsolider(</span><span class="s0">this</span><span class="s1">.Deffender_num</span><span class="s0">, this</span><span class="s1">.Suport_item_num)</span><span class="s0">, </span><span class="s1">info)</span><span class="s0">;</span>
+                        <span class="s0">return;</span>
+                    <span class="s1">}</span>
+                <span class="s1">} </span><span class="s0">else if </span><span class="s1">(random == </span><span class="s2">0</span><span class="s1">) {</span>
+                    <span class="s1">Attacker.ATank kk = check_Attack_Tanks_less_health(check)</span><span class="s0">;</span>
+                    <span class="s1">Attacker.Rsolider jj = check_Attack_Rsolider_less_health(check1)</span><span class="s0">;</span>
+                    <span class="s1">Attacker.Ssolider ll = check_Attack_Ssolider_less_health(check2)</span><span class="s0">;</span>
+                    <span class="s1">Attacker.Bomb mm = check_Attack_Bomb_less_health(check4)</span><span class="s0">;</span>
+                    <span class="s0">if </span><span class="s1">(mm != </span><span class="s0">null</span><span class="s1">) {</span>
+                        <span class="s1">info += Set_Damage_Bomb(mm</span><span class="s0">, </span><span class="s1">Player.s8</span><span class="s0">, </span><span class="s1">info</span><span class="s0">, this</span><span class="s1">.damage)</span><span class="s0">;</span>
+                        <span class="s1">Write_log_file(Game.arena.file_name_Support_Rsolider(</span><span class="s0">this</span><span class="s1">.Deffender_num</span><span class="s0">, this</span><span class="s1">.Suport_item_num)</span><span class="s0">, </span><span class="s1">info)</span><span class="s0">;</span>
+                        <span class="s0">return;</span>
+                    <span class="s1">} </span><span class="s0">else if </span><span class="s1">(kk != </span><span class="s0">null</span><span class="s1">) {</span>
+                        <span class="s1">info += Set_Damage_Atank(kk</span><span class="s0">, </span><span class="s1">Player.s1</span><span class="s0">, </span><span class="s1">info</span><span class="s0">, this</span><span class="s1">.damage)</span><span class="s0">;</span>
+                        <span class="s1">Write_log_file(Game.arena.file_name_Support_Rsolider(</span><span class="s0">this</span><span class="s1">.Deffender_num</span><span class="s0">, this</span><span class="s1">.Suport_item_num)</span><span class="s0">, </span><span class="s1">info)</span><span class="s0">;</span>
+                        <span class="s0">return;</span>
+
+                    <span class="s1">} </span><span class="s0">else if </span><span class="s1">(jj != </span><span class="s0">null</span><span class="s1">) {</span>
+                        <span class="s1">info += Set_Damage_Rsolider(jj</span><span class="s0">, </span><span class="s1">Player.s3</span><span class="s0">, </span><span class="s1">info</span><span class="s0">, this</span><span class="s1">.damage)</span><span class="s0">;</span>
+                        <span class="s1">Write_log_file(Game.arena.file_name_Support_Rsolider(</span><span class="s0">this</span><span class="s1">.Deffender_num</span><span class="s0">, this</span><span class="s1">.Suport_item_num)</span><span class="s0">, </span><span class="s1">info)</span><span class="s0">;</span>
+                        <span class="s0">return;</span>
+                    <span class="s1">} </span><span class="s0">else if </span><span class="s1">(ll != </span><span class="s0">null</span><span class="s1">) {</span>
+                        <span class="s1">info += Set_Damage_Solider(ll</span><span class="s0">, </span><span class="s1">Player.s2</span><span class="s0">, </span><span class="s1">info</span><span class="s0">, this</span><span class="s1">.damage)</span><span class="s0">;</span>
+                        <span class="s1">Write_log_file(Game.arena.file_name_Support_Rsolider(</span><span class="s0">this</span><span class="s1">.Deffender_num</span><span class="s0">, this</span><span class="s1">.Suport_item_num)</span><span class="s0">, </span><span class="s1">info)</span><span class="s0">;</span>
+                        <span class="s0">return;</span>
+                    <span class="s1">}</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+
+
+        <span class="s0">void </span><span class="s1">move() {</span>
+            <span class="s1">Game.arena.setArena(</span><span class="s0">this</span><span class="s1">.x</span><span class="s0">, this</span><span class="s1">.y</span><span class="s0">, </span><span class="s3">&quot; &quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+            <span class="s0">if </span><span class="s1">(</span><span class="s0">this</span><span class="s1">.x &lt; Game.arena.X_Base() &amp;&amp; </span><span class="s0">this</span><span class="s1">.y &lt;= Game.arena.Y_Base()) {</span>
+                <span class="s1">++</span><span class="s0">this</span><span class="s1">.x</span><span class="s0">;</span>
+                <span class="s1">--</span><span class="s0">this</span><span class="s1">.y</span><span class="s0">;</span>
+                <span class="s0">if </span><span class="s1">(Game.arena.Getcell(x</span><span class="s0">, </span><span class="s1">y) != </span><span class="s3">&quot; &quot;</span><span class="s1">) {</span>
+                    <span class="s1">--</span><span class="s0">this</span><span class="s1">.x</span><span class="s0">;</span>
+                    <span class="s1">++</span><span class="s0">this</span><span class="s1">.y</span><span class="s0">;</span>
+
+                <span class="s1">}</span>
+                <span class="s1">Game.arena.setArena(</span><span class="s0">this</span><span class="s1">.x</span><span class="s0">, this</span><span class="s1">.y</span><span class="s0">, </span><span class="s3">&quot;D&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s0">return;</span>
+            <span class="s1">} </span><span class="s0">else if </span><span class="s1">(</span><span class="s0">this</span><span class="s1">.x &gt; Game.arena.X_Base() &amp;&amp; </span><span class="s0">this</span><span class="s1">.y &gt;= Game.arena.Y_Base()) {</span>
+                <span class="s1">--</span><span class="s0">this</span><span class="s1">.x</span><span class="s0">;</span>
+                <span class="s1">++</span><span class="s0">this</span><span class="s1">.y</span><span class="s0">;</span>
+                <span class="s0">if </span><span class="s1">(Game.arena.Getcell(x</span><span class="s0">, </span><span class="s1">y) != </span><span class="s3">&quot; &quot;</span><span class="s1">) {</span>
+                    <span class="s1">++</span><span class="s0">this</span><span class="s1">.x</span><span class="s0">;</span>
+                    <span class="s1">--</span><span class="s0">this</span><span class="s1">.y</span><span class="s0">;</span>
+
+                <span class="s1">}</span>
+                <span class="s1">Game.arena.setArena(</span><span class="s0">this</span><span class="s1">.x</span><span class="s0">, this</span><span class="s1">.y</span><span class="s0">, </span><span class="s3">&quot;D&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s0">return;</span>
+            <span class="s1">} </span><span class="s0">else if </span><span class="s1">(</span><span class="s0">this</span><span class="s1">.x &gt;= Game.arena.X_Base() &amp;&amp; </span><span class="s0">this</span><span class="s1">.y &lt; Game.arena.Y_Base()) {</span>
+                <span class="s1">++</span><span class="s0">this</span><span class="s1">.x</span><span class="s0">;</span>
+                <span class="s1">++</span><span class="s0">this</span><span class="s1">.y</span><span class="s0">;</span>
+                <span class="s0">if </span><span class="s1">(Game.arena.Getcell(x</span><span class="s0">, </span><span class="s1">y) != </span><span class="s3">&quot; &quot;</span><span class="s1">) {</span>
+                    <span class="s1">--</span><span class="s0">this</span><span class="s1">.x</span><span class="s0">;</span>
+                    <span class="s1">--</span><span class="s0">this</span><span class="s1">.y</span><span class="s0">;</span>
+
+                <span class="s1">}</span>
+                <span class="s1">Game.arena.setArena(</span><span class="s0">this</span><span class="s1">.x</span><span class="s0">, this</span><span class="s1">.y</span><span class="s0">, </span><span class="s3">&quot;D&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s0">return;</span>
+            <span class="s1">} </span><span class="s0">else if </span><span class="s1">(</span><span class="s0">this</span><span class="s1">.x &lt;= Game.arena.X_Base() &amp;&amp; </span><span class="s0">this</span><span class="s1">.y &gt; Game.arena.Y_Base()) {</span>
+                <span class="s1">--</span><span class="s0">this</span><span class="s1">.x</span><span class="s0">;</span>
+                <span class="s1">--</span><span class="s0">this</span><span class="s1">.y</span><span class="s0">;</span>
+                <span class="s0">if </span><span class="s1">(Game.arena.Getcell(x</span><span class="s0">, </span><span class="s1">y) != </span><span class="s3">&quot; &quot;</span><span class="s1">) {</span>
+                    <span class="s1">++</span><span class="s0">this</span><span class="s1">.x</span><span class="s0">;</span>
+                    <span class="s1">++</span><span class="s0">this</span><span class="s1">.y</span><span class="s0">;</span>
+
+                <span class="s1">}</span>
+                <span class="s1">Game.arena.setArena(</span><span class="s0">this</span><span class="s1">.x</span><span class="s0">, this</span><span class="s1">.y</span><span class="s0">, </span><span class="s3">&quot;D&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s0">return;</span>
+            <span class="s1">}</span>
+
+        <span class="s1">}</span>
+
+
+        <span class="s1">@Override</span>
+        <span class="s0">public void </span><span class="s1">run() {</span>
+
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public class </span><span class="s1">support_Team </span><span class="s0">implements </span><span class="s1">Runnable {</span>
+
+        <span class="s1">Support_Rsolider x1</span><span class="s0">;</span>
+        <span class="s1">Support_Rsolider x2</span><span class="s0">;</span>
+        <span class="s1">Support_Rsolider x3</span><span class="s0">;</span>
+        <span class="s1">Support_Rsolider x4</span><span class="s0">;</span>
+
+
+        <span class="s1">support_Team() {</span>
+            <span class="s0">if </span><span class="s1">(MoneyD - </span><span class="s2">150 </span><span class="s1">&lt; </span><span class="s2">0</span><span class="s1">) {</span>
+                <span class="s1">System.out.println(</span><span class="s3">&quot;your money isn't enogh&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">System.gc()</span><span class="s0">;</span>
+                <span class="s0">return;</span>
+            <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+                <span class="s1">MoneyD -= </span><span class="s2">150</span><span class="s0">;</span>
+                <span class="s1">x1 = </span><span class="s0">new </span><span class="s1">Support_Rsolider(</span><span class="s2">0</span><span class="s0">, </span><span class="s2">1</span><span class="s0">, </span><span class="s2">1</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">x2 = </span><span class="s0">new </span><span class="s1">Support_Rsolider(</span><span class="s2">1</span><span class="s0">, </span><span class="s2">1</span><span class="s0">, </span><span class="s2">2</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">x3 = </span><span class="s0">new </span><span class="s1">Support_Rsolider(</span><span class="s2">2</span><span class="s0">, </span><span class="s2">1</span><span class="s0">, </span><span class="s2">3</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">x4 = </span><span class="s0">new </span><span class="s1">Support_Rsolider(</span><span class="s2">3</span><span class="s0">, </span><span class="s2">1</span><span class="s0">, </span><span class="s2">4</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+
+        <span class="s0">void </span><span class="s1">Attack_Range_support_team() {</span>
+            <span class="s1">x1.Attack_Range_support_Rsolider(</span><span class="s2">0</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">x2.Attack_Range_support_Rsolider(</span><span class="s2">0</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">x3.Attack_Range_support_Rsolider(</span><span class="s2">0</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">x4.Attack_Range_support_Rsolider(</span><span class="s2">0</span><span class="s1">)</span><span class="s0">;</span>
+
+
+        <span class="s1">}</span>
+
+        <span class="s1">@Override</span>
+        <span class="s0">public void </span><span class="s1">run() {</span>
+            <span class="s0">while </span><span class="s1">(Game.endGame() == Game_state.Running) {</span>
+                <span class="s0">this</span><span class="s1">.Attack_Range_support_team()</span><span class="s0">;</span>
+                <span class="s5">// Game.Sleep_Unit(0.05);</span>
+                <span class="s0">try </span><span class="s1">{</span>
+                    <span class="s1">Thread.sleep(</span><span class="s2">500</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">} </span><span class="s0">catch </span><span class="s1">(InterruptedException e) {</span>
+                    <span class="s1">e.printStackTrace()</span><span class="s0">;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+            <span class="s1">Thread.currentThread().stop()</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public class </span><span class="s1">air_Defence </span><span class="s0">implements </span><span class="s1">Runnable {</span>
+        <span class="s0">int </span><span class="s1">x</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">y</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">Health = </span><span class="s2">100</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">armor = </span><span class="s2">1</span><span class="s0">;</span>
+        <span class="s0">final int </span><span class="s1">damage = </span><span class="s2">100</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">num_Deffender</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">num_air_Defender</span><span class="s0">;</span>
+
+        <span class="s1">air_Defence(</span><span class="s0">int </span><span class="s1">f</span><span class="s0">, int </span><span class="s1">num_Deffender</span><span class="s0">, int </span><span class="s1">num_air_Defender) {</span>
+            <span class="s0">if </span><span class="s1">(MoneyD - </span><span class="s2">175 </span><span class="s1">&lt; </span><span class="s2">0</span><span class="s1">) {</span>
+                <span class="s1">System.out.println(</span><span class="s3">&quot;your money isn't enogh&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">System.gc()</span><span class="s0">;</span>
+                <span class="s0">return;</span>
+            <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+                <span class="s1">MoneyD -= </span><span class="s2">175</span><span class="s0">;</span>
+                <span class="s0">try </span><span class="s1">{</span>
+                    <span class="s1">File myObj = </span><span class="s0">new </span><span class="s1">File(</span><span class="s3">&quot;AirD.txt&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">Scanner myReader = </span><span class="s0">new </span><span class="s1">Scanner(myObj)</span><span class="s0">;</span>
+
+                    <span class="s0">while </span><span class="s1">(myReader.hasNextInt()) {</span>
+
+                        <span class="s1">Airlist.add(myReader.nextInt())</span><span class="s0">;</span>
+
+
+                    <span class="s1">}</span>
+
+
+                    <span class="s1">myReader.close()</span><span class="s0">;</span>
+                <span class="s1">} </span><span class="s0">catch </span><span class="s1">(IOException e) {</span>
+                    <span class="s1">System.out.println(</span><span class="s3">&quot;An error occurred.&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">e.printStackTrace()</span><span class="s0">;</span>
+                <span class="s1">}</span>
+                <span class="s0">this</span><span class="s1">.x = Airlist.get(f)</span><span class="s0">;</span>
+
+                <span class="s0">this</span><span class="s1">.y = Airlist.get(++f)</span><span class="s0">;</span>
+                <span class="s0">this</span><span class="s1">.num_Deffender = num_Deffender</span><span class="s0">;</span>
+                <span class="s0">this</span><span class="s1">.num_air_Defender = num_air_Defender</span><span class="s0">;</span>
+                <span class="s1">arena.setArena(</span><span class="s0">this</span><span class="s1">.x</span><span class="s0">, this</span><span class="s1">.y</span><span class="s0">, </span><span class="s3">&quot;A&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+
+                <span class="s1">s6.add(</span><span class="s0">this</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">Airlist.clear()</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+
+        <span class="s0">public int </span><span class="s1">getX() {</span>
+            <span class="s0">return </span><span class="s1">x</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">public void </span><span class="s1">setX(</span><span class="s0">int </span><span class="s1">x) {</span>
+            <span class="s0">this</span><span class="s1">.x = x</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">public int </span><span class="s1">getY() {</span>
+            <span class="s0">return </span><span class="s1">y</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">public void </span><span class="s1">setY(</span><span class="s0">int </span><span class="s1">y) {</span>
+            <span class="s0">this</span><span class="s1">.y = y</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">public int </span><span class="s1">getHealth() {</span>
+            <span class="s0">return </span><span class="s1">Health</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">public void </span><span class="s1">setHealth(</span><span class="s0">int </span><span class="s1">health) {</span>
+            <span class="s1">Health = health</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">public int </span><span class="s1">getArmor() {</span>
+            <span class="s0">return </span><span class="s1">armor</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">public void </span><span class="s1">setArmor(</span><span class="s0">int </span><span class="s1">armor) {</span>
+            <span class="s0">this</span><span class="s1">.armor = armor</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">public int </span><span class="s1">getDamage() {</span>
+            <span class="s0">return </span><span class="s1">damage</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">void </span><span class="s1">set_air_Defence_in_arena() {</span>
+
+            <span class="s1">Game.arena.setArena(</span><span class="s0">this</span><span class="s1">.x</span><span class="s0">, this</span><span class="s1">.y</span><span class="s0">, </span><span class="s3">&quot;A&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">void </span><span class="s1">Attack_Range_air_Defece() {</span>
+            <span class="s0">if </span><span class="s1">(</span><span class="s0">this</span><span class="s1">.getHealth() &lt;= </span><span class="s2">0</span><span class="s1">)</span>
+                <span class="s0">return;</span>
+            <span class="s1">String info = </span><span class="s3">&quot;&quot;</span><span class="s0">;</span>
+            <span class="s1">Range_List List = Defender.Range(</span><span class="s0">this</span><span class="s1">.x</span><span class="s0">, this</span><span class="s1">.y</span><span class="s0">, </span><span class="s2">5</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">info += </span><span class="s3">&quot;air defenders in ( &quot; </span><span class="s1">+ Integer.toString(</span><span class="s0">this</span><span class="s1">.x) + </span><span class="s3">&quot;, &quot; </span><span class="s1">+ Integer.toString(</span><span class="s0">this</span><span class="s1">.y) + </span><span class="s3">&quot;) and Health: &quot; </span><span class="s1">+ Integer.toString(</span><span class="s0">this</span><span class="s1">.getHealth())</span><span class="s0">;</span>
+            <span class="s0">if </span><span class="s1">(List.getAnimes().size() == </span><span class="s2">0 </span><span class="s1">|| List.getPosition().size() == </span><span class="s2">0</span><span class="s1">) {</span>
+                <span class="s1">info += </span><span class="s3">&quot;not attack any plain&quot;</span><span class="s0">;</span>
+                <span class="s1">Write_log_file(Game.arena.file_name_air_Defence(</span><span class="s0">this</span><span class="s1">.num_Deffender)</span><span class="s0">, </span><span class="s1">info)</span><span class="s0">;</span>
+                <span class="s0">return;</span>
+            <span class="s1">}</span>
+            <span class="s1">ArrayList&lt;Attacker.air_Plane&gt; check = check_Attack_air_plane(List.getAnimes()</span><span class="s0">, </span><span class="s1">List.getPosition())</span><span class="s0">;</span>
+
+            <span class="s5">//من هنا نحدد الاولويات للدفاع حسب إذا المصفوفة مش فاضية</span>
+            <span class="s1">Attacker.air_Plane kk = heck_Attack_air_Plane_less_health(check)</span><span class="s0">;</span>
+
+            <span class="s0">if </span><span class="s1">(kk != </span><span class="s0">null</span><span class="s1">) {</span>
+                <span class="s1">info += Set_Damage_air_plane(kk</span><span class="s0">, </span><span class="s1">Player.s7</span><span class="s0">, </span><span class="s1">info</span><span class="s0">, this</span><span class="s1">.damage)</span><span class="s0">;</span>
+                <span class="s1">Write_log_file(Game.arena.file_name_air_Defence(</span><span class="s0">this</span><span class="s1">.num_Deffender)</span><span class="s0">, </span><span class="s1">info)</span><span class="s0">;</span>
+                <span class="s0">return;</span>
+
+            <span class="s1">}</span>
+
+
+        <span class="s1">}</span>
+
+
+        <span class="s1">@Override</span>
+        <span class="s0">public void </span><span class="s1">run() {</span>
+            <span class="s0">while </span><span class="s1">(Game.endGame() == Game_state.Running) {</span>
+                <span class="s0">this</span><span class="s1">.Attack_Range_air_Defece()</span><span class="s0">;</span>
+                <span class="s0">try </span><span class="s1">{</span>
+                    <span class="s1">Thread.sleep(</span><span class="s2">500</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">} </span><span class="s0">catch </span><span class="s1">(InterruptedException e) {</span>
+                    <span class="s1">e.printStackTrace()</span><span class="s0">;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+            <span class="s1">Thread.currentThread().stop()</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+
+</pre>
+</body>
+</html>

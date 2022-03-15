@@ -1,0 +1,114 @@
+<html>
+<head>
+<title>Game.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6897bb;}
+.s3 { color: #6a8759;}
+.s4 { color: #808080;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Game.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">sample</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">java.io.FileNotFoundException</span><span class="s0">;</span>
+
+<span class="s0">public class </span><span class="s1">Game </span><span class="s0">implements </span><span class="s1">Runnable {</span>
+    <span class="s0">protected static </span><span class="s1">Arena arena</span><span class="s0">;</span>
+    <span class="s0">static </span><span class="s1">Base base</span><span class="s0">;</span>
+    <span class="s1">Valley valley</span><span class="s0">;</span>
+    <span class="s1">River river</span><span class="s0">;</span>
+    <span class="s1">Bridge bridge</span><span class="s0">;</span>
+    <span class="s0">static </span><span class="s1">Game_state state</span><span class="s0">;</span>
+
+    <span class="s0">public </span><span class="s1">Game() {</span>
+        <span class="s1">arena = </span><span class="s0">new </span><span class="s1">Arena()</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static void </span><span class="s1">Sleep_Unit(</span><span class="s0">double </span><span class="s1">second) {</span>
+        <span class="s0">double </span><span class="s1">start = System.currentTimeMillis()</span><span class="s0">;</span>
+        <span class="s0">double </span><span class="s1">end = start + (</span><span class="s2">1000 </span><span class="s1">* second)</span><span class="s0">;</span>
+        <span class="s0">while </span><span class="s1">(System.currentTimeMillis() &lt;= end) {</span>
+
+        <span class="s1">}</span>
+
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">Star_New_Game() </span><span class="s0">throws </span><span class="s1">FileNotFoundException {</span>
+        <span class="s0">this</span><span class="s1">.base = </span><span class="s0">new </span><span class="s1">Base()</span><span class="s0">;</span>
+        <span class="s0">this</span><span class="s1">.river = </span><span class="s0">new </span><span class="s1">River()</span><span class="s0">;</span>
+        <span class="s0">this</span><span class="s1">.valley = </span><span class="s0">new </span><span class="s1">Valley()</span><span class="s0">;</span>
+        <span class="s0">this</span><span class="s1">.bridge = </span><span class="s0">new </span><span class="s1">Bridge()</span><span class="s0">;</span>
+        <span class="s1">arena.setArena(base.getX()</span><span class="s0">, </span><span class="s1">base.getY()</span><span class="s0">, </span><span class="s3">&quot;#&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">arena.setArena(river.getX()</span><span class="s0">, </span><span class="s1">river.getY()</span><span class="s0">, </span><span class="s3">&quot;*&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">arena.setArena(river.getX() + </span><span class="s2">1</span><span class="s0">, </span><span class="s1">(river.getY())</span><span class="s0">, </span><span class="s3">&quot;*&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">arena.setArena(river.getX() + </span><span class="s2">2</span><span class="s0">, </span><span class="s1">(river.getY())</span><span class="s0">, </span><span class="s3">&quot;*&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">arena.setArena(river.getX() + </span><span class="s2">3</span><span class="s0">, </span><span class="s1">(river.getY())</span><span class="s0">, </span><span class="s3">&quot;*&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">arena.setArena(valley.getX()</span><span class="s0">, </span><span class="s1">valley.getY()</span><span class="s0">, </span><span class="s3">&quot;+&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">arena.setArena(valley.getX() + </span><span class="s2">1</span><span class="s0">, </span><span class="s1">valley.getY()</span><span class="s0">, </span><span class="s3">&quot;+&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">arena.setArena(valley.getX()</span><span class="s0">, </span><span class="s1">valley.getY() + </span><span class="s2">1</span><span class="s0">, </span><span class="s3">&quot;+&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">arena.setArena((valley.getX()) + </span><span class="s2">1</span><span class="s0">, </span><span class="s1">(valley.getY()) + </span><span class="s2">1</span><span class="s0">, </span><span class="s3">&quot;+&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">arena.setArena(bridge.getX()</span><span class="s0">, </span><span class="s1">bridge.getY()</span><span class="s0">, </span><span class="s3">&quot;/&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">arena.setArena(bridge.getX() + </span><span class="s2">1</span><span class="s0">, </span><span class="s1">bridge.getY() + </span><span class="s2">1</span><span class="s0">, </span><span class="s3">&quot;/&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">System.out.print(</span><span class="s3">&quot;&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+    <span class="s1">}</span>
+
+    <span class="s0">static boolean </span><span class="s1">search_Attacker() {</span>
+        <span class="s1">{</span>
+            <span class="s0">if </span><span class="s1">((Player.s1.size() == </span><span class="s2">0</span><span class="s1">) &amp;&amp; (Player.s2.size() == </span><span class="s2">0</span><span class="s1">) &amp;&amp; (Player.s3.size() == </span><span class="s2">0</span><span class="s1">) &amp;&amp; (Player.s8.size() == </span><span class="s2">0</span><span class="s1">) &amp;&amp; (Player.s7.size() == </span><span class="s2">0</span><span class="s1">))</span>
+                <span class="s0">return true;</span>
+        <span class="s1">}</span>
+        <span class="s0">return false;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static </span><span class="s1">Game_state endGame() {</span>
+
+        <span class="s0">if </span><span class="s1">(base.getHealtBase() &lt;= </span><span class="s2">0.0</span><span class="s1">) {</span>
+
+            <span class="s1">state = Game_state.Attacker_is_Winner</span><span class="s0">;</span>
+            <span class="s0">return </span><span class="s1">state</span><span class="s0">;</span>
+        <span class="s1">} </span><span class="s0">else if </span><span class="s1">(base.getHealtBase() &gt; </span><span class="s2">0 </span><span class="s1">&amp;&amp; (search_Attacker())) {</span>
+            <span class="s1">state = Game_state.Attacker_is_loser</span><span class="s0">;</span>
+            <span class="s0">return </span><span class="s1">state</span><span class="s0">;</span>
+        <span class="s1">}</span>
+        <span class="s4">///////////////////////////////////////////////////////////////////////////////////////////</span>
+        <span class="s0">else if </span><span class="s1">(base.getHealtBase() &gt; </span><span class="s2">0 </span><span class="s1">&amp;&amp; (!search_Attacker())) {</span>
+            <span class="s1">state = Game_state.Running</span><span class="s0">;</span>
+            <span class="s0">return </span><span class="s1">state</span><span class="s0">;</span>
+
+        <span class="s1">}</span>
+        <span class="s0">else </span><span class="s1">{</span>
+            <span class="s0">return null;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+
+    <span class="s1">@Override</span>
+
+    <span class="s0">public void </span><span class="s1">run() {</span>
+        <span class="s0">try </span><span class="s1">{</span>
+            <span class="s0">this</span><span class="s1">.Star_New_Game()</span><span class="s0">;</span>
+            <span class="s1">Game.arena.printer()</span><span class="s0">;</span>
+            <span class="s1">System.out.println()</span><span class="s0">;</span>
+            <span class="s1">System.out.println()</span><span class="s0">;</span>
+
+
+        <span class="s1">} </span><span class="s0">catch </span><span class="s1">(FileNotFoundException e) {</span>
+            <span class="s1">e.printStackTrace()</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+
+<span class="s1">}</span>
+</pre>
+</body>
+</html>
